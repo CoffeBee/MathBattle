@@ -1,0 +1,10 @@
+{% extends 'authorization/base_auth.html' %}
+
+{% block content %}
+<form method='post'>
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit">
+  <p>Войти <a href="../login/">Войти</a></p>
+</form>
+{% endblock %}

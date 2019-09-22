@@ -1,0 +1,10 @@
+{% extends 'authorization/base_auth.html' %}
+
+{% block content %}
+<form method='post'>
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit">
+  <p>База данных хочет познакомиться с Вами <a href="../signup/">Зарегистрироваться</a></p>
+</form>
+{% endblock %}

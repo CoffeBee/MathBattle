@@ -14,6 +14,9 @@ class Theme(models.Model):
 
     name = models.CharField(max_length=200)
 
+    def __str__(self):
+    	return str(self.name)
+
 
 class Task(models.Model):
 
@@ -26,6 +29,7 @@ class Task(models.Model):
     right_answer = models.CharField(max_length=200)
     typetype = models.IntegerField()
     title = models.CharField(default='Task', max_length=200)
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, default=DEFAULT_THEME_ID)
             
 class Solution(models.Model):
 

@@ -1,0 +1,13 @@
+{% extends 'userprofile/base_userprofile.html' %}
+
+{% block title %}
+  Профиль пользователя
+{% endblock %}
+
+{% block content %}
+  <h1>Профиль</h1>
+  <p>Ник: {{username}}</p>
+  <p>Почта: {{ email }}</p>
+  <p><a href="..">Перейти на главную</a></p>
+  <p>Хотите покинуть нас? <a href="../auth/logout/">До свидания!</a></p>
+{% endblock %}

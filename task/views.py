@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 
-from .models import Task, Solves
+from .models import Task, Solution
 from .forms import NumSolveForm
 from .checker import Checker
 def task(request, task_id):

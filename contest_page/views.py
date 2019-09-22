@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from .models import Contest
 from django.template import loader
 from django.utils.timezone import now
-from task.models import Task, Solves
+from task.models import Task, Solution
 def contest(request, contest_id):
     contest = Contest.objects.all()[contest_id - 1]
     task = Task.objects.all()

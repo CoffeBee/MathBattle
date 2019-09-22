@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title></title>
+
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+      {% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'contest/main.css' %}">
+   </head>
+   <body>
+      <div class="container" style="padding-top: 20px;">
+         <div class="d-flex bd-highlight mb-3">
+            <div class="p-1 bd-highlight"><img src="{% static 'contest/logo.png' %}" class="col-9"></div>
+            <div class="ml-auto p-2 bd-highlight text-right">
+               <a href="/userprofile">{{ username }}</a>
+                <div class="w-100"></div>
+               <a href="/auth/logout/">Выйти</a>
+            </div>
+         </div>
+         <div class="navbar-container">
+            <ul>
+               <li class="nav-link">
+                  <a href="/">Главная
+                  </a>
+                  <div class="underline"></div>
+               </li>
+               <li class="nav-link">
+                  <a href="/#">Топ</a>
+                  <div class="underline"></div>
+               </li>
+               <li class="nav-link active-link">
+                  <a href="/contest">Контесты</a>
+                  <div class="underline"></div>
+               </li>
+               <li class="nav-link">
+                  <a href="/archiv">Архив</a>
+                  <div class="underline"></div>
+               </li>
+            </ul>
+         </div>
+         <div class="row cnt-table">
+            <div class="col-8" style="margin-top: 30px;">
+               <div style="background-color: #DEDEDE; border-style: solid; border-width: 1px; border-color: #B7B7B7; border-radius: 10px;">
+                  <p style="padding-left: 10px; padding-top: 5px;">
+                     Список активных контестов
+                  </p>
+                  <div style="min-height: 100px; background-color: #FFF; margin-left: 10px; margin-right: 10px; border-radius: 10px;">
+                     <table class="">
+                        <tbody>
+                           <tr style="border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px">
+                              <th style="width:10em; border-right-style: solid; border-right-width: 1px; padding-bottom: 10px" class="top left">№</th>
+                              <th style="width:60em; border-right-style: solid; border-right-width: 1px; padding-bottom: 10px" class="top">Название</th>
+                           </tr>
+                           {% for i in tasks %}
+                                <tr style="border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px">
+                              <td style="border-right-style: solid; border-right-width: 1px; padding-bottom: 10px">
+                                 <h6>A</h6>
+                              </td>
+                              <td style="border-right-style: solid; border-right-width: 1px; padding-bottom: 10px">
+                                 <a href="task/{{ i.0 }}">Задача {{ i.1 }}</a>
+                              </td>
+                           </tr>
+
+                            {% endfor %}
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="col-4" style="min-height: 100px; background-color: white">
+            </div>
+         </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+   </body>
+</html>

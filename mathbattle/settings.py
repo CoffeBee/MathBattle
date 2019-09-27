@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'contest.apps.ContestConfig',
     'authorization.apps.AuthorizationConfig',
-    'task.apps.TaskConfig',
+    'tasks.apps.TasksConfig',
     'contest_page.apps.ContestPageConfig',
     'archiv.apps.ArchivConfig',
-    'userprofile.apps.UserprofileConfig'
+    'userprofile.apps.UserprofileConfig',
+    'checker.apps.CheckerConfig',
 ]
 
 MIDDLEWARE = [

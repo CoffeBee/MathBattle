@@ -1,8 +1,10 @@
-from enum import Enum
+from django_enumfield import enum
 
-class Verdict(enum):
-	WrongAnswer = auto()
-	AcceptedToEvualetion = auto()
-	InEvualetion = auto()
-	Rejected = auto()
-	Accepted = auto()
+class Virdict(enum.Enum):
+	WRONG_ANSWER = 0
+	ACCEPTED_FOR_EVUALETION = 1
+	IN_EVUALETION = 2
+	REJECTED = 3
+	ACCEPTED = 4
+	ACCEPTED_FOR_EVUALETION_IN_CONTEST = 5
+

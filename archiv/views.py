@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 
-from task.models import Task
+from tasks.models import Task
 def archive(request):
     task = Task.objects.all()
     task_href = []

@@ -11,7 +11,7 @@ class Checker(models.Model):
     def __str__(self):
         return os.path.basename(self.code.name)
 
-    def check(self, userans, ans) -> bool:
+    def checkAns(self, userans, ans) -> bool:
     	codestr = open('../{}'.format(self.code.name)).read()
     	return eval(codestr)
 

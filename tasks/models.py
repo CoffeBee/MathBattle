@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.contrib import admin
 from checker.virdicts import Virdict
+from checker.models import Checker
 from django_enumfield import enum
 from django.db.models.functions import datetime
 
@@ -10,6 +11,7 @@ from django.db.models.functions import datetime
 
 DEFAULT_THEME_ID = 1
 DEFAULT_TASK_ID = 1
+DEFAULT_CHECKER_ID = 1
 
 class Task(models.Model):
 
@@ -18,9 +20,9 @@ class Task(models.Model):
         verbose_name_plural = "Tasks"
 
     text = models.CharField(max_length=2000)
-    author = models.CharField(max_length=100)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     right_answer = models.CharField(max_length=200)
-    typetype = models.IntegerField()
+    checker = models.ForeignKey(Checker, on_delete=models.CASCADE, default=DEFAULT_CHECKER_ID)
     title = models.CharField(default='Task', max_length=200)
 
     def __str__(self):

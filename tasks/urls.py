@@ -2,5 +2,5 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('/<int:task_id>/', task)
+    path('/<str:theme_name>/<str:task_title>/', task)
 ]

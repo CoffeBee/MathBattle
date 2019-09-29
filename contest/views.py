@@ -2,15 +2,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import random
 from django.contrib.auth.decorators import login_required
-from tasks.models import Contest
+from tasks.models import Theme, TaskCase
 
 
 @login_required(login_url='../auth/login/')
-def contest(request):
-    contests = Contest.objects.all()
-    hrefs = []
-    for i in range(1, len(contests) + 1):
-        hrefs.append([i, contests[i - 1].dateST.strftime('%m-%d %H:%M'),
-                      str(contests[i - 1].dateED - contests[i - 1].dateST)])
+def themes(request):
+    themes = Theme.objects.all() 
+    return render(request, 'contest/index.html', context={'themes': themes})
 
-    return render(request, 'contest/index.html', context={'num_contest': hrefs, 'username': request.user.username})
+@login_required(login_url='../auth/login/')
+def theme(request, theme_name):
+	tasks = TaskCase.objects.filter(theme__name=theme_name).all()
+	return render(request, 'contest/theme.html', context={'theme' : tasks})

@@ -4,7 +4,8 @@ from django.contrib.postgres.fields import ArrayField
 from django.contrib import admin
 from checker.virdicts import Virdict
 from checker.models import Checker
-from django_enumfield import enum
+from enumfields import EnumField, Enum
+
 from django.db.models.functions import datetime
 
 # Create your models here.
@@ -12,6 +13,15 @@ from django.db.models.functions import datetime
 DEFAULT_THEME_ID = 1
 DEFAULT_TASK_ID = 1
 DEFAULT_CHECKER_ID = 1
+
+class Hardness(Enum):
+    JUNIOR = 'JUNIOR'
+    MIDDLE_JUNIOR = 'MIDDLE-JUNIOR'
+    MIDDLE = 'MIDDLE'
+    MIDDLE_SINIOR = 'MIDDLE-SINIOR'
+    SINIOR = 'SINIOR'
+    SINIOR_UPPER = 'SINIOR-UPPER'
+
 
 class Task(models.Model):
 
@@ -37,7 +47,7 @@ class Solution(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     answer = models.CharField(max_length=2000)
     description = models.CharField(max_length=20000)
-    verdict = enum.EnumField(Virdict, default=Virdict.WRONG_ANSWER)
+    verdict = EnumField(Virdict, max_length=500,default=Virdict.WRONG_ANSWER)
     
 class Contest(models.Model):
 
@@ -66,6 +76,8 @@ class Theme(models.Model):
 
     name = models.CharField(max_length=200)
     tasks = models.ManyToManyField(Task, through='TaskCase')
+    general_name = models.CharField(max_length=200, default='Геометрия')
+    hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE)
     def __str__(self):
     	return str(self.name)
 
@@ -75,7 +87,7 @@ class TaskCase(models.Model):
         verbose_name = "TaskCase"
         verbose_name_plural = "TasksCase"
 
-    level = models.IntegerField()
+    hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
     

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import random
 from django.contrib.auth.decorators import login_required
-from tasks.models import Theme, TaskCase
+from tasks.models import Theme, TaskCase, Solution
 
 
 @login_required(login_url='../auth/login/')
@@ -14,3 +14,9 @@ def themes(request):
 def theme(request, theme_name):
 	tasks = TaskCase.objects.filter(theme__name=theme_name).all()
 	return render(request, 'contest/theme.html', context={'theme' : tasks})
+
+@login_required(login_url='../auth/login/')
+def solutions(request):
+    submits = Solution.objects.all() 
+    print(submits)
+    return render(request, 'contest/solutions.html', context={'submits': submits})

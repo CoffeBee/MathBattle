@@ -45,10 +45,12 @@ class Solution(models.Model):
         verbose_name_plural = "Solutions"
 
     username = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, default=DEFAULT_TASK_ID)
     answer = models.CharField(max_length=2000)
     description = models.CharField(max_length=20000)
     verdict = EnumField(Virdict, max_length=500,default=Virdict.WRONG_ANSWER)
-    
+    submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True)
+
 class Contest(models.Model):
 
     class Meta:

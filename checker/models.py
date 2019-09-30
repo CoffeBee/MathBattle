@@ -12,7 +12,7 @@ class Checker(models.Model):
         return os.path.basename(self.code.name)
 
     def checkAns(self, userans, ans) -> bool:
-    	codestr = open('../{}'.format(self.code.name)).read()
+    	codestr = self.code.read()
     	return eval(codestr)
 
     code = models.FileField(upload_to='uploads/checkers')

@@ -181,7 +181,7 @@
                             </thead>
                             <tbody>
                                 {% for solution in submits %}
-                                   <tr >
+                                   <tr onclick="location.href={{solution.id}}">
                                         <td></td>
                                         <td class="product-name">{{solution.task.title}}</td>
                                         <td class="product-price">{{solution.submitTime}}</td>

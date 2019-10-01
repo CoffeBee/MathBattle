@@ -4,6 +4,7 @@ from .views import *
 urlpatterns = [
     path('theme/', themes),
     path('theme/<str:theme_name>/', theme),
-    path('solutions/', solutions)
+    path('solutions/', solutions),
+    path('solutions/<int:submit_id>', solution),
 
 ]

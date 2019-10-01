@@ -154,10 +154,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Главная</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="/themes/theme">Темы</a>
+                                    <li class="breadcrumb-item"><a href="/themes/solutions">Решения</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="/themes/theme/{{themename}}">{{themename}}</a></li>
-                                    <li class="breadcrumb-item active">{{task.title}}</li>
+                                    <li class="breadcrumb-item active">{{submit.task.title}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -169,41 +168,34 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <h4 class="card-title">Условие</h4>
-                            <p class="card-text">{{task.text}}</p>
-                            <p class="card-text mt-1"><small class="text-muted">Котегарически желаем удачи</small></p>
+                            <h4 class="card-title">Решение</h4>
+                            <p class="card-text">{{submit.description}}</p>
+                            <p class="card-text mt-1"><small class="text-muted">Читайте внимательно и пытайтесь найти лажу везде</small></p>
                         </div>
                     </div>
                 </div>
                 <!-- Data list view end -->
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Проверить решение</h4>
+                        <h4 class="card-title">Ваш вердикт</h4>
                         </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <form action="?" method="post">
                                         {% csrf_token %}
-                                        <div class="row">
-                                            <div class="col-xl-6 col-md-8 col-12 mb-2">
-                                                <fieldset class="form-group">
-                                                    <label for="ans">Ваш ответ</label>
-                                                    <small class="text-muted">Если ответ не верен, решения не проверяется</i></small>
-                                                    {{form.ans}}
-                                                </fieldset>
-                                            </div>
-                                        </div>
-                                        <p class="mb-2">Пешите свои мысли как можно структурирование и понятние. Если Ваше решение не будет понято, Вам предется долго и муторно подавать на аппеляцию. Советуем вам сначало написать решение тезисно. У вас есть 100 символов на решение</p>
+                                        
+                                        <p class="mb-2">Пешите ваши притензии к решению как можно чотче, если Вы плохо(или не напишите) коментарий к решению - это будет минус в карму</p>
                                         <div class="row">
                                             <div class="col-12">
                                                 <fieldset class="form-label-group mb-0">
-                                                    <textarea data-length=1000 class="form-control char-textarea" id="description" rows="5" name="description" placeholder="Чудесные мысли"></textarea>
+                                                    <textarea data-length=1000 class="form-control char-textarea" id="comment" rows="5" name="comment" placeholder="Чудесные мысли"></textarea>
                                                     <label for="textarea-counter">Решение</label>
                                                 </fieldset>
                                                 <small class="counter-value float-right"><span class="char-count">0</span> / 1000</small>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Отправить</button>
+                                        <button type="submit" name="OK" class="btn btn-success waves-effect waves-light">Правильно</button>
+                                        <button type="submit" name="Rejected"class="btn btn-danger waves-effect waves-light">Неправильно</button>
                                     </form>
                                 </div>
                             </div>
@@ -211,96 +203,7 @@
                     </div>
                     <div class="content-body">
                 <!-- Data list view starts -->
-                <section id="data-list-view" class="data-list-view-header">
-                    
-
-                    <!-- DataTable starts -->
-                    <div class="table-responsive">
-                        <table class="table data-list-view">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>ВЕРДИКТ</th>
-                                    <th>ВРЕМЯ ПОСЫЛКИ</th>
-                                    <th>Ваш ОТВЕТ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for solution in submits%}
-                                   <tr onclick="location.href='/themes/solutions/{{solution.id}}'">
-                                        <td></td>
-                                        <td class="product-name">{{solution.verdict}}</td>
-                                        <td class="product-price">{{solution.submitTime}}</td>
-                                        <td class="product-price">{{solution.answer}}</td>
-                                   </tr>
-                                {%endfor%}
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- DataTable ends -->
-
-                    <!-- add new sidebar starts -->
-                    <div class="add-new-data-sidebar">
-                        <div class="overlay-bg"></div>
-                        <div class="add-new-data">
-                            <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
-                                <div>
-                                    <h4>ADD NEW DATA</h4>
-                                </div>
-                                <div class="hide-data-sidebar">
-                                    <i class="feather icon-x"></i>
-                                </div>
-                            </div>
-                            <div class="data-items pb-3">
-                                <div class="data-fields px-2 mt-3">
-                                    <div class="row">
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-name">Name</label>
-                                            <input type="text" class="form-control" id="data-name">
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-category"> Category </label>
-                                            <select class="form-control" id="data-category">
-                                                <option>Audio</option>
-                                                <option>Computers</option>
-                                                <option>Fitness</option>
-                                                <option>Appliance</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-status">Order Status</label>
-                                            <select class="form-control" id="data-status">
-                                                <option>Pending</option>
-                                                <option>Canceled</option>
-                                                <option>Delivered</option>
-                                                <option>On Hold</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-price">Price</label>
-                                            <input type="number" class="form-control" id="data-price">
-                                        </div>
-                                        <div class="col-sm-12 data-field-col data-list-upload">
-                                            <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                                <div class="dz-message">Upload Image</div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                <div class="add-data-btn">
-                                    <button class="btn btn-primary">Add Data</button>
-                                </div>
-                                <div class="cancel-data-btn">
-                                    <button class="btn btn-outline-danger">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- add new sidebar ends -->
-                </section>
+                
             </div>
                 </div> 
 

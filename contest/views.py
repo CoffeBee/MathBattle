@@ -27,6 +27,8 @@ def solutions(request):
 @login_required(login_url='../auth/login/')
 def solution(request, submit_id):
     submit = Solution.objects.get(id=submit_id)
+    if (submit.username == request.user):
+        return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit})
     if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION):
     	return render(request, 'contest/solutionError.html')
     if (request.method == 'POST'):
@@ -34,12 +36,11 @@ def solution(request, submit_id):
         if form.is_valid():
             if 'OK' in request.POST:
                 submit.verdict = Virdict.ACCEPTED
-                submit.comment = form.cleaned_data['comment']
+                submit.judgerComment = form.cleaned_data['comment']
             else:
                 submit.verdict = Virdict.REJECTED
-                submit.comment = form.cleaned_data['comment']
+                submit.judgerComment = form.cleaned_data['comment']
             submit.save()
             return redirect('/themes/solutions')
-    if (submit.username == request.user):
-        return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit})
+
     return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm()})

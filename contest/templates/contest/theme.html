@@ -155,7 +155,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Главная</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="../">Темы</a>
+                                    <li class="breadcrumb-item"><a href="/themes/theme">Темы</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{theme.0.theme.name}}</li>
                                 </ol>
@@ -185,7 +185,7 @@
                             </thead>
                             <tbody>
                                 {% for task in theme%}
-                                   <tr onclick="location.href='../../tasks/{{theme.0.theme.name}}/{{task.task.title}}';">
+                                   <tr onclick="location.href='/tasks/{{theme.0.theme.name}}/{{task.task.title}}';">
                                         <td></td>
                                         <td class="product-name">{{task.task.title}}</td>
                                         <td class="product-name">{{task.task.author}}</td>

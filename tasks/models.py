@@ -50,6 +50,8 @@ class Solution(models.Model):
     description = models.CharField(max_length=20000)
     verdict = EnumField(Virdict, max_length=500,default=Virdict.WRONG_ANSWER)
     submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True)
+    judgerComment = models.CharField(max_length=20000)
+    
 
 class Contest(models.Model):
 

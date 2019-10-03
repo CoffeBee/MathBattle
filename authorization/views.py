@@ -5,21 +5,20 @@ from django.contrib.auth import authenticate, login, logout
 
 def login_view(request):
     next = request.GET.get('next')
-    if request.method == "POST":
-        form = UserLoginForm(request.POST)
-        print(form)
-        if form.is_valid():
-            print(request.POST)
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            if next:
-                return redirect(next)
-            return redirect('/themes/theme')
-        return render(request, 'authorization/loginFailed.html', context={'form' : UserLoginForm()})
+    form = UserLoginForm(request.POST or None)
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        if next:
+            return redirect(next)
+        return redirect('/')
 
-    return render(request, 'authorization/login.html', context={'form' : UserLoginForm()})
+    context = {
+        'form': form,
+    }
+    return render(request, 'authorization/login.html', context)
 
 
 def logout_view(request):

@@ -1,4 +1,5 @@
-from django.shortcuts import redirect
+from django.shortcuts import render
 
 def index(request):
-    return redirect('themes/theme')
+
+    return render(request,'base.html')

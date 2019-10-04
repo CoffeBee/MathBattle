@@ -8,23 +8,23 @@ from tasks.models import Theme, TaskCase, Solution
 from checker.virdicts import Virdict
 from .forms import CheckForm
 
-@login_required(login_url='../auth/login/')
+@login_required(login_url='../../auth/login/')
 def themes(request):
     themes = Theme.objects.all() 
     return render(request, 'contest/index.html', context={'themes': themes})
 
-@login_required(login_url='../auth/login/')
+@login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
 	tasks = TaskCase.objects.filter(theme__name=theme_name).all()
 	return render(request, 'contest/theme.html', context={'theme' : tasks})
 
-@login_required(login_url='../auth/login/')
+@login_required(login_url='../../auth/login/')
 def solutions(request):
     submits = Solution.objects.filter(verdict=Virdict.ACCEPTED_FOR_EVUALETION).filter(~Q(username=request.user)).all()
     print(submits)
     return render(request, 'contest/solutions.html', context={'submits': submits})
 
-@login_required(login_url='../auth/login/')
+@login_required(login_url='../../../auth/login/')
 def solution(request, submit_id):
     submit = Solution.objects.get(id=submit_id)
     if (submit.username == request.user):

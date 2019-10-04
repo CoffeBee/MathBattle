@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader 
+from django.contrib.auth.decorators import login_required
 
 from .models import Task, Solution
 from .forms import NumSolveForm
 from checker.models import Checker
 from checker.virdicts import Virdict
+
+@login_required(login_url='../../../auth/login/')
 def task(request, theme_name, task_title):
     task = Task.objects.get(title=task_title)
     submits = Solution.objects.filter(task=task, username=request.user)

@@ -88,16 +88,8 @@
                                     <ul class="search-list"></ul>
                                 </div>
                             </li>
-                            <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
-                                <li class="dropdown-menu-header">
-                                    <div class="dropdown-header m-0 p-2">
-                                        <h3 class="white">5 New</h3><span class="notification-title">App Notifications</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            </li>
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                    <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">CoffeBee</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
+                                    <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="/auth/logout"><i class="feather icon-power"></i> Logout</a>
                                 </div>

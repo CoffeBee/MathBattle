@@ -11,24 +11,24 @@ from .forms import CheckForm
 @login_required(login_url='../../auth/login/')
 def themes(request):
     themes = Theme.objects.all() 
-    return render(request, 'contest/index.html', context={'themes': themes})
+    return render(request, 'contest/index.html', context={'themes': themes, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
 	tasks = TaskCase.objects.filter(theme__name=theme_name).all()
-	return render(request, 'contest/theme.html', context={'theme' : tasks})
+	return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
 
 @login_required(login_url='../../auth/login/')
 def solutions(request):
     submits = Solution.objects.filter(verdict=Virdict.ACCEPTED_FOR_EVUALETION).filter(~Q(username=request.user)).all()
     print(submits)
-    return render(request, 'contest/solutions.html', context={'submits': submits})
+    return render(request, 'contest/solutions.html', context={'submits': submits, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login/')
 def solution(request, submit_id):
     submit = Solution.objects.get(id=submit_id)
     if (submit.username == request.user):
-        return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit})
+        return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
     if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION):
     	return render(request, 'contest/solutionError.html')
     if (request.method == 'POST'):
@@ -43,4 +43,4 @@ def solution(request, submit_id):
             submit.save()
             return redirect('/themes/solutions')
 
-    return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm()})
+    return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})

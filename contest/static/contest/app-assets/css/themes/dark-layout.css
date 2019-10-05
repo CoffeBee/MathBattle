@@ -1,18 +1,7 @@
 /*========================================================
         DARK LAYOUT
 =========================================================*/
-body.dark-layout {
-  background-color : #262C49;
-  /********* UI ELEMENTS *********/
-  /********* COMPONENTS *********/
-  /********** FORMS **********/
-  /********** TABLE **********/
-  /********** PAGES **********/
-  /********** CHARTS **********/
-  /********** APPLICATIONS **********/
-  /********** EXTENSIONS **********/
-  /********** CUSTOMIZER **********/
-}
+
 body.dark-layout h1, body.dark-layout h2, body.dark-layout h3, body.dark-layout h4, body.dark-layout h5, body.dark-layout h6 {
   color : #EBEEFD;
 }
@@ -131,48 +120,32 @@ body.dark-layout .header-navbar[class*='bg-'] .navbar-nav .nav-item .nav-link {
   background-color : inherit;
 }
 body.dark-layout .main-menu {
-  background-color : #10163A;
 }
 body.dark-layout .main-menu .shadow-bottom {
-  background : -webkit-gradient(linear, left top, left bottom, color-stop(44%, #0F1642), color-stop(73%, rgba(15, 22, 66, 0.51)), to(rgba(44, 48, 60, 0)));
-  background : -webkit-linear-gradient(top, #0F1642 44%, rgba(15, 22, 66, 0.51) 73%, rgba(44, 48, 60, 0));
-  background :    -moz-linear-gradient(top, #0F1642 44%, rgba(15, 22, 66, 0.51) 73%, rgba(44, 48, 60, 0));
-  background :      -o-linear-gradient(top, #0F1642 44%, rgba(15, 22, 66, 0.51) 73%, rgba(44, 48, 60, 0));
-  background :         linear-gradient(180deg, #0F1642 44%, rgba(15, 22, 66, 0.51) 73%, rgba(44, 48, 60, 0));
+  
 }
 body.dark-layout .main-menu:not(.expanded) .navigation .sidebar-group-active a {
-  background-color : #262C49;
 }
 body.dark-layout .main-menu-content .navigation-main {
-  background-color : #10163A;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item i {
-  color : #C2C6DC;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item.open a {
-  background-color : #262C49;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item a:after {
-  color : #C2C6DC;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item .menu-content {
-  background-color : #10163A;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item .menu-content .active .menu-item {
-  color : #FFFFFF;
 }
 body.dark-layout .main-menu-content .navigation-main .nav-item .menu-content li:not(.active) a {
-  background-color : #10163A;
 }
 body.dark-layout .main-menu-content .navigation-main .active .menu-title, body.dark-layout .main-menu-content .navigation-main .active i {
-  color : #FFFFFF;
 }
 body.dark-layout .main-menu-content .navigation-main .sidebar-group-active a {
-  background : #10163A;
   border-radius : 4px;
 }
 body.dark-layout .main-menu-content .navigation-main .sidebar-group-active .menu-content {
-  background-color : #10163A;
 }
 body.dark-layout .main-menu-content .navigation-main .sidebar-group-active .menu-content .active {
   z-index : 1;
@@ -181,16 +154,12 @@ body.dark-layout .main-menu-content .navigation-main .sidebar-group-active .menu
   background-color : transparent;
 }
 body.dark-layout.menu-collapsed .main-menu:not(.expanded) .navigation-main li.active a {
-  background : #262C49 !important;
 }
 body.dark-layout .data-list-view-header .dataTables_wrapper .top .action-btns .dropdown .dropdown-toggle, body.dark-layout .data-thumb-view-header .dataTables_wrapper .top .action-btns .dropdown .dropdown-toggle {
-  background-color : #10163A !important;
-  color : #C2C6DC;
 }
 body.dark-layout .data-list-view-header .dataTables_wrapper .top .action-btns .dropdown .dropdown-toggle:hover, body.dark-layout .data-list-view-header .dataTables_wrapper .top .action-btns .dropdown .dropdown-toggle:active, body.dark-layout .data-thumb-view-header .dataTables_wrapper .top .action-btns .dropdown .dropdown-toggle:hover, body.dark-layout .data-thumb-view-header .dataTables_wrapper .top .action-btns .dropdown .dropdown-toggle:active {
   -webkit-box-shadow : none;
           box-shadow : none;
-  color : #C2C6DC !important;
 }
 body.dark-layout .data-list-view-header .dataTables_wrapper .top .action-btns .dt-buttons .btn.btn-outline-primary span, body.dark-layout .data-thumb-view-header .dataTables_wrapper .top .action-btns .dt-buttons .btn.btn-outline-primary span {
   color : #7367F0;

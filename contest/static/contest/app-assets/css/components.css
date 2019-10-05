@@ -382,32 +382,32 @@ body.fixed-footer footer.footer-dark {
     Author: PIXINVENT
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
-.main-menu {
+ {
   z-index : 1031;
   position : absolute;
   display : table-cell;
   height : 100%;
   overflow : hidden;
 }
-.main-menu.menu-light {
+light {
   color : #626262;
   background : #FFFFFF;
 }
-.main-menu.menu-light .main-menu-header {
+light -header {
   padding : 20px;
 }
-.main-menu.menu-light .main-menu-header .menu-search {
+light -header search {
   background : #E6E6E6;
   padding : 0.5rem 1rem;
   color : #494949;
 }
-.main-menu.menu-light .main-menu-header .menu-search:focus {
+light -header search:focus {
   border-color : #D9D9D9;
 }
-.main-menu.menu-light .navigation {
+light .navigation {
   background : #FFFFFF;
 }
-.main-menu.menu-light .navigation .navigation-header {
+light .navigation .navigation-header {
   color : #999999;
   margin : -webkit-calc(2.2rem - 0.2rem) 0 0.8rem 2.2rem;
   margin :    -moz-calc(2.2rem - 0.2rem) 0 0.8rem 2.2rem;
@@ -416,14 +416,14 @@ body.fixed-footer footer.footer-dark {
   line-height : 1.5;
   letter-spacing : 0.01rem;
 }
-.main-menu.menu-light .navigation .navigation-header span {
+light .navigation .navigation-header span {
   font-weight : 500;
 }
-.main-menu.menu-light .navigation li.has-sub ul.menu-content {
+light .navigation li.has-sub ulcontent {
   padding : 7px;
   margin : -7px -7px 0 -7px;
 }
-.main-menu.menu-light .navigation li a {
+light .navigation li a {
   color : #565656;
   padding : 10px 15px 10px 15px;
   line-height : 1.45;
@@ -432,38 +432,38 @@ body.fixed-footer footer.footer-dark {
      -moz-transition : padding 0.35s ease 0s !important;
           transition : padding 0.35s ease 0s !important;
 }
-.main-menu.menu-light .navigation li a span.menu-sub-title {
+light .navigation li a spansub-title {
   color : #AFAFAF;
 }
-.main-menu.menu-light .navigation li.hover > a {
+light .navigation li.hover > a {
   padding-left : 25px;
   -webkit-transition : padding 0.35s ease 0s !important;
        -o-transition : padding 0.35s ease 0s !important;
      -moz-transition : padding 0.35s ease 0s !important;
           transition : padding 0.35s ease 0s !important;
 }
-.main-menu.menu-light .navigation > li {
+light .navigation > li {
   padding : 0 15px;
 }
-.main-menu.menu-light .navigation > li > a .label {
+light .navigation > li > a .label {
   margin-top : 4px;
   margin-right : 5px;
 }
-.main-menu.menu-light .navigation > li > a i {
+light .navigation > li > a i {
   position : relative;
   top : 1px;
 }
-.main-menu.menu-light .navigation > li.open > a, .main-menu.menu-light .navigation > li.sidebar-group-active > a {
+light .navigation > li.open > a, light .navigation > li.sidebar-group-active > a {
   color : #494949;
   background : whitesmoke;
   transition : transform 0.25s ease 0s, -webkit-transform 0.25s ease 0s;
   border-radius : 6px;
   margin-bottom : 7px;
 }
-.main-menu.menu-light .navigation > li:not(.open) > ul {
+light .navigation > li:not(.open) > ul {
   display : none;
 }
-.main-menu.menu-light .navigation > li.active > a {
+light .navigation > li.active > a {
   background : -webkit-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
   background :    -moz-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
   background :      -o-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
@@ -474,43 +474,43 @@ body.fixed-footer footer.footer-dark {
   font-weight : 400;
   border-radius : 4px;
 }
-.main-menu.menu-light .navigation > li .active {
+light .navigation > li .active {
   background : #F0F0F0;
 }
-.main-menu.menu-light .navigation > li .active > a {
+light .navigation > li .active > a {
   color : #7367F0;
   margin-bottom : 0;
 }
-.main-menu.menu-light .navigation > li .active .hover > a {
+light .navigation > li .active .hover > a {
   background : whitesmoke;
 }
-.main-menu.menu-light .navigation > li ul {
+light .navigation > li ul {
   padding : 0;
   margin : 0;
 }
-.main-menu.menu-light .navigation > li ul li {
+light .navigation > li ul li {
   color : #626262;
   background : transparent;
 }
-.main-menu.menu-light .navigation > li ul li > a {
+light .navigation > li ul li > a {
   padding : 10px 15px 10px 20px;
 }
-.main-menu.menu-light .navigation > li ul .has-sub:not(.open) > ul {
+light .navigation > li ul .has-sub:not(.open) > ul {
   display : none;
 }
-.main-menu.menu-light .navigation > li ul .open > a, .main-menu.menu-light .navigation > li ul .sidebar-group-active > a {
+light .navigation > li ul .open > a, light .navigation > li ul .sidebar-group-active > a {
   color : #626262;
 }
-.main-menu.menu-light .navigation > li ul .open > ul, .main-menu.menu-light .navigation > li ul .sidebar-group-active > ul {
+light .navigation > li ul .open > ul, light .navigation > li ul .sidebar-group-active > ul {
   display : block;
 }
-.main-menu.menu-light .navigation > li ul .open > ul .open > ul, .main-menu.menu-light .navigation > li ul .sidebar-group-active > ul .open > ul {
+light .navigation > li ul .open > ul .open > ul, light .navigation > li ul .sidebar-group-active > ul .open > ul {
   display : block;
 }
-.main-menu.menu-light .navigation > li ul .hover > a, .main-menu.menu-light .navigation > li ul:hover > a {
+light .navigation > li ul .hover > a, light .navigation > li ul:hover > a {
   color : #6C6C6C;
 }
-.main-menu.menu-light .navigation > li ul .active {
+light .navigation > li ul .active {
   background : -webkit-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
   background :    -moz-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
   background :      -o-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
@@ -519,73 +519,71 @@ body.fixed-footer footer.footer-dark {
           box-shadow : 0 0 10px 1px rgba(115, 103, 240, 0.7);
   border-radius : 4px;
 }
-.main-menu.menu-light .navigation > li ul .active > a {
+light .navigation > li ul .active > a {
   color : #FFFFFF;
 }
-.main-menu.menu-light .navigation > li > ul {
+light .navigation > li > ul {
   background : #FFFFFF;
 }
-.main-menu.menu-light ul.menu-popout {
+light ulpopout {
   background : #FFFFFF;
 }
-.main-menu.menu-light ul.menu-popout li a {
+light ulpopout li a {
   color : #626262;
 }
-.main-menu.menu-light ul.menu-popout li a span.menu-sub-title {
+light ulpopout li a spansub-title {
   color : #AFAFAF;
 }
-.main-menu.menu-light ul.menu-popout li.hover > a, .main-menu.menu-light ul.menu-popout li:hover > a, .main-menu.menu-light ul.menu-popout li.open > a {
+light ulpopout li.hover > a, light ulpopout li:hover > a, light ulpopout li.open > a {
   background : #F0F0F0;
 }
-.main-menu.menu-light ul.menu-popout .has-sub:not(.open) > ul {
+light ulpopout .has-sub:not(.open) > ul {
   display : none;
 }
-.main-menu.menu-light ul.menu-popout .open > a {
+light ulpopout .open > a {
   color : #626262;
 }
-.main-menu.menu-light ul.menu-popout .open > ul {
+light ulpopout .open > ul {
   display : block;
 }
-.main-menu.menu-light ul.menu-popout .open > ul .open {
+light ulpopout .open > ul .open {
   background : #E8E8E8;
 }
-.main-menu.menu-light ul.menu-popout .open > ul .open > ul {
+light ulpopout .open > ul .open > ul {
   display : block;
   background : #E8E8E8;
 }
-.main-menu.menu-light ul.menu-popout .hover > a, .main-menu.menu-light ul.menu-popout:hover > a {
+light ulpopout .hover > a, light ulpopout:hover > a {
   color : #6C6C6C;
   background-color : whitesmoke;
 }
-.main-menu.menu-light ul.menu-popout .active {
+light ulpopout .active {
   background : rgba(0, 0, 0, 0.06);
 }
-.main-menu.menu-light ul.menu-popout .active > a {
+light ulpopout .active > a {
   color : #7C7C7C;
   background-color : whitesmoke;
 }
-.main-menu.menu-light ul.menu-popout .active .hover > a, .main-menu.menu-light ul.menu-popout .active :hover > a {
+light ulpopout .active .hover > a, light ulpopout .active :hover > a {
   background-color : transparent;
 }
-.main-menu.menu-dark {
+ {
   color : #DCDCDC;
   background : #10163A;
 }
-.main-menu.menu-dark .main-menu-header {
+ -header {
   padding : 20px;
 }
-.main-menu.menu-dark .main-menu-header .menu-search {
+ -header search {
   background : #050712;
   padding : 0.5rem 1rem;
   color : #C3C3C3;
 }
-.main-menu.menu-dark .main-menu-header .menu-search:focus {
+ -header search:focus {
   border-color : black;
 }
-.main-menu.menu-dark .navigation {
-  background : #10163A;
-}
-.main-menu.menu-dark .navigation .navigation-header {
+
+ .navigation .navigation-header {
   color : white;
   margin : -webkit-calc(2.2rem - 0.2rem) 0 0.8rem 2.2rem;
   margin :    -moz-calc(2.2rem - 0.2rem) 0 0.8rem 2.2rem;
@@ -594,14 +592,14 @@ body.fixed-footer footer.footer-dark {
   line-height : 1.5;
   letter-spacing : 0.01rem;
 }
-.main-menu.menu-dark .navigation .navigation-header span {
+ .navigation .navigation-header span {
   font-weight : 500;
 }
-.main-menu.menu-dark .navigation li.has-sub ul.menu-content {
+ .navigation li.has-sub ulcontent {
   padding : 7px;
   margin : -7px -7px 0 -7px;
 }
-.main-menu.menu-dark .navigation li a {
+ .navigation li a {
   color : #D0D0D0;
   padding : 10px 15px 10px 15px;
   line-height : 1.45;
@@ -610,38 +608,38 @@ body.fixed-footer footer.footer-dark {
      -moz-transition : padding 0.35s ease 0s !important;
           transition : padding 0.35s ease 0s !important;
 }
-.main-menu.menu-dark .navigation li a span.menu-sub-title {
+ .navigation li a spansub-title {
   color : white;
 }
-.main-menu.menu-dark .navigation li.hover > a {
+ .navigation li.hover > a {
   padding-left : 25px;
   -webkit-transition : padding 0.35s ease 0s !important;
        -o-transition : padding 0.35s ease 0s !important;
      -moz-transition : padding 0.35s ease 0s !important;
           transition : padding 0.35s ease 0s !important;
 }
-.main-menu.menu-dark .navigation > li {
+ .navigation > li {
   padding : 0 15px;
 }
-.main-menu.menu-dark .navigation > li > a .label {
+ .navigation > li > a .label {
   margin-top : 4px;
   margin-right : 5px;
 }
-.main-menu.menu-dark .navigation > li > a i {
+ .navigation > li > a i {
   position : relative;
   top : 1px;
 }
-.main-menu.menu-dark .navigation > li.open > a, .main-menu.menu-dark .navigation > li.sidebar-group-active > a {
+ .navigation > li.open > a,  .navigation > li.sidebar-group-active > a {
   color : #C3C3C3;
   background : #0C102A;
   transition : transform 0.25s ease 0s, -webkit-transform 0.25s ease 0s;
   border-radius : 6px;
   margin-bottom : 7px;
 }
-.main-menu.menu-dark .navigation > li:not(.open) > ul {
+ .navigation > li:not(.open) > ul {
   display : none;
 }
-.main-menu.menu-dark .navigation > li.active > a {
+ .navigation > li.active > a {
   background : -webkit-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
   background :    -moz-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
   background :      -o-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
@@ -652,43 +650,43 @@ body.fixed-footer footer.footer-dark {
   font-weight : 400;
   border-radius : 4px;
 }
-.main-menu.menu-dark .navigation > li .active {
+ .navigation > li .active {
   background : #090D22;
 }
-.main-menu.menu-dark .navigation > li .active > a {
+ .navigation > li .active > a {
   color : #7367F0;
   margin-bottom : 0;
 }
-.main-menu.menu-dark .navigation > li .active .hover > a {
+ .navigation > li .active .hover > a {
   background : #0C102A;
 }
-.main-menu.menu-dark .navigation > li ul {
+ .navigation > li ul {
   padding : 0;
   margin : 0;
 }
-.main-menu.menu-dark .navigation > li ul li {
+ .navigation > li ul li {
   color : #DCDCDC;
   background : transparent;
 }
-.main-menu.menu-dark .navigation > li ul li > a {
+ .navigation > li ul li > a {
   padding : 10px 15px 10px 20px;
 }
-.main-menu.menu-dark .navigation > li ul .has-sub:not(.open) > ul {
+ .navigation > li ul .has-sub:not(.open) > ul {
   display : none;
 }
-.main-menu.menu-dark .navigation > li ul .open > a, .main-menu.menu-dark .navigation > li ul .sidebar-group-active > a {
+ .navigation > li ul .open > a,  .navigation > li ul .sidebar-group-active > a {
   color : #DCDCDC;
 }
-.main-menu.menu-dark .navigation > li ul .open > ul, .main-menu.menu-dark .navigation > li ul .sidebar-group-active > ul {
+ .navigation > li ul .open > ul,  .navigation > li ul .sidebar-group-active > ul {
   display : block;
 }
-.main-menu.menu-dark .navigation > li ul .open > ul .open > ul, .main-menu.menu-dark .navigation > li ul .sidebar-group-active > ul .open > ul {
+ .navigation > li ul .open > ul .open > ul,  .navigation > li ul .sidebar-group-active > ul .open > ul {
   display : block;
 }
-.main-menu.menu-dark .navigation > li ul .hover > a, .main-menu.menu-dark .navigation > li ul:hover > a {
+ .navigation > li ul .hover > a,  .navigation > li ul:hover > a {
   color : #E6E6E6;
 }
-.main-menu.menu-dark .navigation > li ul .active {
+ .navigation > li ul .active {
   background : -webkit-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
   background :    -moz-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
   background :      -o-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
@@ -697,78 +695,78 @@ body.fixed-footer footer.footer-dark {
           box-shadow : 0 0 10px 1px rgba(115, 103, 240, 0.7);
   border-radius : 4px;
 }
-.main-menu.menu-dark .navigation > li ul .active > a {
+ .navigation > li ul .active > a {
   color : #FFFFFF;
 }
-.main-menu.menu-dark .navigation > li > ul {
+ .navigation > li > ul {
   background : #10163A;
 }
-.main-menu.menu-dark ul.menu-popout {
+ ulpopout {
   background : #10163A;
 }
-.main-menu.menu-dark ul.menu-popout li a {
+ ulpopout li a {
   color : #DCDCDC;
 }
-.main-menu.menu-dark ul.menu-popout li a span.menu-sub-title {
+ ulpopout li a spansub-title {
   color : white;
 }
-.main-menu.menu-dark ul.menu-popout li.hover > a, .main-menu.menu-dark ul.menu-popout li:hover > a, .main-menu.menu-dark ul.menu-popout li.open > a {
+ ulpopout li.hover > a,  ulpopout li:hover > a,  ulpopout li.open > a {
   background : #090D22;
 }
-.main-menu.menu-dark ul.menu-popout .has-sub:not(.open) > ul {
+ ulpopout .has-sub:not(.open) > ul {
   display : none;
 }
-.main-menu.menu-dark ul.menu-popout .open > a {
+ ulpopout .open > a {
   color : #DCDCDC;
 }
-.main-menu.menu-dark ul.menu-popout .open > ul {
+ ulpopout .open > ul {
   display : block;
 }
-.main-menu.menu-dark ul.menu-popout .open > ul .open {
+ ulpopout .open > ul .open {
   background : #060816;
 }
-.main-menu.menu-dark ul.menu-popout .open > ul .open > ul {
+ ulpopout .open > ul .open > ul {
   display : block;
   background : #060816;
 }
-.main-menu.menu-dark ul.menu-popout .hover > a, .main-menu.menu-dark ul.menu-popout:hover > a {
+ ulpopout .hover > a,  ulpopout:hover > a {
   color : #E6E6E6;
   background-color : #0C102A;
 }
-.main-menu.menu-dark ul.menu-popout .active {
+ ulpopout .active {
   background : rgba(0, 0, 0, 0.06);
 }
-.main-menu.menu-dark ul.menu-popout .active > a {
+ ulpopout .active > a {
   color : #F6F6F6;
   background-color : #0C102A;
 }
-.main-menu.menu-dark ul.menu-popout .active .hover > a, .main-menu.menu-dark ul.menu-popout .active :hover > a {
+ ulpopout .active .hover > a,  ulpopout .active :hover > a {
   background-color : transparent;
 }
-.main-menu.menu-fixed {
+fixed {
   position : fixed;
   /* fallback if needed */
 }
-.main-menu.menu-fixed .main-menu-footer {
+fixed -footer {
   position : fixed;
 }
-.main-menu.menu-static {
+static {
   height : auto;
   padding-bottom : -webkit-calc(100% - 35rem);
   padding-bottom :    -moz-calc(100% - 35rem);
   padding-bottom :         calc(100% - 35rem);
 }
-.main-menu.menu-static .main-menu-content {
+static -content {
   height : unset !important;
 }
-.main-menu.menu-shadow {
+shadow {
   -webkit-box-shadow : 0 0 15px 0 rgba(0, 0, 0, 0.05);
           box-shadow : 0 0 15px 0 rgba(0, 0, 0, 0.05);
 }
-.main-menu.menu-border {
+border {
   border-right : 1px solid #E4E7ED;
 }
-.main-menu .shadow-bottom {
+ .shadow-bottom {
   display : none;
   position : absolute;
   z-index : 2;
@@ -784,10 +782,10 @@ body.fixed-footer footer.footer-dark {
   background :      -o-linear-gradient(#FFFFFF 41%, rgba(255, 255, 255, 0.11) 95%, rgba(255, 255, 255, 0));
   background :         linear-gradient(#FFFFFF 41%, rgba(255, 255, 255, 0.11) 95%, rgba(255, 255, 255, 0));
 }
-.main-menu.menu-native-scroll .main-menu-content {
+native-scroll -content {
   overflow-y : scroll;
 }
-.main-menu .navbar-header {
+ .navbar-header {
   height : 100%;
   width : 260px;
   height : 5rem;
@@ -798,7 +796,7 @@ body.fixed-footer footer.footer-dark {
      -moz-transition : 300ms ease all;
           transition : 300ms ease all;
 }
-.main-menu .navbar-header .navbar-brand {
+ .navbar-header .navbar-brand {
   display : -webkit-box;
   display : -webkit-flex;
   display :    -moz-box;
@@ -811,13 +809,13 @@ body.fixed-footer footer.footer-dark {
           align-items : center;
   margin-top : 1.35rem;
 }
-.main-menu .navbar-header .navbar-brand .brand-logo {
+ .navbar-header .navbar-brand .brand-logo {
   background : url('../../app-assets/images/logo/vuesax-logo.png') no-repeat;
   background-position : -65px -54px;
   height : 24px;
   width : 35px;
 }
-.main-menu .navbar-header .navbar-brand .brand-text {
+ .navbar-header .navbar-brand .brand-text {
   color : #7367F0;
   padding-left : 1rem;
   font-weight : 600;
@@ -828,33 +826,33 @@ body.fixed-footer footer.footer-dark {
        -o-animation : 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1 fadein;
           animation : 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1 fadein;
 }
-.main-menu .navbar-header .modern-nav-toggle {
+ .navbar-header .modern-nav-toggle {
   -webkit-animation : 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1 fadein;
      -moz-animation : 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1 fadein;
        -o-animation : 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1 fadein;
           animation : 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1 fadein;
 }
-.main-menu .main-menu-content {
+ -content {
   height : -webkit-calc(100% - 6rem) !important;
   height :    -moz-calc(100% - 6rem) !important;
   height :         calc(100% - 6rem) !important;
   position : relative;
 }
-.main-menu ul {
+ ul {
   list-style : none;
   margin : 0;
   padding : 0;
 }
-.main-menu ul.navigation-main {
+ ul.navigation-main {
   overflow-x : hidden;
 }
-.main-menu ul.navigation-main > li:first-child {
+ ul.navigation-main > li:first-child {
   margin-top : 0.5rem;
 }
-.main-menu a {
+ a {
   outline : none;
 }
-.main-menu a:hover, .main-menu a:focus {
+ a:hover,  a:focus {
   text-decoration : none;
 }
 
@@ -886,7 +884,7 @@ body.fixed-footer footer.footer-dark {
   cursor : not-allowed;
 }
 
-.menu-popout li.disabled a {
+popout li.disabled a {
   cursor : not-allowed;
 }
 
@@ -929,13 +927,13 @@ body.fixed-footer footer.footer-dark {
   margin-bottom : 0.25rem;
 }
 
-.main-menu-header .user-content {
+-header .user-content {
   padding : 20px;
 }
-.main-menu-header .user-content .media {
+-header .user-content .media {
   overflow : inherit;
 }
-.main-menu-header .user-content .media-body {
+-header .user-content .media-body {
   vertical-align : bottom;
   opacity : 1;
   width : 150px;
@@ -946,7 +944,7 @@ body.fixed-footer footer.footer-dark {
           transition : all 0.3s ease 0.15s;
 }
 
-.main-menu-footer {
+-footer {
   position : relative;
   overflow : hidden;
   bottom : 0;
@@ -955,24 +953,24 @@ body.fixed-footer footer.footer-dark {
   color : white;
   background-color : #9AA9B7;
 }
-.main-menu-footer.footer-open {
+-footer.footer-open {
   max-height : 500px;
   -webkit-transition : max-height 0.2s ease-in-out;
        -o-transition : max-height 0.2s ease-in-out;
      -moz-transition : max-height 0.2s ease-in-out;
           transition : max-height 0.2s ease-in-out;
 }
-.main-menu-footer a {
+-footer a {
   color : white;
 }
-.main-menu-footer a:hover, .main-menu-footer a:focus {
+-footer a:hover, -footer a:focus {
   color : #FFFFFF;
 }
-.main-menu-footer .header {
+-footer .header {
   height : 19px;
   border-bottom : 1px solid #A9B5C1;
 }
-.main-menu-footer .toggle {
+-footer .toggle {
   -webkit-transform : rotate(0deg);
      -moz-transform : rotate(0deg);
       -ms-transform : rotate(0deg);
@@ -980,10 +978,10 @@ body.fixed-footer footer.footer-dark {
           transform : rotate(0deg);
   transition : -webkit-transform 0.2s ease-in-out;
 }
-.main-menu-footer .content {
+-footer .content {
   padding : 0;
 }
-.main-menu-footer .content .actions > a {
+-footer .content .actions > a {
   display : block;
   float : left;
   width : 33.33333%;
@@ -993,25 +991,25 @@ body.fixed-footer footer.footer-dark {
   border-top : 1px solid #A9B5C1;
   border-left : 1px solid #A9B5C1;
 }
-.main-menu-footer .content .actions > a > span {
+-footer .content .actions > a > span {
   font-size : 1.35rem;
 }
-.main-menu-footer .content .actions > a:hover, .main-menu-footer .content .actions > a:focus {
+-footer .content .actions > a:hover, -footer .content .actions > a:focus {
   color : #FFFFFF;
 }
 
-body.vertical-layout.vertical-menu.menu-expanded .main-menu-footer .content {
+body.vertical-layout.vertical-menuexpanded -footer .content {
   margin-left : 0;
 }
 
-body.menu-collapsed .menu-static {
+bodycollapsed static {
   padding-bottom : -webkit-calc(100% - 14rem);
   padding-bottom :    -moz-calc(100% - 14rem);
   padding-bottom :         calc(100% - 14rem);
 }
 
 @media (max-width: 767.98px) {
-  .menu-hide .main-menu, .menu-open .main-menu {
+  hide , open  {
     -webkit-transition : top 0.35s, height 0.35s, -webkit-transform 0.25s;
             transition : top 0.35s, height 0.35s, -webkit-transform 0.25s;
          -o-transition : top 0.35s, height 0.35s, -o-transform 0.25s;
@@ -1019,7 +1017,7 @@ body.menu-collapsed .menu-static {
             transition : transform 0.25s, top 0.35s, height 0.35s;
             transition : transform 0.25s, top 0.35s, height 0.35s, -webkit-transform 0.25s, -moz-transform 0.25s, -o-transform 0.25s;
   }
-  .main-menu {
+   {
     -webkit-transform : translate3d(-240px, 0, 0);
        -moz-transform : translate3d(-240px, 0, 0);
             transform : translate3d(-240px, 0, 0);
@@ -1030,7 +1028,7 @@ body.menu-collapsed .menu-static {
        -moz-perspective : 1000;
             perspective : 1000;
   }
-  .menu-open .main-menu {
+  open  {
     -webkit-transform : translate3d(0, 0, 0);
        -moz-transform : translate3d(0, 0, 0);
             transform : translate3d(0, 0, 0);
@@ -1043,12 +1041,12 @@ body.menu-collapsed .menu-static {
   }
 }
 
-body.fixed-footer .main-menu.menu-fixed {
+body.fixed-footer fixed {
   height : 100%;
 }
 
 @media (max-width: 768px) {
-  body .main-menu.menu-static {
+  body static {
     padding-bottom : 100%;
   }
 }

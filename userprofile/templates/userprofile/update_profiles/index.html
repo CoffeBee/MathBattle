@@ -1,0 +1,16 @@
+{% extends '../base_userprofile.html' %}
+{% block title %}
+  Профиль пользователя
+{% endblock %}
+
+{% block content %}
+  <h1>Профиль</h1>
+
+  <form method="post">
+  {% csrf_token %}
+  {{ user_form.as_p }}
+  {{ profile_form.as_p }}
+  <button type="submit">Save changes</button>
+  </form>
+  <p>Хотите покинуть нас? <a href="../auth/logout/">До свидания!</a></p>
+{% endblock %}

@@ -34,6 +34,7 @@ class Task(models.Model):
     right_answer = models.CharField(max_length=200)
     checker = models.ForeignKey(Checker, on_delete=models.CASCADE, default=DEFAULT_CHECKER_ID)
     title = models.CharField(default='Task', max_length=200)
+    solvers = models.ManyToManyField(User, related_name='solver')
 
     def __str__(self):
         return self.title
@@ -60,7 +61,7 @@ class Contest(models.Model):
         verbose_name_plural = "Contests"
 
     def __str__(self):
-        pass
+        return self.name
 
     def task_default():
         return [1]
@@ -101,9 +102,6 @@ class TaskContestCase(models.Model):
     class Meta:
         verbose_name = "TaskContestCase"
         verbose_name_plural = "TaskContestCases"
-
-    def __str__(self):
-        pass
 
     points = models.IntegerField()
     task = models.ForeignKey(Task, on_delete=models.CASCADE)

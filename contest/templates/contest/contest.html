@@ -106,13 +106,14 @@
                 <div class="content-header-left col-md-12 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Конетесты {{theme.theme.name}}</h2>
+                            <h2 class="content-header-title float-left mb-0">Контест {{contest.name}}</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Главная</a>
                                     </li>
-                                    <li class="breadcrumb-item active"><a href="/themes/theme">Контесты</a>
+                                    <li class="breadcrumb-item"><a href="/themes/theme">Контесты</a>
                                     </li>
+                                    <li class="breadcrumb-item active">{{contest.name}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -130,20 +131,20 @@
                                     <th></th>
                                     <th>НАЗВАНИЕ</th>
                                     <th>АВТОР</th>
-                                    <th>QTY ЗАДАЧ</th>
-                                    <th>ДАТА НАЧАЛА</th>
-                                    <th>ДАНА ОКОНАНИЯ</th>
+                                    <th>СЛОЖНОСТЬ</th>
+                                    <th>QTY РЕШИВШИХ</th>
+                                    <th>QTY ПОСЫЛОК</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for contest in contests%}
-                                <tr onclick="location.href='/themes/contest/{{contest.name}}}';">
+                                {% for task in theme%}
+                                <tr onclick="location.href='/tasks/{{theme.0.theme.name}}/{{task.task.title}}';">
                                     <td></td>
-                                    <td class="product-name">{{contest.name}}</td>
-                                    <td class="product-name">{{contest.author}}</td>
-                                    <td class="product-price">{{contest.tasks.count}}</td>
-                                    <td class="product-price">{{contest.startDate}}</td>
-                                    <td class="product-price">{{contest.finishDate}}</td>
+                                    <td class="product-name">{{task.task.title}}</td>
+                                    <td class="product-name">{{task.task.author}}</td>
+                                    <td class="product-price">{{task.hardness}}</td>
+                                    <td class="product-price">0 челове решило</td>
+                                    <td class="product-price">0 посылок</td>
                                 </tr>
                                 {%endfor%}
                             </tbody>

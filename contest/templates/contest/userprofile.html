@@ -8,6 +8,10 @@
   <h1>Профиль</h1>
   <p>Ник: {{username}}</p>
   <p>Почта: {{ email }}</p>
+  {% for theme in themes %}
+    <p>Тема: {{ theme.name }} Раздел: {{ theme.general_name }} Уровень: {{ theme.hardness }} </p>
+  {% endfor %}
   <p><a href="..">Перейти на главную</a></p>
+  <p><a href="userprofile/update_profiles">Редактировать профиль</a></p>
   <p>Хотите покинуть нас? <a href="../auth/logout/">До свидания!</a></p>
 {% endblock %}

@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.db.models.functions import datetime
 
 from django.contrib.auth.decorators import login_required
-from tasks.models import Theme, TaskCase, Solution, Contest
+from tasks.models import Theme, TaskCase, Solution, Contest, Rang
 from checker.virdicts import Virdict
 from .forms import CheckForm
 
@@ -31,8 +31,19 @@ def contest(request, contest_name):
 
 @login_required(login_url='../../auth/login/')
 def solutions(request):
-    submits = Solution.objects.filter(verdict=Virdict.ACCEPTED_FOR_EVUALETION).filter(~Q(username=request.user)).filter(task__solvers=request.user).all()
-    return render(request, 'contest/solutions.html', context={'submits': submits, 'user' : request.user})
+    solutions = Solution.objects.all()
+    need = []
+    for sol in  solutions:
+        theme = sol.task.theme_set.all()[0]
+        global_theme = theme.general_theme.all()[0]
+        rang = 0
+        try:
+            rang = Rang.objects.get(user=request.user, theme=global_theme).point
+        except:
+            pass
+        if rang > sol.need_rang and sol.username != request.user:
+            need.append(sol)
+    return render(request, 'contest/solutions.html', context={'submits': need, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login/')
 def solution(request, submit_id):

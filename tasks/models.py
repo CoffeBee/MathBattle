@@ -74,8 +74,8 @@ class Contest(models.Model):
     finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)          
   
 
-class GrobalTheme(models.Model):
-    name = CharField(max_length=200)
+class GlobalTheme(models.Model):
+    name = models.CharField(max_length=200)
     rangs = models.ManyToManyField(User, through='Rang')
 
 
@@ -87,14 +87,14 @@ class Theme(models.Model):
 
     name = models.CharField(max_length=200)
     tasks = models.ManyToManyField(Task, through='TaskCase')
-    general_theme = models.ManyToManyField(GrobalTheme, through='GlobalThemeName')
+    general_theme = models.ManyToManyField(GlobalTheme, through='GlobalThemeName')
     def __str__(self):
     	return str(self.name)
 
 class GlobalThemeName(models.Model):
-    hardness = IntegerField()
-    global_them = ForeignKey(GlobalTheme, on_delete=models.CASCADE)
-    theme = ForeignKey(Theme, on_delete=models.CASCADE)
+    hardness = models.IntegerField()
+    global_them = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
 
 class TaskCase(models.Model):
 
@@ -135,7 +135,7 @@ class TaskCase_inline(admin.TabularInline):
     model = TaskCase
     extra = 1
 
-class (admin.TabularInline):
+class GlobalThemeName_inline(admin.TabularInline):
     model = GlobalThemeName
     extra = 1
 
@@ -148,7 +148,7 @@ class TaskAdmin(admin.ModelAdmin):
 class ThemeAdmin(admin.ModelAdmin):
     inlines = (TaskCase_inline, GlobalThemeName_inline)
 class GlobalThemeAdmin(admin.ModelAdmin):
-    inlines = (GlobalThemeName_inline)
+    inlines = (GlobalThemeName_inline, )
 
 
 

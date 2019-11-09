@@ -83,6 +83,7 @@ class Theme(models.Model):
     tasks = models.ManyToManyField(Task, through='TaskCase')
     general_name = models.CharField(max_length=200, default='Геометрия')
     hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE)
+    rangs = models.ManyToManyField(User, through='Rang')
     def __str__(self):
     	return str(self.name)
 
@@ -106,6 +107,16 @@ class TaskContestCase(models.Model):
     points = models.IntegerField()
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
+
+class Rang(models.Model):
+
+    class Meta:
+        verbose_name = "Rang"
+        verbose_name_plural = "Rangs"
+
+    point = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
 
 class TaskContestCase_inline(admin.TabularInline):
     model = TaskContestCase

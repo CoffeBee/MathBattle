@@ -89,7 +89,7 @@
                                     <ul class="search-list"></ul>
                                 </div>
                             </li>
-                            
+
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                     <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
                                 </a>
@@ -133,7 +133,7 @@
                                     <th>РАЗДЕЛ</th>
                                     <th>ПРОГРЕСС</th>
                                     <th>СЛОЖНОСТЬ</th>
-                                    <th>QTY ЗАДАЧ</th>
+                                    <th>КОЛ-ВО ЗАДАЧ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -141,7 +141,7 @@
                                 <tr onclick="location.href='{{theme.name}}';">
                                     <td></td>
                                     <td class="product-name">{{theme.name}}</td>
-                                    <td class="product-category">{{theme.general_theme[0]}}</td>
+                                    <td class="product-category">{{theme.general_theme.all.0.name}}</td>
                                     <td>
                                         <div class="progress progress-bar-success">
                                             <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width:97%"></div>
@@ -231,7 +231,7 @@
     <div class="drag-target"></div>
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25"><a class="text-bold-800 grey darken-2" href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">MathBattle,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Сделано в Силаэдре<i class="feather icon-heart pink"></i></span>
+        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25"><a class="text-bold-800 grey darken-2" href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">MathBattle,</a>Все права защищены</span><span class="float-md-right d-none d-md-block">Сделано в Силаэдре<i class="feather icon-heart pink"></i></span>
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
         </p>
     </footer>

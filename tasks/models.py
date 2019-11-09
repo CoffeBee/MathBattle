@@ -146,7 +146,9 @@ class TaskAdmin(admin.ModelAdmin):
     inlines = (TaskCase_inline, TaskContestCase_inline)
 
 class ThemeAdmin(admin.ModelAdmin):
-    inlines = (TaskCase_inline, GlobalThemeName)
+    inlines = (TaskCase_inline, GlobalThemeName_inline)
+class GlobalThemeAdmin(admin.ModelAdmin):
+    inlines = (GlobalThemeName_inline)
 
 
 

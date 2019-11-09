@@ -32,7 +32,6 @@ def contest(request, contest_name):
 @login_required(login_url='../../auth/login/')
 def solutions(request):
     submits = Solution.objects.filter(verdict=Virdict.ACCEPTED_FOR_EVUALETION).filter(~Q(username=request.user)).filter(task__solvers=request.user).all()
-    print(submits)
     return render(request, 'contest/solutions.html', context={'submits': submits, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login/')

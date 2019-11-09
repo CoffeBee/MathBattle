@@ -7,9 +7,7 @@ def login_view(request):
     next = request.GET.get('next')
     if request.method == "POST":
         form = UserLoginForm(request.POST)
-        print(form)
         if form.is_valid():
-            print(request.POST)
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)

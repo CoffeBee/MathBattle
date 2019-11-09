@@ -14,7 +14,6 @@ def task(request, theme_name, task_title):
     submits = Solution.objects.filter(task=task, username=request.user)
     if  request.method == 'POST':
         form = NumSolveForm(request.POST)  
-        print(request.POST)
         if (form.is_valid()):
             ans = form.cleaned_data['ans']
             description = form.cleaned_data['description']

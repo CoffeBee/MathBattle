@@ -136,7 +136,7 @@ class TaskCase_inline(admin.TabularInline):
     extra = 1
 
 class (admin.TabularInline):
-    model = TaskContestCase
+    model = GlobalThemeName
     extra = 1
 
 class ContestAdmin(admin.ModelAdmin):
@@ -146,7 +146,7 @@ class TaskAdmin(admin.ModelAdmin):
     inlines = (TaskCase_inline, TaskContestCase_inline)
 
 class ThemeAdmin(admin.ModelAdmin):
-    inlines = (TaskCase_inline,)
+    inlines = (TaskCase_inline, GlobalThemeName)
 
 
 

@@ -72,7 +72,13 @@ class Contest(models.Model):
     team_size = models.IntegerField(default=4)
     startDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
     finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)          
-    
+  
+
+class GrobalTheme(models.Model):
+    name = CharField(max_length=200)
+    rangs = models.ManyToManyField(User, through='Rang')
+
+
 class Theme(models.Model):
 
     class Meta:
@@ -81,11 +87,14 @@ class Theme(models.Model):
 
     name = models.CharField(max_length=200)
     tasks = models.ManyToManyField(Task, through='TaskCase')
-    general_name = models.CharField(max_length=200, default='Геометрия')
-    hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE)
-    rangs = models.ManyToManyField(User, through='Rang')
+    general_theme = models.ManyToManyField(GrobalTheme, through='GlobalThemeName')
     def __str__(self):
     	return str(self.name)
+
+class GlobalThemeName(models.Model):
+    hardness = IntegerField()
+    global_them = ForeignKey(GlobalTheme, on_delete=models.CASCADE)
+    theme = ForeignKey(Theme, on_delete=models.CASCADE)
 
 class TaskCase(models.Model):
 
@@ -116,7 +125,7 @@ class Rang(models.Model):
 
     point = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+    theme = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
 
 class TaskContestCase_inline(admin.TabularInline):
     model = TaskContestCase
@@ -124,6 +133,10 @@ class TaskContestCase_inline(admin.TabularInline):
 
 class TaskCase_inline(admin.TabularInline):
     model = TaskCase
+    extra = 1
+
+class (admin.TabularInline):
+    model = TaskContestCase
     extra = 1
 
 class ContestAdmin(admin.ModelAdmin):

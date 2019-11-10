@@ -25,9 +25,9 @@ def task(request, theme_name, task_title):
                 pass
             print(rang)
             if checker.checkAns(ans, task.right_answer):
-                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED_FOR_EVUALETION, task=task, need_rang=rang)
+                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED_FOR_EVUALETION, task=task, need_rang=rang, comments=[])
             else:
-                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.WRONG_ANSWER, task=task, need_rang=rang)
+                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.WRONG_ANSWER, task=task, need_rang=rang, comments=[])
             newsol.save()
             
     return render(request, 'contest/task.html', context={'themename' : theme_name, 'task' : task, 'form' : NumSolveForm(), 'submits' : submits})

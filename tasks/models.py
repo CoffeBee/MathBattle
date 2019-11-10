@@ -48,11 +48,11 @@ class Solution(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, default=DEFAULT_TASK_ID)
     answer = models.CharField(max_length=2000)
-    description = models.CharField(max_length=20000)
+    description = models.CharField(max_length=2000)
     verdict = EnumField(Virdict, max_length=500,default=Virdict.WRONG_ANSWER)
     submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True)
-    judgerComment = models.CharField(max_length=20000)
     need_rang = models.IntegerField()
+    comments = ArrayField(models.CharField(max_length=2000), blank=True)
 
 
 class Contest(models.Model):

@@ -41,16 +41,27 @@ def solutions(request):
             rang = Rang.objects.get(user=request.user, theme=global_theme).point
         except:
             pass
-        if rang > sol.need_rang and sol.username != request.user:
+        if rang > sol.need_rang and sol.username != request.user and (sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION or sol.verdict == Virdict.APPLICATION):
             need.append(sol)
     return render(request, 'contest/solutions.html', context={'submits': need, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login/')
 def solution(request, submit_id):
     submit = Solution.objects.get(id=submit_id)
+    print(submit.verdict)
     if (submit.username == request.user):
+        if (submit.verdict == Virdict.REJECTED):
+            if (request.method == 'POST'):
+                form = CheckForm(request.POST)  
+                if form.is_valid():
+                    submit.verdict = Virdict.APPLICATION
+                    submit.comments.append(form.cleaned_data['comment'])
+                    submit.need_rang += 1
+                    submit.save()
+                return redirect('/themes/solutions')
+            return render(request, 'contest/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user})
         return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
-    if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION):
+    if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION and submit.verdict != Virdict.APPLICATION):
     	return render(request, 'contest/solutionError.html')
     if (request.method == 'POST'):
         form = CheckForm(request.POST)  
@@ -58,10 +69,10 @@ def solution(request, submit_id):
             if 'OK' in request.POST:
                 submit.task.solvers.add(request.user)
                 submit.verdict = Virdict.ACCEPTED
-                submit.judgerComment = form.cleaned_data['comment']
+                submit.comments.apppend(form.cleaned_data['comment'])
             else:
                 submit.verdict = Virdict.REJECTED
-                submit.judgerComment = form.cleaned_data['comment']
+                submit.comments.append(form.cleaned_data['comment'])
             submit.save()
             return redirect('/themes/solutions')
 

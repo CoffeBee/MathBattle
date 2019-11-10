@@ -130,14 +130,14 @@ body, html{
   padding: 0px;
   margin: 0px;
 }
-table
+table#a
 {
   width: 100%;
   padding: 0px;
   margin: 0px;
   overflow: hidden;
 }
-textarea
+textarea#a
 {
  border: none;
  margin: 0px;
@@ -150,7 +150,7 @@ textarea
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;
 }
-tr,td
+tr#a,td#a
 {
   vertical-align: top;
   overflow: auto;
@@ -159,7 +159,7 @@ tr,td
   margin: 0px;
 }
 td#Input
-{
+{ 
 }
 td#Output{
   position: relative;
@@ -304,13 +304,13 @@ td#Output{
                                 <div class="row">
                                     <div class="col-12">
                                         <fieldset class="form-label-group mb-0">
-                                            <table cellspacing="0" cellpadding="0">
-                                            <tr>
-                                            <td id="Input">
+                                            <table cellspacing="0" cellpadding="0" id="a">
+                                            <tr id="a">
+                                            <td id="Input" style="width : 50%;">
                                             <textarea placeholder="Мы умеем вот так $e^{i}$"
                                             id="MathInput" onkeyup="Preview.Update()" data-length=1000 class="form-control char-textarea" id="description" rows="5" name="description" placeholder="Чудесные мысли"></textarea>
                                             </td>
-                                            <td id=Output>
+                                            <td id="Output">
                                             <div id="MathPreview"></div>
                                             <div id="MathBuffer"></div>
                                             </td>

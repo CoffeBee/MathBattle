@@ -119,7 +119,7 @@
                                     </li>
                                     <li class="breadcrumb-item"><a href="/themes/solutions">Решения</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{submit.task.title}}</li>
+                                    <li class="breadcrumb-item active">Ваше решение для задачи {{submit.task.title}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -129,14 +129,14 @@
             <div class="content-body">
                 <!-- Data list view starts -->
                 <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <h4 class="card-title">Решение</h4>
-                            <p class="card-text">{{submit.description}}</p>
-                            <p class="card-text mt-1"><small class="text-muted">Читайте внимательно и пытайтесь найти лажу в решении</small></p>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <h4 class="card-title">Решение</h4>
+                                <p class="card-text">{{submit.description}}</p>
+                                <p class="card-text mt-1"><small class="text-muted">Ваше решение</small></p>
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% for sol in submit.comments%}
                     <div class="card">
                         <div class="card-content">
@@ -148,16 +148,15 @@
                         </div>
                     </div>
                 {% endfor %}
-                <!-- Data list view end -->
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Ваш вердикт</h4>
+                        <h4 class="card-title">Подать заявку на аппиляцию</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             <form action="?" method="post">
                                 {% csrf_token %}
-                                <p class="mb-2">Пишите ваши претензии к решению как можно точнее, если Вы плохо напишите или не напишите коментарий к решению - это будет минус в Вашу карму</p>
+                                <p class="mb-2">Пишите ваши претензии к проверки как можно точнее, если Вы плохо напишите или не напишите коментарий к проверки - это будет минус в Вашу карму</p>
                                 <div class="row">
                                     <div class="col-12">
                                         <fieldset class="form-label-group mb-0">
@@ -167,17 +166,22 @@
                                         <small class="counter-value float-right"><span class="char-count">0</span> / 1000</small>
                                     </div>
                                 </div>
-                                <button type="submit" name="OK" class="btn btn-success waves-effect waves-light">Правильно</button>
-                                <button type="submit" name="Rejected" class="btn btn-danger waves-effect waves-light">Неправильно</button>
+                                <button type="submit" name="Rejected" class="btn btn-danger waves-effect waves-light">Подать заявку</button>
                             </form>
                         </div>
                     </div>
-                </div>
+                </div>    
+                
+                
+                <!-- Data list view end -->
             </div>
-            <div class="content-body">
-                <!-- Data list view starts -->
-            </div>
+            
+            <!-- Data list view end -->
         </div>
+        <div class="content-body">
+            <!-- Data list view starts -->
+        </div>
+    </div>
     </div>
     </div>
     </div>

@@ -128,6 +128,11 @@ class Rang(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     theme = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
 
+class Points(models.Model):
+    score = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
+
 class TaskContestCase_inline(admin.TabularInline):
     model = TaskContestCase
     extra = 1

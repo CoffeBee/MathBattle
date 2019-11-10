@@ -29,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/core/colors/palette-gradient.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/plugins/file-uploaders/dropzone.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/pages/data-list-view.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
     <!-- END: Page CSS-->
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
@@ -88,11 +89,11 @@
                                     <ul class="search-list"></ul>
                                 </div>
                             </li>
+
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                     <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
+                                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="/auth/logout"><i class="feather icon-power"></i> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -106,14 +107,15 @@
                 <div class="content-header-left col-md-12 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Тема {{theme.theme.name}}</h2>
+                            <h2 class="content-header-title float-left mb-0">Команда {{team.name}}</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Главная</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="/themes/theme">Темы</a>
+                                    <li class="breadcrumb-item"> Команды
                                     </li>
-                                    <li class="breadcrumb-item active">{{theme.0.theme.name}}</li>
+                                    <li class="breadcrumb-item"> {{team.name}}
+                                    </li>
                                 </ol>
                             </div>
                         </div>
@@ -129,22 +131,23 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>НАЗВАНИЕ</th>
-                                    <th>АВТОР</th>
-                                    <th>СЛОЖНОСТЬ</th>
-                                    <th>КОЛ-ВО РЕШИВШИХ</th>
-                                    <th>КОЛ-ВО ПОСЫЛОК</th>
+                                    <th>Логие</th>
+                                    <th>Имя</th>
+                                    <th>Фамилия</th>
+                                    <th>Школа</th>
+                                    <th>Класс</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for task in theme%}
-                                <tr onclick="location.href='/tasks/{{task.task.title}}';">
+                                {% for user in team.users.all%}
+                                <tr>
                                     <td></td>
-                                    <td class="product-name">{{task.task.title}}</td>
-                                    <td class="product-name">{{task.task.author}}</td>
-                                    <td class="product-price">{{task.hardness}}</td>
-                                    <td class="product-price">0 челове решило</td>
-                                    <td class="product-price">0 посылок</td>
+                                    <td class="product-name">{{user.username}}</td>
+                                    <td class="product-category">{{user.profile.first_name}}</td>
+                                    <td class="product-category">{{user.profile.second_name}}</td>
+                                    <td class="product-category">{{user.profile.school}}</td>
+                                    <td class="product-category">{{user.profile.grade}} класс</td>
+
                                 </tr>
                                 {%endfor%}
                             </tbody>
@@ -213,6 +216,17 @@
                     <!-- add new sidebar ends -->
                 </section>
                 <!-- Data list view end -->
+                {% if not user in team.users.all %}
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form action="?" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">Вступить в комадну</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </div>

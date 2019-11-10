@@ -143,7 +143,31 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <h4 class="card-title">Достижения</h4>
+                            <h4 class="card-title">Создать команду</h4>
+                            <form action="?" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-xl-6 col-md-8 col-12 mb-2">
+                                        <fieldset class="form-group">
+                                            <label for="ans">Название вашей комадны</label>
+                                            {{form.name}}
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">Сгенерировать ссылку</button>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- Data list view end -->
+            </div>
+            <div class="content-body">
+                <!-- Data list view starts -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <h4 class="card-title">Создать команду</h4>
                             <p>   </p>
                             
                         </div>
@@ -151,7 +175,6 @@
                 </div>
                 <!-- Data list view end -->
             </div>
-
     </div>
     </div>
     </div>

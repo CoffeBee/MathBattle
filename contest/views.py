@@ -3,9 +3,10 @@ from django.http import HttpResponse
 import random
 from django.db.models import Q
 from django.db.models.functions import datetime
+from django.utils import timezone
 
 from django.contrib.auth.decorators import login_required
-from tasks.models import Theme, TaskCase, Solution, Contest, Rang
+from tasks.models import Theme, TaskCase, Solution, Contest, Rang, TaskContestCase
 from checker.virdicts import Virdict
 from .forms import CheckForm
 
@@ -26,14 +27,26 @@ def contests(request):
 
 @login_required(login_url='../../../auth/login')
 def contest(request, contest_name):
-    contest = Contest.objects.get(name=contest_name)
-    return render(request, 'contest/contest.html', context={'contest' : contest, 'user' : request.user})
+    now = timezone.now()
+    contest = Contest.objects.get(name = contest_name)
+    score = 0
+    for task in contest.tasks.all():
+        if Solution.objects.filter(username = request.user).filter(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST).filter(task = task).exists():
+            score += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
+    print(score)
+    if now > contest.startDate and now < contest.finishDate:
+        tasks = TaskContestCase.objects.filter(contest__name=contest_name).all()
+        return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score})
+    return render(request, 'contest/contestError.html')
+
 
 @login_required(login_url='../../auth/login/')
 def solutions(request):
     solutions = Solution.objects.all()
     need = []
     for sol in  solutions:
+        if len(sol.task.theme_set.all()) == 0:
+            continue
         theme = sol.task.theme_set.all()[0]
         global_theme = theme.general_theme.all()[0]
         rang = 0

@@ -91,8 +91,8 @@
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                     <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="page-user-profile.html"><i class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i>Выйти</a>
                                 </div>
                             </li>
                         </ul>
@@ -106,14 +106,13 @@
                 <div class="content-header-left col-md-12 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Тема {{theme.theme.name}}</h2>
+                            <h2 class="content-header-title float-left mb-0">Контесты {{theme.theme.name}}</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Главная</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="/themes/theme">Темы</a>
+                                    <li class="breadcrumb-item active"><a href="/themes/theme">Контесты</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{theme.0.theme.name}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -131,20 +130,20 @@
                                     <th></th>
                                     <th>НАЗВАНИЕ</th>
                                     <th>АВТОР</th>
-                                    <th>СЛОЖНОСТЬ</th>
-                                    <th>QTY РЕШИВШИХ</th>
-                                    <th>QTY ПОСЫЛОК</th>
+                                    <th>КОЛ-ВО ЗАДАЧ</th>
+                                    <th>ДАТА НАЧАЛА</th>
+                                    <th>ДАНА ОКОНАНИЯ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for task in theme%}
-                                <tr onclick="location.href='/tasks/{{theme.0.theme.name}}/{{task.task.title}}';">
+                                {% for contest in contests%}
+                                <tr onclick="location.href='/themes/contest/{{contest.name}}}';">
                                     <td></td>
-                                    <td class="product-name">{{task.task.title}}</td>
-                                    <td class="product-name">{{task.task.author}}</td>
-                                    <td class="product-price">{{task.hardness}}</td>
-                                    <td class="product-price">0 челове решило</td>
-                                    <td class="product-price">0 посылок</td>
+                                    <td class="product-name">{{contest.name}}</td>
+                                    <td class="product-name">{{contest.author}}</td>
+                                    <td class="product-price">{{contest.tasks.count}}</td>
+                                    <td class="product-price">{{contest.startDate}}</td>
+                                    <td class="product-price">{{contest.finishDate}}</td>
                                 </tr>
                                 {%endfor%}
                             </tbody>
@@ -221,7 +220,7 @@
     <div class="drag-target"></div>
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25"><a class="text-bold-800 grey darken-2" href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">MathBattle,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Сделано в Силаэдре<i class="feather icon-heart pink"></i></span>
+        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25"><a class="text-bold-800 grey darken-2" href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">MathBattle,</a>Все права защищены</span><span class="float-md-right d-none d-md-block">Сделано в Силаэдре<i class="feather icon-heart pink"></i></span>
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
         </p>
     </footer>

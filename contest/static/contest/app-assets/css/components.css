@@ -464,21 +464,13 @@ light .navigation > li:not(.open) > ul {
   display : none;
 }
 light .navigation > li.active > a {
-  background : -webkit-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
-  background :    -moz-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
-  background :      -o-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));
-  background :         linear-gradient(118deg, #7367F0, rgba(115, 103, 240, 0.7));
-  -webkit-box-shadow : 0 0 10px 1px rgba(115, 103, 240, 0.7);
-          box-shadow : 0 0 10px 1px rgba(115, 103, 240, 0.7);
   color : #FFFFFF;
   font-weight : 400;
   border-radius : 4px;
 }
 light .navigation > li .active {
-  background : #F0F0F0;
 }
 light .navigation > li .active > a {
-  color : #7367F0;
   margin-bottom : 0;
 }
 light .navigation > li .active .hover > a {
@@ -499,7 +491,6 @@ light .navigation > li ul .has-sub:not(.open) > ul {
   display : none;
 }
 light .navigation > li ul .open > a, light .navigation > li ul .sidebar-group-active > a {
-  color : #626262;
 }
 light .navigation > li ul .open > ul, light .navigation > li ul .sidebar-group-active > ul {
   display : block;
@@ -508,7 +499,6 @@ light .navigation > li ul .open > ul .open > ul, light .navigation > li ul .side
   display : block;
 }
 light .navigation > li ul .hover > a, light .navigation > li ul:hover > a {
-  color : #6C6C6C;
 }
 light .navigation > li ul .active {
   background : -webkit-linear-gradient(332deg, #7367F0, rgba(115, 103, 240, 0.7));

@@ -34,6 +34,7 @@ class Task(models.Model):
     right_answer = models.CharField(max_length=200)
     checker = models.ForeignKey(Checker, on_delete=models.CASCADE, default=DEFAULT_CHECKER_ID)
     title = models.CharField(default='Task', max_length=200)
+    solvers = models.ManyToManyField(User, related_name='solver')
 
     def __str__(self):
         return self.title
@@ -60,7 +61,7 @@ class Contest(models.Model):
         verbose_name_plural = "Contests"
 
     def __str__(self):
-        pass
+        return self.name
 
     def task_default():
         return [1]
@@ -71,7 +72,13 @@ class Contest(models.Model):
     team_size = models.IntegerField(default=4)
     startDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
     finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)          
-    
+  
+
+class GlobalTheme(models.Model):
+    name = models.CharField(max_length=200)
+    rangs = models.ManyToManyField(User, through='Rang')
+
+
 class Theme(models.Model):
 
     class Meta:
@@ -80,10 +87,14 @@ class Theme(models.Model):
 
     name = models.CharField(max_length=200)
     tasks = models.ManyToManyField(Task, through='TaskCase')
-    general_name = models.CharField(max_length=200, default='Геометрия')
-    hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE)
+    general_theme = models.ManyToManyField(GlobalTheme, through='GlobalThemeName')
     def __str__(self):
     	return str(self.name)
+
+class GlobalThemeName(models.Model):
+    hardness = models.IntegerField()
+    global_them = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
 
 class TaskCase(models.Model):
 
@@ -102,12 +113,19 @@ class TaskContestCase(models.Model):
         verbose_name = "TaskContestCase"
         verbose_name_plural = "TaskContestCases"
 
-    def __str__(self):
-        pass
-
     points = models.IntegerField()
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
+
+class Rang(models.Model):
+
+    class Meta:
+        verbose_name = "Rang"
+        verbose_name_plural = "Rangs"
+
+    point = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    theme = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
 
 class TaskContestCase_inline(admin.TabularInline):
     model = TaskContestCase
@@ -117,6 +135,10 @@ class TaskCase_inline(admin.TabularInline):
     model = TaskCase
     extra = 1
 
+class GlobalThemeName_inline(admin.TabularInline):
+    model = GlobalThemeName
+    extra = 1
+
 class ContestAdmin(admin.ModelAdmin):
     inlines = (TaskContestCase_inline,)
 
@@ -124,7 +146,9 @@ class TaskAdmin(admin.ModelAdmin):
     inlines = (TaskCase_inline, TaskContestCase_inline)
 
 class ThemeAdmin(admin.ModelAdmin):
-    inlines = (TaskCase_inline,)
+    inlines = (TaskCase_inline, GlobalThemeName_inline)
+class GlobalThemeAdmin(admin.ModelAdmin):
+    inlines = (GlobalThemeName_inline, )
 
 
 

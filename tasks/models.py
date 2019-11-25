@@ -52,6 +52,8 @@ class Solution(models.Model):
     submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True)
     need_rang = models.IntegerField()
     comments = ArrayField(models.CharField(max_length=2000), blank=True)
+    model_pic = models.ImageField(upload_to = 'uploads/contest/sol_images', default='uploads/contest/no_images.jpg')
+
 
 
 class Contest(models.Model):

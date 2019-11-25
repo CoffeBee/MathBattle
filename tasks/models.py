@@ -1,20 +1,3 @@
-
-
-
-class ContestUser(models.Model):
-
-    class Meta:
-        verbose_name = "ContestUser"
-        verbose_name_plural = "ContestUsers"
-
-    def __str__(self):
-        pass
-    contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    team = models.ForeignKey('userprofile.Team', on_delete=models.CASCADE)
-    point = models.IntegerField()
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField

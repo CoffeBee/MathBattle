@@ -92,7 +92,8 @@
                                     <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
+                                    <a class="dropdown-item" href="/auth/logout"><i class="feather icon-power"></i> Выйти</a>
+                                    <a class="dropdown-item" href="/userprofile"><i class="feather icon-user"></i> Профиль</a>
                                 </div>
                             </li>
                         </ul>
@@ -143,7 +144,7 @@
                                     <td class="product-name">{{task.task.title}}</td>
                                     <td class="product-name">{{task.task.author}}</td>
                                     <td class="product-price">{{task.hardness}}</td>
-                                    <td class="product-price">0 челове решило</td>
+                                    <td class="product-price">0 человек решило</td>
                                     <td class="product-price">0 посылок</td>
                                 </tr>
                                 {%endfor%}

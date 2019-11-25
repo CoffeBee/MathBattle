@@ -72,7 +72,7 @@ var Preview = {
   //  This gets called when a key is pressed in the textarea.
   //  We check if there is already a pending update and clear it if so.
   //  Then set up an update to occur after a small delay (so if more keys
-  //    are pressed, the update won't occur until after there has been 
+  //    are pressed, the update won't occur until after there has been
   //    a pause in the typing).
   //  The callback function is set up below, after the Preview object is set up.
   //
@@ -86,7 +86,7 @@ var Preview = {
   //  If the text hasn't changed, return
   //  Otherwise, indicate that MathJax is running, and start the
   //    typesetting.  After it is done, call PreviewDone.
-  //  
+  //
   CreatePreview: function () {
     Preview.timeout = null;
     if (this.mjPending) return;
@@ -144,7 +144,7 @@ textarea#a
  padding-left: 20px;
  padding-right: 20px;
  padding-top: 20px;
-  
+
   width: 100%;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -159,7 +159,7 @@ tr#a,td#a
   margin: 0px;
 }
 td#Input
-{ 
+{
 }
 td#Output{
   position: relative;
@@ -242,7 +242,9 @@ td#Output{
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                     <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="/auth/logout"><i class="feather icon-power"></i> Logout</a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="/auth/logout"><i class="feather icon-power"></i> Выйти</a>
+                                    <a class="dropdown-item" href="/userprofile"><i class="feather icon-user"></i> Профиль</a>
                                 </div>
                             </li>
                         </ul>
@@ -277,7 +279,7 @@ td#Output{
                         <div class="card-body">
                             <h4 class="card-title">Условие</h4>
                             <p class="card-text">{{task.text}}</p>
-                            <p class="card-text mt-1"><small class="text-muted">Котегарически желаем удачи</small></p>
+                            <p class="card-text mt-1"><small class="text-muted">Желаем удачи!</small></p>
                         </div>
                     </div>
                 </div>
@@ -288,7 +290,7 @@ td#Output{
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="?" method="post">
+                            <form action="?" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-xl-6 col-md-8 col-12 mb-2">
@@ -299,7 +301,7 @@ td#Output{
                                         </fieldset>
                                     </div>
                                 </div>
-                                <p class="mb-2">Пишите свои мысли как можно структурированее и понятнее. Если Ваше решение не будет понято, Вам придется долго и муторно подавать на аппеляцию. Советуем Вам сначало написать решение тезисно. У вас есть 1000 символов на решение</p>
+                                <p class="mb-2">Пишите свои мысли как можно структурированнее и понятнее. Если Ваше решение не будет понято, Вам придеться долго подавать на аппеляцию. Советуем Вам сначало написать решение тезисно. У вас есть 1000 символов на решение</p>
                                 <div class="row">
                                     <div class="col-12">
                                         <fieldset class="form-label-group mb-0">
@@ -318,7 +320,11 @@ td#Output{
                                             <label for="textarea-counter">Решение</label>
                                         </fieldset>
                                         <small class="counter-value float-right"><span class="char-count">0</span> / 1000</small>
+
                                     </div>
+                                    <p>
+                                        {{form.image}}
+                                    </p>
                                 </div>
                                 <button type="submit" class="btn btn-primary waves-effect waves-light">Отправить</button>
                             </form>

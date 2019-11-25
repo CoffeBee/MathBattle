@@ -1,5 +1,4 @@
-Ваня Подворный, [25 нояб. 2019 г., 15:46:49]:
-contestants = models.ManyToManyField(User, through='ContestUser', related_name='contestants')
+
 
 
 class ContestUser(models.Model):

@@ -17,6 +17,15 @@ def check(task, user):
     if Solution.objects.filter(username=user, task=task.task).exists():
         return 2
     return 0
+def check_team(task, team):
+    fl = 0
+    for user in team.users.all():
+        if Solution.objects.filter(username=user, task=task.task, verdict = Virdict.ACCEPTED).exists():
+            return 1
+        if Solution.objects.filter(username=user, task=task.task).exists():
+            fl = 2
+    return fl
+    
 @login_required(login_url='../../auth/login/')
 def themes(request):
     themes = Theme.objects.all() 
@@ -58,7 +67,7 @@ def contest(request, contest_name):
                 if not mfl and Solution.objects.filter(username = user).filter(Q(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST) | Q(verdict = Virdict.ACCEPTED)).filter(task = task).exists():
                     Mayscore += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
                     mfl = True
-        tasks = [[check(task, request.user), task] for task in TaskContestCase.objects.filter(contest__name=contest_name).all()]
+        tasks = [[check_team(task, team), task] for task in TaskContestCase.objects.filter(contest__name=contest_name).all()]
         return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore})
     return render(request, 'contest/solutionError.html')
 

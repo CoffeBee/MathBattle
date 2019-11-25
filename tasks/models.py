@@ -75,7 +75,22 @@ class Contest(models.Model):
     team_size = models.IntegerField(default=4)
     startDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
     finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
+    contestants = models.ManyToManyField(User, through='ContestUser', related_name='contestants')
 
+
+class ContestUser(models.Model):
+
+    class Meta:
+        verbose_name = "ContestUser"
+        verbose_name_plural = "ContestUsers"
+
+    def __str__(self):
+        pass
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    team = models.ForeignKey('userprofile.Team', on_delete=models.CASCADE)
+    point = models.IntegerField()
 
 class GlobalTheme(models.Model):
     name = models.CharField(max_length=200)

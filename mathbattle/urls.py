@@ -8,7 +8,6 @@ urlpatterns = [
     path('', index),
     path('auth/', include('authorization.urls')),
     path('tasks', include('tasks.urls')),
-    path('contest_page', include('contest_page.urls')),
     path('archiv/', include('archiv.urls')),
     path('userprofile', include('userprofile.urls'))
 ]

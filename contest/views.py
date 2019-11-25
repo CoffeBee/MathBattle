@@ -105,7 +105,10 @@ def solution(request, submit_id):
             if 'OK' in request.POST:
                 submit.task.solvers.add(request.user)
                 submit.verdict = Virdict.ACCEPTED
-                submit.comments.apppend(form.cleaned_data['comment'])
+                l = list(submit.comments)
+                print(l)
+                l.append(form.cleaned_data['comment'])
+                submit.comments = l
             else:
                 submit.verdict = Virdict.REJECTED
                 submit.comments.append(form.cleaned_data['comment'])

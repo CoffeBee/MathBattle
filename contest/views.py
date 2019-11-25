@@ -64,7 +64,7 @@ def contest(request, contest_name):
                 if not sfl and Solution.objects.filter(username = user).filter(verdict = Virdict.ACCEPTED).filter(task = task).exists():
                     score += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
                     sfl = True
-                if not mfl and Solution.objects.filter(username = user).filter(Q(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST) | Q(verdict = Virdict.ACCEPTED)).filter(task = task).exists():
+                if not mfl and Solution.objects.filter(username = user).filter(Q(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST) | Q(verdict = Virdict.ACCEPTED) | Q(verdict = Virdict.ACCEPTED_FOR_EVUALETION)).filter(task = task).exists():
                     Mayscore += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
                     mfl = True
         tasks = [[check_team(task, team), task] for task in TaskContestCase.objects.filter(contest__name=contest_name).all()]

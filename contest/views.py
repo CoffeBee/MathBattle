@@ -1,15 +1,22 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from tasks.models import ContestUser
+from userprofile.models import Team
 import random
 from django.db.models import Q
 from django.db.models.functions import datetime
 from django.utils import timezone
-
+from .forms import ContestRegister
 from django.contrib.auth.decorators import login_required
 from tasks.models import Theme, TaskCase, Solution, Contest, Rang, TaskContestCase
 from checker.virdicts import Virdict
 from .forms import CheckForm
-
+def check(task, user):
+    if Solution.objects.filter(username=user, task=task.task, verdict = Virdict.ACCEPTED).exists():
+        return 1
+    if Solution.objects.filter(username=user, task=task.task).exists():
+        return 2
+    return 0
 @login_required(login_url='../../auth/login/')
 def themes(request):
     themes = Theme.objects.all() 
@@ -17,8 +24,9 @@ def themes(request):
 
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
-	tasks = TaskCase.objects.filter(theme__name=theme_name).all()
-	return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
+    tasks = [[check(task, request.user), task] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
+    print(tasks)
+    return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login')
 def contests(request):
@@ -27,9 +35,14 @@ def contests(request):
 
 @login_required(login_url='../../../auth/login')
 def contest(request, contest_name):
-    print(request.user.team_set.all())
+
+        
     now = timezone.now()
     contest = Contest.objects.get(name = contest_name)
+    if request.method == "POST":
+        team = Team.objects.get(pk=request.POST['team'])
+        new_contest_user = ContestUser(team = team, user = request.user, point=0, contest = contest)
+        new_contest_user.save()
     score = 0
     Mayscore = 0
     for task in contest.tasks.all():
@@ -37,8 +50,9 @@ def contest(request, contest_name):
             score += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
         if Solution.objects.filter(username = request.user).filter(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST).filter(task = task).exists():
             Mayscore += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
-    print(score)
     if now > contest.startDate and now < contest.finishDate:
+        if len(ContestUser.objects.filter(contest=contest, user=request.user).all()) == 0:
+            return render(request, 'contest/ContestRegister.html', context={'form' : ContestRegister(user=request.user)})
         tasks = TaskContestCase.objects.filter(contest__name=contest_name).all()
         return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore})
     return render(request, 'contest/solutionError.html')

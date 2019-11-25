@@ -139,10 +139,44 @@
                             <tbody>
                                 {% for task in tasks%}
                                 <tr onclick="location.href='/tasks/{{task.task.title}}';">
-                                    <td></td>
-                                    <td class="product-name">{{task.task.title}}</td>
-                                    <td class="product-name">{{task.task.author}}</td>
-                                    <td class="product-price">{{task.points}}</td>
+                                    <td>
+                                        {% if task.0 == 1%}
+                                            <div class="vs-checkbox-con vs-checkbox-success">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                
+                                            </div>
+                                        {%endif%}
+                                        {% if task.0 == 2%}
+                                            <div class="vs-checkbox-con vs-checkbox-danger">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                
+                                            </div>
+                                        {%endif%}
+                                         {% if task.0 == 0%}
+                                            <div class="vs-checkbox-con vs-checkbox-danger">
+                                                <input type="checkbox"  value="true" onclick="return true;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                
+                                            </div>
+                                        {%endif%}
+                                    </td>
+                                    <td class="product-name">{{task.1.task.title}}</td>
+                                    <td class="product-name">{{task.1.task.author}}</td>
+                                    <td class="product-price">{{task.1.points}}</td>
                                     <td class="product-price">0 человек решило</td>
                                     <td class="product-price">0 посылок</td>
                                 </tr>

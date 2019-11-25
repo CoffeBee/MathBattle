@@ -25,7 +25,6 @@ def themes(request):
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
     tasks = [[check(task, request.user), task] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
-    print(tasks)
     return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login')
@@ -43,17 +42,23 @@ def contest(request, contest_name):
         team = Team.objects.get(pk=request.POST['team'])
         new_contest_user = ContestUser(team = team, user = request.user, point=0, contest = contest)
         new_contest_user.save()
-    score = 0
-    Mayscore = 0
-    for task in contest.tasks.all():
-        if Solution.objects.filter(username = request.user).filter(verdict = Virdict.ACCEPTED).filter(task = task).exists():
-            score += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
-        if Solution.objects.filter(username = request.user).filter(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST).filter(task = task).exists():
-            Mayscore += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
     if now > contest.startDate and now < contest.finishDate:
         if len(ContestUser.objects.filter(contest=contest, user=request.user).all()) == 0:
             return render(request, 'contest/ContestRegister.html', context={'form' : ContestRegister(user=request.user)})
-        tasks = TaskContestCase.objects.filter(contest__name=contest_name).all()
+        team = ContestUser.objects.get(contest=contest, user=request.user).team
+        score = 0
+        Mayscore = 0
+        for task in contest.tasks.all():
+            mfl = False
+            sfl = False
+            for user in team.users.all():
+                if not sfl and Solution.objects.filter(username = request.user).filter(verdict = Virdict.ACCEPTED).filter(task = task).exists():
+                    score += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
+                    sfl = True
+                if not mfl and Solution.objects.filter(username = request.user).filter(Q(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST) | Q(verdict = Virdict.ACCEPTED)).filter(task = task).exists():
+                    Mayscore += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
+                    mfl = True
+        tasks = [[check(task, request.user), task] for task in TaskContestCase.objects.filter(contest__name=contest_name).all()]
         return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore})
     return render(request, 'contest/solutionError.html')
 

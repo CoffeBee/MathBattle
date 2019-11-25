@@ -87,8 +87,8 @@ DATABASES = {
         'NAME' : 'mathbattle',
         'USER' : 'podvorniy',
         'PASSWORD' : 'Podvorniy1303©',
-        'HOST' : 'rc1a-m64po417wgldsodz.mdb.yandexcloud.net',
-        'PORT' : '6432'
+        'HOST' : 'localhost',
+        'PORT' : '5432'
 
     }
 }

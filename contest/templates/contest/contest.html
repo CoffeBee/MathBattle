@@ -106,14 +106,14 @@
                 <div class="content-header-left col-md-12 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Контест {{contest.name}}</h2>
+                            <h2 class="content-header-title float-left mb-0">Контест {{tasks.0.contest.name}}</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Главная</a>
                                     </li>
                                     <li class="breadcrumb-item"><a href="/themes/theme">Контесты</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{contest.name}}</li>
+                                    <li class="breadcrumb-item active">{{tasks.0.contest.name}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -131,18 +131,18 @@
                                     <th></th>
                                     <th>НАЗВАНИЕ</th>
                                     <th>АВТОР</th>
-                                    <th>СЛОЖНОСТЬ</th>
+                                    <th>ЦЕНА</th>
                                     <th>КОЛ-ВО РЕШИВШИХ</th>
                                     <th>КОЛ-ВО ПОСЫЛОК</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for task in theme%}
-                                <tr onclick="location.href='/tasks/{{theme.0.theme.name}}/{{task.task.title}}';">
+                                {% for task in tasks%}
+                                <tr onclick="location.href='/tasks/{{task.task.title}}';">
                                     <td></td>
                                     <td class="product-name">{{task.task.title}}</td>
                                     <td class="product-name">{{task.task.author}}</td>
-                                    <td class="product-price">{{task.hardness}}</td>
+                                    <td class="product-price">{{task.points}}</td>
                                     <td class="product-price">0 человек решило</td>
                                     <td class="product-price">0 посылок</td>
                                 </tr>
@@ -213,6 +213,16 @@
                     <!-- add new sidebar ends -->
                 </section>
                 <!-- Data list view end -->
+
+                <div class="content-header row">
+                    <div class="content-header-left col-md-12 col-12 mb-2">
+                        <div class="row breadcrumbs-top">
+                            <div class="col-12">
+                                <h2 class="content-header-title float-left mb-0">Ваш счет : {{score}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

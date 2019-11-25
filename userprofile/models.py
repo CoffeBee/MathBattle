@@ -25,3 +25,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+class Team(models.Model):
+    users = models.ManyToManyField(User)
+    name = models.CharField(max_length=2000)
+    link = models.CharField(max_length=200)

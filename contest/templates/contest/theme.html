@@ -138,7 +138,7 @@
                             </thead>
                             <tbody>
                                 {% for task in theme%}
-                                <tr onclick="location.href='/tasks/{{theme.0.theme.name}}/{{task.task.title}}';">
+                                <tr onclick="location.href='/tasks/{{task.task.title}}';">
                                     <td></td>
                                     <td class="product-name">{{task.task.title}}</td>
                                     <td class="product-name">{{task.task.author}}</td>

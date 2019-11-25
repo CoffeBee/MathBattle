@@ -33,6 +33,13 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
     <!-- END: Custom CSS-->
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    showProcessingMessages: false,
+    tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </head>
 <!-- END: Head-->
 <!-- BEGIN: Body-->
@@ -130,6 +137,17 @@
                         </div>
                     </div>
                 </div>
+                {% for sol in submit.comments%}
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <h4 class="card-title"></h4>
+                                <p class="card-text">{{sol}}</p>
+                                <p class="card-text mt-1"><small class="text-muted">Коментарии к решению</small></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
                 <!-- Data list view end -->
                 <div class="card">
                     <div class="card-header">

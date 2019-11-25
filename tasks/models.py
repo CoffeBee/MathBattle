@@ -1,3 +1,21 @@
+Ваня Подворный, [25 нояб. 2019 г., 15:46:49]:
+contestants = models.ManyToManyField(User, through='ContestUser', related_name='contestants')
+
+
+class ContestUser(models.Model):
+
+    class Meta:
+        verbose_name = "ContestUser"
+        verbose_name_plural = "ContestUsers"
+
+    def __str__(self):
+        pass
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    team = models.ForeignKey('userprofile.Team', on_delete=models.CASCADE)
+    point = models.IntegerField()
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
@@ -5,7 +23,6 @@ from django.contrib import admin
 from checker.virdicts import Virdict
 from checker.models import Checker
 from enumfields import EnumField, Enum
-
 from django.db.models.functions import datetime
 
 # Create your models here.
@@ -68,107 +85,4 @@ class Contest(models.Model):
 
     def task_default():
         return [1]
-
-    name = models.CharField(max_length=200)
-    tasks = models.ManyToManyField(Task, through='TaskContestCase')
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    team_size = models.IntegerField(default=4)
-    startDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
-    finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
-    contestants = models.ManyToManyField(User, through='ContestUser', related_name='contestants')
-
-
-class ContestUser(models.Model):
-
-    class Meta:
-        verbose_name = "ContestUser"
-        verbose_name_plural = "ContestUsers"
-
-    def __str__(self):
-        pass
-    contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    team = models.ForeignKey('userprofile.Team', on_delete=models.CASCADE)
-    point = models.IntegerField()
-
-class GlobalTheme(models.Model):
-    name = models.CharField(max_length=200)
-    rangs = models.ManyToManyField(User, through='Rang')
-
-
-class Theme(models.Model):
-
-    class Meta:
-        verbose_name = "Theme"
-        verbose_name_plural = "Themes"
-
-    name = models.CharField(max_length=200)
-    tasks = models.ManyToManyField(Task, through='TaskCase')
-    general_theme = models.ManyToManyField(GlobalTheme, through='GlobalThemeName')
-    def __str__(self):
-    	return str(self.name)
-
-class GlobalThemeName(models.Model):
-    hardness = models.IntegerField()
-    global_them = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
-
-class TaskCase(models.Model):
-
-    class Meta:
-        verbose_name = "TaskCase"
-        verbose_name_plural = "TasksCase"
-
-    hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
-
-
-class TaskContestCase(models.Model):
-
-    class Meta:
-        verbose_name = "TaskContestCase"
-        verbose_name_plural = "TaskContestCases"
-
-    points = models.IntegerField()
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
-
-class Rang(models.Model):
-
-    class Meta:
-        verbose_name = "Rang"
-        verbose_name_plural = "Rangs"
-
-    point = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    theme = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
-
-class Points(models.Model):
-    score = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
-
-class TaskContestCase_inline(admin.TabularInline):
-    model = TaskContestCase
-    extra = 1
-
-class TaskCase_inline(admin.TabularInline):
-    model = TaskCase
-    extra = 1
-
-class GlobalThemeName_inline(admin.TabularInline):
-    model = GlobalThemeName
-    extra = 1
-
-class ContestAdmin(admin.ModelAdmin):
-    inlines = (TaskContestCase_inline,)
-
-class TaskAdmin(admin.ModelAdmin):
-    inlines = (TaskCase_inline, TaskContestCase_inline)
-
-class ThemeAdmin(admin.ModelAdmin):
-    inlines = (TaskCase_inline, GlobalThemeName_inline)
-class GlobalThemeAdmin(admin.ModelAdmin):
-    inlines = (GlobalThemeName_inline, )
+...

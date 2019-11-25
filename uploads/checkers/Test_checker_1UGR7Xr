@@ -1,1 +1,1 @@
-userans == ans
+userans.lower() == ans.lower()

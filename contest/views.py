@@ -27,17 +27,21 @@ def contests(request):
 
 @login_required(login_url='../../../auth/login')
 def contest(request, contest_name):
+    print(request.user.team_set.all())
     now = timezone.now()
     contest = Contest.objects.get(name = contest_name)
     score = 0
+    Mayscore = 0
     for task in contest.tasks.all():
-        if Solution.objects.filter(username = request.user).filter(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST).filter(task = task).exists():
+        if Solution.objects.filter(username = request.user).filter(verdict = Virdict.ACCEPTED).filter(task = task).exists():
             score += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
+        if Solution.objects.filter(username = request.user).filter(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST).filter(task = task).exists():
+            Mayscore += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
     print(score)
     if now > contest.startDate and now < contest.finishDate:
         tasks = TaskContestCase.objects.filter(contest__name=contest_name).all()
-        return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score})
-    return render(request, 'contest/contestError.html')
+        return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore})
+    return render(request, 'contest/solutionError.html')
 
 
 @login_required(login_url='../../auth/login/')
@@ -54,7 +58,7 @@ def solutions(request):
             rang = Rang.objects.get(user=request.user, theme=global_theme).point
         except:
             pass
-        if rang > sol.need_rang and sol.username != request.user and (sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION or sol.verdict == Virdict.APPLICATION):
+        if rang > sol.need_rang and sol.username != request.user and (sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION or sol.verdict == Virdict.APPLICATION or sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION):
             need.append(sol)
     return render(request, 'contest/solutions.html', context={'submits': need, 'user' : request.user})
 
@@ -75,7 +79,7 @@ def solution(request, submit_id):
             return render(request, 'contest/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user})
         return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
     if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION and submit.verdict != Virdict.APPLICATION):
-    	return render(request, 'contest/solutionError.html')
+    	return render(request, 'contest/ContestError.html')
     if (request.method == 'POST'):
         form = CheckForm(request.POST)  
         if form.is_valid():

@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'contest.apps.ContestConfig',
     'authorization.apps.AuthorizationConfig',
     'tasks.apps.TasksConfig',
-    'contest_page.apps.ContestPageConfig',
     'archiv.apps.ArchivConfig',
     'userprofile.apps.UserprofileConfig',
     'checker.apps.CheckerConfig',

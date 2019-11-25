@@ -29,7 +29,6 @@
     <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/core/colors/palette-gradient.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/plugins/file-uploaders/dropzone.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/pages/data-list-view.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
     <!-- END: Page CSS-->
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
@@ -89,7 +88,6 @@
                                     <ul class="search-list"></ul>
                                 </div>
                             </li>
-
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                     <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
                                 </a>
@@ -109,13 +107,12 @@
                 <div class="content-header-left col-md-12 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Темы</h2>
+                            <h2 class="content-header-title float-left mb-0">Профиль</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Главная</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Темы
-                                    </li>
+
                                 </ol>
                             </div>
                         </div>
@@ -124,109 +121,52 @@
             </div>
             <div class="content-body">
                 <!-- Data list view starts -->
-                <section id="data-list-view" class="data-list-view-header">
-                    <!-- DataTable starts -->
-                    <div class="table-responsive">
-                        <table class="table data-list-view">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>НАЗВАНИЕ</th>
-                                    <th>РАЗДЕЛ</th>
-                                    <th>ПРОГРЕСС</th>
-                                    <th>СЛОЖНОСТЬ</th>
-                                    <th>КОЛ-ВО ЗАДАЧ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for theme in themes%}
-                                <tr onclick="location.href='{{theme.name}}';">
-                                    <td></td>
-                                    <td class="product-name">{{theme.name}}</td>
-                                    <td class="product-category">{{theme.general_theme.all.0.name}}</td>
-                                    <td>
-                                        <div class="progress progress-bar-success">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width:97%"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="chip chip-{{theme.hardness}}">
-                                            <div class="chip-body">
-                                                <div class="chip-text">{{theme.hardness}}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-price">{{theme.tasks.count}} Задач</td>
-                                </tr>
-                                {%endfor%}
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- DataTable ends -->
-                    <!-- add new sidebar starts -->
-                    <div class="add-new-data-sidebar">
-                        <div class="overlay-bg"></div>
-                        <div class="add-new-data">
-                            <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
-                                <div>
-                                    <h4>ADD NEW DATA</h4>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form method="post" class="form-label-group">
+                                {% csrf_token %}
+                                <div class="form-label-group">
+                                    <input type="id_first_name" id="id_first_name" class="form-control" placeholder="Имя" name="first_name">
+                                    <label for="id_first_name">Имя</label>
                                 </div>
-                                <div class="hide-data-sidebar">
-                                    <i class="feather icon-x"></i>
+                                <div class="form-label-group">
+                                    <input type="id_father_name" id="id_father_name" class="form-control" placeholder="Отчество" name="father_name">
+                                    <label for="id_father_name">Отчество</label>
                                 </div>
-                            </div>
-                            <div class="data-items pb-3">
-                                <div class="data-fields px-2 mt-3">
-                                    <div class="row">
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-name">Name</label>
-                                            <input type="text" class="form-control" id="data-name">
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-category"> Category </label>
-                                            <select class="form-control" id="data-category">
-                                                <option>Audio</option>
-                                                <option>Computers</option>
-                                                <option>Fitness</option>
-                                                <option>Appliance</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-status">Order Status</label>
-                                            <select class="form-control" id="data-status">
-                                                <option>Pending</option>
-                                                <option>Canceled</option>
-                                                <option>Delivered</option>
-                                                <option>On Hold</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 data-field-col">
-                                            <label for="data-price">Price</label>
-                                            <input type="number" class="form-control" id="data-price">
-                                        </div>
-                                        <div class="col-sm-12 data-field-col data-list-upload">
-                                            <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                                <div class="dz-message">Upload Image</div>
-                                            </form>
-                                        </div>
-                                    </div>
+                                <div class="form-label-group">
+                                    <input type="id_second_name" id="id_second_name" class="form-control" placeholder="Фамилия" name="second_name">
+                                    <label for="id_second_name">Фамилия</label>
                                 </div>
-                            </div>
-                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                <div class="add-data-btn">
-                                    <button class="btn btn-primary">Add Data</button>
+                                <div class="form-label-group">
+                                    <input type="email" id="email" class="form-control" placeholder="Почта" name="email">
+                                    <label for="inputEmail">Почта</label>
                                 </div>
-                                <div class="cancel-data-btn">
-                                    <button class="btn btn-outline-danger">Cancel</button>
+                                <div class="form-label-group">
+                                    <input type="id_birth_date" id="id_birth_date" class="form-control" placeholder="Дата рождения" name="birth_date">
+                                    <label for="id_birth_date">Дата рождения</label>
                                 </div>
-                            </div>
+                                <div class="form-label-group">
+                                    <input type="id_location" id="id_location" class="form-control" placeholder="Место проживания" name="location">
+                                    <label for="id_location">Город проживания</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input type="id_school" id="id_school" class="form-control" placeholder="Школа" name="school">
+                                    <label for="id_school">Школа</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input type="id_grade" id="id_grade" class="form-control" placeholder="Класс" name="grade">
+                                    <label for="id_grade">Класс</label>
+                                </div>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Сохранить изменения</a>
+                            </form>
                         </div>
                     </div>
-                    <!-- add new sidebar ends -->
-                </section>
+                </div>
                 <!-- Data list view end -->
             </div>
-        </div>
+    </div>
+    </div>
     </div>
     <!-- END: Content-->
     <div class="sidenav-overlay"></div>

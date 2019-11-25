@@ -53,6 +53,8 @@ class Solution(models.Model):
     submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True)
     need_rang = models.IntegerField()
     comments = ArrayField(models.CharField(max_length=2000), blank=True)
+    model_pic = models.ImageField(upload_to = 'uploads/contest/sol_images', default='uploads/contest/no_images.jpg')
+
 
 
 class Contest(models.Model):
@@ -72,8 +74,8 @@ class Contest(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     team_size = models.IntegerField(default=4)
     startDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
-    finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)          
-  
+    finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
+
 
 class GlobalTheme(models.Model):
     name = models.CharField(max_length=200)
@@ -106,7 +108,7 @@ class TaskCase(models.Model):
     hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
-    
+
 
 class TaskContestCase(models.Model):
 
@@ -155,8 +157,3 @@ class ThemeAdmin(admin.ModelAdmin):
     inlines = (TaskCase_inline, GlobalThemeName_inline)
 class GlobalThemeAdmin(admin.ModelAdmin):
     inlines = (GlobalThemeName_inline, )
-
-
-
-
-    

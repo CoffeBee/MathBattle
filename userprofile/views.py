@@ -37,7 +37,12 @@ def team(request, team_name):
 	if request.method == 'POST':
 		if not request.user in team.users.all():
 			team.users.add(request.user)
-	return render(request, 'contest/team.html', {'team' : team, 'user' : request.user})
+	return render(request, 'contest/team.html', {'team' : team,
+                                                'user' : request.user,
+                                                "first_name": request.user.profile.first_name,
+                 							    "second_name": request.user.profile.second_name,
+                                                "school": request.user.profile.school,
+                                                "grade": request.user.profile.grade,})
 
 @login_required(login_url='../auth/login/')
 @transaction.atomic
@@ -56,7 +61,7 @@ def update_profile(request):
 	else:
 		user_form=UserForm(instance=request.user)
 		profile_form=ProfileForm(instance=request.user.profile)
-	return render(request, 'userprofile/update_profiles/index.html', {
+	return render(request, 'contest/update_profiles.html', {
 		'user_form': user_form,
 		'profile_form': profile_form
 	})

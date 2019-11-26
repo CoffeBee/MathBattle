@@ -39,6 +39,8 @@ def register_view(request):
         if next:
             return redirect(next)
         return redirect('/')
+    elif (request.method == "POST"):
+        return render(request, 'authorization/registerFailed.html')
 
     context = {
         'form': form,

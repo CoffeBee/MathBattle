@@ -8,7 +8,7 @@ from django.db.models.functions import datetime
 from django.utils import timezone
 from .forms import ContestRegister
 from django.contrib.auth.decorators import login_required
-from tasks.models import Theme, TaskCase, Solution, Contest, Rang, TaskContestCase
+from tasks.models import Theme, TaskCase, Solution, Contest, Rang, TaskContestCase, Message
 from checker.virdicts import Virdict
 from .forms import CheckForm
 def check(task, user):
@@ -25,10 +25,10 @@ def check_team(task, team):
         if Solution.objects.filter(username=user, task=task.task).exists():
             fl = 2
     return fl
-    
+
 @login_required(login_url='../../auth/login/')
 def themes(request):
-    themes = Theme.objects.all() 
+    themes = Theme.objects.all()
     return render(request, 'contest/index.html', context={'themes': themes, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login/')
@@ -44,7 +44,7 @@ def contests(request):
 @login_required(login_url='../../../auth/login')
 def contest(request, contest_name):
 
-        
+
     now = timezone.now()
     contest = Contest.objects.get(name = contest_name)
     if request.method == "POST":
@@ -93,35 +93,36 @@ def solutions(request):
 @login_required(login_url='../../../auth/login/')
 def solution(request, submit_id):
     submit = Solution.objects.get(id=submit_id)
-    print(submit.model_pic[0].url)
     if (submit.username == request.user):
         if (submit.verdict == Virdict.REJECTED):
             if (request.method == 'POST'):
-                form = CheckForm(request.POST)  
+                form = CheckForm(request.POST)
                 if form.is_valid():
+                    new_message = Message(text=form.cleaned_data['comment'])
+                    new_message.save()
                     submit.verdict = Virdict.APPLICATION
-                    submit.comments.append(form.cleaned_data['comment'])
+                    submit.comments.add(new_message)
                     submit.need_rang += 1
                     submit.save()
                 return redirect('/themes/solutions')
 
-            return render(request, 'contest/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user, 'images' : submit.model_pic})
-        return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user, 'images' : submit.model_pic})
+            return render(request, 'contest/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user})
+        return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
     if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION and submit.verdict != Virdict.APPLICATION):
     	return render(request, 'contest/ContestError.html')
     if (request.method == 'POST'):
-        form = CheckForm(request.POST)  
+        form = CheckForm(request.POST)
         if form.is_valid():
+            new_message = Message(text=form.cleaned_data['comment'])
+            new_message.save()
             if 'OK' in request.POST:
                 submit.task.solvers.add(request.user)
                 submit.verdict = Virdict.ACCEPTED
-                l = list(submit.comments)
-                print(l)
-                l.append(form.cleaned_data['comment'])
-                submit.comments = l
+                submit.comments.add(new_message)
             else:
                 submit.verdict = Virdict.REJECTED
                 submit.comments.append(form.cleaned_data['comment'])
+                submit.comments.add(new_message)
             submit.save()
             return redirect('/themes/solutions')
 

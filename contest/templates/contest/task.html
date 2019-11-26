@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
     <!-- END: Custom CSS-->
     <script type="text/x-mathjax-config">
+    {{ form.media }}
   MathJax.Hub.Config({
     showProcessingMessages: false,
     tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
@@ -304,27 +305,9 @@ td#Output{
                                 <p class="mb-2">Пишите свои мысли как можно структурированнее и понятнее. Если Ваше решение не будет понято, Вам придеться долго подавать на аппеляцию. Советуем Вам сначало написать решение тезисно. У вас есть 1000 символов на решение</p>
                                 <div class="row">
                                     <div class="col-12">
-                                        <fieldset class="form-label-group mb-0">
-                                            <table cellspacing="0" cellpadding="0" id="a">
-                                            <tr id="a">
-                                            <td id="Input" style="width : 50%;">
-                                            <textarea placeholder="Мы умеем вот так $e^{i}$"
-                                            id="MathInput" onkeyup="Preview.Update()" data-length=1000 class="form-control char-textarea" id="description" rows="5" name="description" placeholder="Чудесные мысли"></textarea>
-                                            </td>
-                                            <td id="Output">
-                                            <div id="MathPreview"></div>
-                                            <div id="MathBuffer"></div>
-                                            </td>
-                                            </tr>
-                                            </table>
-                                            <label for="textarea-counter">Решение</label>
-                                            {{ imForm.management_form }}
-                                    {% for form in imForm %}
-                                        {{ form }}
-                                    {% endfor %}
-                                        </fieldset>
-                                        <small class="counter-value float-right"><span class="char-count">0</span> / 1000</small>
+                                      <script src="summernote-ext-equation.js"></script>
 
+                                        {{form.description}}
                                     </div>
 
                                     </div>
@@ -456,24 +439,7 @@ td#Output{
     <script src="{% static "contest/app-assets/js/scripts/ui/data-list-view.js" %}"></script>
     <!-- END: Page JS-->
 
-  <script>
-  document.getElementById("file").onchange = function() {myFunction(this)};
 
-  function myFunction(x) {
-    x = x.nextElementSibling;
-    x = x.nextElementSibling;
-    x.type = "file";
-    x.onchange = function() {myFunction(this)};
-  }
-  </script>
-  <script>
-  var elements = document.getElementsByClassName("file");
-  for(var i=0; i<elements.length; i++) {
-    elements[i].type = "hidden";
-  }
-  var x = document.getElementById("file");
-  x.type = "file";
-  </script>
 Preview.Init();
 </script>
 </body>

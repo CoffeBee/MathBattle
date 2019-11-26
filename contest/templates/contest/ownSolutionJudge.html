@@ -135,6 +135,10 @@
                             <div class="card-body">
                                 <h4 class="card-title">Решение</h4>
                                 <p class="card-text">{{submit.description}}</p>
+                                {%for image in images%}
+                                    {{image.url }}
+                                    <img src="{{ image.url }}">
+                                {%endfor%}
                                 <p class="card-text mt-1"><small class="text-muted">Ваше решение</small></p>
                             </div>
                         </div>

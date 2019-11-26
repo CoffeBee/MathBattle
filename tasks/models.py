@@ -22,6 +22,7 @@ class Hardness(Enum):
     SINIOR_UPPER = 'SINIOR-UPPER'
 
 
+
 class Task(models.Model):
 
     class Meta:
@@ -52,9 +53,15 @@ class Solution(models.Model):
     submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True)
     need_rang = models.IntegerField()
     comments = ArrayField(models.CharField(max_length=2000), blank=True, default=list())
-    model_pic = models.ImageField(upload_to = 'uploads/contest/sol_images', default='uploads/contest/no_images.jpg')
 
+class ImageModel(models.Model):
 
+    class Meta:
+        verbose_name =  "ImageModel"
+        verbose_name_plural =  "ImageModels"
+
+    image = models.ImageField(upload_to = 'uploads/contest/sol_images', default='uploads/contest/no_images.jpg')
+    solution = models.ForeignKey(Solution, on_delete=models.CASCADE)
 
 class Contest(models.Model):
 

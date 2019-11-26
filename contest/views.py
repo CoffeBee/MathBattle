@@ -93,7 +93,7 @@ def solutions(request):
 @login_required(login_url='../../../auth/login/')
 def solution(request, submit_id):
     submit = Solution.objects.get(id=submit_id)
-    print(submit.verdict)
+    print(submit.model_pic[0].url)
     if (submit.username == request.user):
         if (submit.verdict == Virdict.REJECTED):
             if (request.method == 'POST'):
@@ -104,8 +104,9 @@ def solution(request, submit_id):
                     submit.need_rang += 1
                     submit.save()
                 return redirect('/themes/solutions')
-            return render(request, 'contest/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user})
-        return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
+
+            return render(request, 'contest/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user, 'images' : submit.model_pic})
+        return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user, 'images' : submit.model_pic})
     if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION and submit.verdict != Virdict.APPLICATION):
     	return render(request, 'contest/ContestError.html')
     if (request.method == 'POST'):

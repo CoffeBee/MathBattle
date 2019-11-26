@@ -134,17 +134,17 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="card-title">Решение</h4>
-                                <p class="card-text">{{submit.description}}</p>
+                                <p class="card-text">{{submit.description|safe}}</p>
                                 <p class="card-text mt-1"><small class="text-muted">Ваше решение</small></p>
                             </div>
                         </div>
                     </div>
-                {% for sol in submit.comments%}
+                {% for sol in submit.comments.all%}
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="card-title"></h4>
-                                <p class="card-text">{{sol}}</p>
+                                <p class="card-text">{{sol.text|safe}}</p>
                                 <p class="card-text mt-1"><small class="text-muted">Коментарий к решению</small></p>
                             </div>
                         </div>
@@ -161,11 +161,7 @@
                                 <p class="mb-2">Пишите ваши претензии к проверки как можно точнее, если Вы плохо напишите или не напишите коментарий к проверки - это будет минус в Вашу карму</p>
                                 <div class="row">
                                     <div class="col-12">
-                                        <fieldset class="form-label-group mb-0">
-                                            <textarea data-length=1000 class="form-control char-textarea" id="comment" rows="5" name="comment" placeholder="Чудесные мысли"></textarea>
-                                            <label for="textarea-counter">Решение</label>
-                                        </fieldset>
-                                        <small class="counter-value float-right"><span class="char-count">0</span> / 1000</small>
+                                        {{form.comment}}
                                     </div>
                                 </div>
                                 <button type="submit" name="Rejected" class="btn btn-danger waves-effect waves-light">Подать заявку</button>

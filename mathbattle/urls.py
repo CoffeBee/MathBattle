@@ -9,5 +9,11 @@ urlpatterns = [
     path('auth/', include('authorization.urls')),
     path('tasks', include('tasks.urls')),
     path('archiv/', include('archiv.urls')),
-    path('userprofile', include('userprofile.urls'))
+    path('userprofile', include('userprofile.urls')),
+    path('summernote/', include('django_summernote.urls')),
 ]
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

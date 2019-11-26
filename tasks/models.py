@@ -6,6 +6,7 @@ from checker.virdicts import Virdict
 from checker.models import Checker
 from enumfields import EnumField, Enum
 from django.db.models.functions import datetime
+from django_summernote.fields import SummernoteTextField
 
 # Create your models here.
 
@@ -39,6 +40,12 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
+class Message(models.Model):
+    class Meta:
+        verbose_name = "Message"
+        verbose_name_plural = "Messages"
+    text = SummernoteTextField()
+
 class Solution(models.Model):
 
     class Meta:
@@ -48,20 +55,11 @@ class Solution(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, default=DEFAULT_TASK_ID)
     answer = models.CharField(max_length=2000)
-    description = models.CharField(max_length=2000)
+    description = SummernoteTextField()
     verdict = EnumField(Virdict, max_length=500,default=Virdict.WRONG_ANSWER)
     submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True)
     need_rang = models.IntegerField()
-    comments = ArrayField(models.CharField(max_length=2000), blank=True, default=list())
-
-class ImageModel(models.Model):
-
-    class Meta:
-        verbose_name =  "ImageModel"
-        verbose_name_plural =  "ImageModels"
-
-    image = models.ImageField(upload_to = 'uploads/contest/sol_images', default='uploads/contest/no_images.jpg')
-    solution = models.ForeignKey(Solution, on_delete=models.CASCADE)
+    comments = models.ManyToManyField(Message, blank=True)
 
 class Contest(models.Model):
 
@@ -81,8 +79,8 @@ class Contest(models.Model):
     team_size = models.IntegerField(default=4)
     startDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
     finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
-    contestants = models.ManyToManyField(User, through='ContestUser', related_name='contestants')          
-  
+    contestants = models.ManyToManyField(User, through='ContestUser', related_name='contestants')
+
 
 class ContestUser(models.Model):
 
@@ -97,7 +95,7 @@ class ContestUser(models.Model):
 
     team = models.ForeignKey('userprofile.Team', on_delete=models.CASCADE)
     point = models.IntegerField()
-    
+
 
 class GlobalTheme(models.Model):
     name = models.CharField(max_length=200)
@@ -130,7 +128,7 @@ class TaskCase(models.Model):
     hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
-    
+
 
 class TaskContestCase(models.Model):
 
@@ -179,4 +177,3 @@ class ThemeAdmin(admin.ModelAdmin):
     inlines = (TaskCase_inline, GlobalThemeName_inline)
 class GlobalThemeAdmin(admin.ModelAdmin):
     inlines = (GlobalThemeName_inline, )
-

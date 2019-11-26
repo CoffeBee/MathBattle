@@ -134,21 +134,17 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="card-title">Решение</h4>
-                                <p class="card-text">{{submit.description}}</p>
-                                {%for image in images%}
-                                    {{image.url }}
-                                    <img src="{{ image.url }}">
-                                {%endfor%}
+                                <p class="card-text">{{submit.description|safe}}</p>
                                 <p class="card-text mt-1"><small class="text-muted">Ваше решение</small></p>
                             </div>
                         </div>
                     </div>
-                {% for sol in submit.comments%}
+                {% for sol in submit.comments.all%}
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="card-title"></h4>
-                                <p class="card-text">{{sol}}</p>
+                                <p class="card-text">{{sol.text|safe}}</p>
                                 <p class="card-text mt-1"><small class="text-muted">Коментарий к решению</small></p>
                             </div>
                         </div>

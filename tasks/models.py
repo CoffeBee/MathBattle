@@ -5,7 +5,6 @@ from django.contrib import admin
 from checker.virdicts import Virdict
 from checker.models import Checker
 from enumfields import EnumField, Enum
-
 from django.db.models.functions import datetime
 
 # Create your models here.
@@ -21,6 +20,7 @@ class Hardness(Enum):
     MIDDLE_SINIOR = 'MIDDLE-SINIOR'
     SINIOR = 'SINIOR'
     SINIOR_UPPER = 'SINIOR-UPPER'
+
 
 
 class Task(models.Model):
@@ -52,8 +52,16 @@ class Solution(models.Model):
     verdict = EnumField(Virdict, max_length=500,default=Virdict.WRONG_ANSWER)
     submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True)
     need_rang = models.IntegerField()
-    comments = ArrayField(models.CharField(max_length=2000), blank=True)
+    comments = ArrayField(models.CharField(max_length=2000), blank=True, default=list())
 
+class ImageModel(models.Model):
+
+    class Meta:
+        verbose_name =  "ImageModel"
+        verbose_name_plural =  "ImageModels"
+
+    image = models.ImageField(upload_to = 'uploads/contest/sol_images', default='uploads/contest/no_images.jpg')
+    solution = models.ForeignKey(Solution, on_delete=models.CASCADE)
 
 class Contest(models.Model):
 
@@ -72,8 +80,24 @@ class Contest(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     team_size = models.IntegerField(default=4)
     startDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
-    finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)          
+    finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
+    contestants = models.ManyToManyField(User, through='ContestUser', related_name='contestants')          
   
+
+class ContestUser(models.Model):
+
+    class Meta:
+        verbose_name = "ContestUser"
+        verbose_name_plural = "ContestUsers"
+
+    def __str__(self):
+        pass
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    team = models.ForeignKey('userprofile.Team', on_delete=models.CASCADE)
+    point = models.IntegerField()
+    
 
 class GlobalTheme(models.Model):
     name = models.CharField(max_length=200)
@@ -156,7 +180,3 @@ class ThemeAdmin(admin.ModelAdmin):
 class GlobalThemeAdmin(admin.ModelAdmin):
     inlines = (GlobalThemeName_inline, )
 
-
-
-
-    

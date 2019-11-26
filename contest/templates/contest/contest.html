@@ -138,11 +138,45 @@
                             </thead>
                             <tbody>
                                 {% for task in tasks%}
-                                <tr onclick="location.href='/tasks/{{task.task.title}}';">
-                                    <td></td>
-                                    <td class="product-name">{{task.task.title}}</td>
-                                    <td class="product-name">{{task.task.author}}</td>
-                                    <td class="product-price">{{task.points}}</td>
+                                <tr onclick="location.href='/tasks/{{task.1.task.title}}';">
+                                    <td>
+                                        {% if task.0 == 1%}
+                                            <div class="vs-checkbox-con vs-checkbox-success">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                
+                                            </div>
+                                        {%endif%}
+                                        {% if task.0 == 2%}
+                                            <div class="vs-checkbox-con vs-checkbox-danger">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                
+                                            </div>
+                                        {%endif%}
+                                         {% if task.0 == 0%}
+                                            <div class="vs-checkbox-con vs-checkbox-danger">
+                                                <input type="checkbox"  value="true" onclick="return true;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                
+                                            </div>
+                                        {%endif%}
+                                    </td>
+                                    <td class="product-name">{{task.1.task.title}}</td>
+                                    <td class="product-name">{{task.1.task.author}}</td>
+                                    <td class="product-price">{{task.1.points}}</td>
                                     <td class="product-price">0 человек решило</td>
                                     <td class="product-price">0 посылок</td>
                                 </tr>
@@ -222,6 +256,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="content-header-left col-md-12 col-12 mb-2">
+                        <div class="row breadcrumbs-top">
+                            <div class="col-12">
+                                <h2 class="content-header-title float-left mb-0">Ваш предположиьельный счет : {{score}}</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -231,6 +272,9 @@
     <div class="drag-target"></div>
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
+        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25"><a class="text-bold-800 grey darken-2" href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">* Предположительный - сколько у вас будет баллов если все ваши отосланные решения будет оценены на полный былл</a</span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+        </p>
         <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25"><a class="text-bold-800 grey darken-2" href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">MathBattle,</a>Все права защищены</span><span class="float-md-right d-none d-md-block">Сделано в Силаэдре<i class="feather icon-heart pink"></i></span>
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
         </p>
@@ -245,7 +289,7 @@
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js" %}"></script>
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js" %}"></script>
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js" %}"></script>
-    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js" %}"></script>
+
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Theme JS-->
     <script src="{% static "contest/app-assets/js/core/app-menu.js" %}"></script>

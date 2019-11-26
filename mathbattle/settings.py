@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'contest.apps.ContestConfig',
     'authorization.apps.AuthorizationConfig',
     'tasks.apps.TasksConfig',
-    'contest_page.apps.ContestPageConfig',
     'archiv.apps.ArchivConfig',
     'userprofile.apps.UserprofileConfig',
     'checker.apps.CheckerConfig',
@@ -84,9 +83,9 @@ WSGI_APPLICATION = 'mathbattle.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'mathbattle',
-        'USER' : 'podvorniy',
-        'PASSWORD' : 'Podvorniy1303©',
+        'NAME' : 'dp',
+        'USER' : 'UlyanaEskova',
+        'PASSWORD' : '10121958',
         'HOST' : 'localhost',
         'PORT' : '5432'
 

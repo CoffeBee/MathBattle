@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Темы - MathBattle</title>
+   {% load static%}
+    <link rel="apple-touch-icon" href="{% static 'contest/app-assets/images/ico/apple-icon-120.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'main.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/vendors/css/vendors.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/vendors/css/tables/datatable/datatables.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/vendors/css/file-uploaders/dropzone.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/themes/semi-dark-layout.css" %}">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/bootstrap.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/bootstrap-extended.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/colors.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/components.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/themes/dark-layout.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/themes/semi-dark-layout.css" %}">
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/core/menu/menu-types/vertical-menu.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/core/colors/palette-gradient.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/plugins/file-uploaders/dropzone.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/pages/data-list-view.css" %}">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
+    <!-- END: Custom CSS-->
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+<style type="text/css">
+body {
+  background: url({% static "contest/vuesax-login-bg.jpg" %}) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+</style>
+
+<body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
+
+    <section class="row flexbox-container justify-content-center align-items-center h-100 align-self-center">
+        <div class="col-xl-7 col-md-8 col-12 d-flex justify-content-center align-self-center mx-auto">
+            <div class="card auth-card bg-transparent shadow-none rounded-0 mb-0 w-100">
+                <div class="card-content">
+                    <div class="card-body text-center">
+                        <h1 class="font-large-2 mt-1 mb-0">Вы еще не зарегистрированны на конетест. Выберите команду за которую вы будите играть</h1>
+                        <form action="?" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{form.team}}
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">Выбрать</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="{% static "contest/app-assets/vendors/js/vendors.min.js" %}"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static "contest/app-assets/vendors/js/extensions/dropzone.min.js" %}"></script>
+    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.min.js" %}"></script>
+    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js" %}"></script>
+    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js" %}"></script>
+    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js" %}"></script>
+    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js" %}"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="{% static "contest/app-assets/js/core/app-menu.js" %}"></script>
+    <script src="{% static "contest/app-assets/js/core/app.js" %}"></script>
+    <script src="{% static "contest/app-assets/js/scripts/components.js" %}"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="{% static "contest/app-assets/js/scripts/ui/data-list-view.js" %}"></script>
+    <!-- END: Page JS-->
+
+</body>
+<!-- END: Body-->
+
+</html>

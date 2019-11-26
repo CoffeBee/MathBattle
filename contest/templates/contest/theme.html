@@ -92,7 +92,8 @@
                                     <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
+                                    <a class="dropdown-item" href="/auth/logout"><i class="feather icon-power"></i> Выйти</a>
+                                    <a class="dropdown-item" href="/userprofile"><i class="feather icon-user"></i> Профиль</a>
                                 </div>
                             </li>
                         </ul>
@@ -138,12 +139,46 @@
                             </thead>
                             <tbody>
                                 {% for task in theme%}
-                                <tr onclick="location.href='/tasks/{{task.task.title}}';">
-                                    <td></td>
-                                    <td class="product-name">{{task.task.title}}</td>
-                                    <td class="product-name">{{task.task.author}}</td>
-                                    <td class="product-price">{{task.hardness}}</td>
-                                    <td class="product-price">0 челове решило</td>
+                                <tr onclick="location.href='/tasks/{{task.1.task.title}}';">
+                                    <td>
+                                        {% if task.0 == 1%}
+                                            <div class="vs-checkbox-con vs-checkbox-success">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                
+                                            </div>
+                                        {%endif%}
+                                        {% if task.0 == 2%}
+                                            <div class="vs-checkbox-con vs-checkbox-danger">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                
+                                            </div>
+                                        {%endif%}
+                                         {% if task.0 == 0%}
+                                            <div class="vs-checkbox-con vs-checkbox-danger">
+                                                <input type="checkbox"  value="true" onclick="return true;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+                                                
+                                            </div>
+                                        {%endif%}
+                                    </td>
+                                    <td class="product-name">{{task.1.task.title}}</td>
+                                    <td class="product-name">{{task.1.task.author}}</td>
+                                    <td class="product-price">{{task.1.hardness}}</td>
+                                    <td class="product-price">0 человек решило</td>
                                     <td class="product-price">0 посылок</td>
                                 </tr>
                                 {%endfor%}
@@ -235,7 +270,7 @@
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js" %}"></script>
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js" %}"></script>
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js" %}"></script>
-    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js" %}"></script>
+
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Theme JS-->
     <script src="{% static "contest/app-assets/js/core/app-menu.js" %}"></script>

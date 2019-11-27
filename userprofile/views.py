@@ -16,6 +16,8 @@ def profile_views(request):
     if form.is_valid():
       m = hashlib.md5()
       m.update(form.cleaned_data['name'].encode('utf-8'))
+      if (Team.objects.filter(name = form.cleaned_data['name']).exists()):
+          return redirect('/userprofile/team/{}'.format(str(m.hexdigest())))
       newteam = Team(name = form.cleaned_data['name'], link = str(m.hexdigest()))
       newteam.save()
       newteam.users.add(request.user)

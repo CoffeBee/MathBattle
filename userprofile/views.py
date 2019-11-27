@@ -12,6 +12,7 @@ import hashlib
 
 @login_required(login_url='../auth/login/')
 def profile_views(request):
+<<<<<<< HEAD
     if request.method == 'POST':
         form = TeamForm(request.POST)
         if form.is_valid():
@@ -33,6 +34,29 @@ def profile_views(request):
                                 "location": request.user.profile.location,
                                 "grade": request.user.profile.grade, 'form': TeamForm(), }))
 
+=======
+  if request.method == 'POST':
+    form = TeamForm(request.POST)
+    if form.is_valid():
+      m = hashlib.md5()
+      m.update(form.cleaned_data['name'].encode('utf-8'))
+      if (Team.objects.filter(name = form.cleaned_data['name']).exists()):
+          return redirect('/userprofile/team/{}'.format(str(m.hexdigest())))
+      newteam = Team(name = form.cleaned_data['name'], link = str(m.hexdigest()))
+      newteam.save()
+      newteam.users.add(request.user)
+      newteam.save()
+      return redirect('/userprofile/team/{}'.format(str(m.hexdigest())))
+  return HttpResponse(render(request,'contest/userprofile.html',
+							  {"email" : request.user.email,
+							   "username" : request.user.username,
+							   "first_name": request.user.profile.first_name,
+							   "second_name": request.user.profile.second_name,
+							   "father_name": request.user.profile.father_name,
+							   "school": request.user.profile.school,
+							   "location": request.user.profile.location,
+							   "grade": request.user.profile.grade, 'form' : TeamForm(), }))
+>>>>>>> d417453e12c004b9db905909288ed069ee89e833
 
 @login_required(login_url='../auth/login/')
 def team(request, team_name):

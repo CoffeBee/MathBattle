@@ -128,35 +128,35 @@
                         <table class="table data-list-view">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th class="hidden-sm hidden-xs"></th>
                                     <th>НАЗВАНИЕ</th>
                                     <th>РАЗДЕЛ</th>
-                                    <th>ПРОГРЕСС</th>
-                                    <th>СЛОЖНОСТЬ</th>
-                                    <th>КОЛ-ВО ЗАДАЧ</th>
+                                    <th class="hidden-sm hidden-xs">ПРОГРЕСС</th>
+                                    <th class="hidden-sm hidden-xs">СЛОЖНОСТЬ</th>
+                                    <th class="hidden-sm hidden-xs">КОЛ-ВО ЗАДАЧ</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for theme in themes%}
                                 <tr onclick="location.href='{{theme.name}}';">
-                                    <td>
+                                    <td class="hidden-sm hidden-xs">
 
                                     </td>
                                     <td class="product-name">{{theme.name}}</td>
                                     <td class="product-category">{{theme.general_theme.all.0.name}}</td>
-                                    <td>
+                                    <td class="hidden-sm hidden-xs">
                                         <div class="progress progress-bar-success">
                                             <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width:97%"></div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="hidden-sm hidden-xs">
                                         <div class="chip chip-{{theme.hardness}}">
                                             <div class="chip-body">
                                                 <div class="chip-text">{{theme.hardness}}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="product-price">{{theme.tasks.count}} Задач</td>
+                                    <td class="product-price hidden-xs hidden-sm">{{theme.tasks.count}} Задач</td>
                                 </tr>
                                 {%endfor%}
                             </tbody>

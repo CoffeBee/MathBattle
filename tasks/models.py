@@ -100,7 +100,7 @@ class ContestUser(models.Model):
 class GlobalTheme(models.Model):
     name = models.CharField(max_length=200)
     rangs = models.ManyToManyField(User, through='Rang')
-    def __str__(self.name):
+    def __str__(self):
         return str(self.name)
 
 class Theme(models.Model):

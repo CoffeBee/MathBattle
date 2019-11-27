@@ -23,6 +23,16 @@ def profile_views(request):
       newteam.users.add(request.user)
       newteam.save()
       return redirect('/userprofile/team/{}'.format(str(m.hexdigest())))
+  if (request.user_agent.is_mobile):
+      return HttpResponse(render(request,'contest/mobile/userprofile.html',
+    							  {"email" : request.user.email,
+    							   "username" : request.user.username,
+    							   "first_name": request.user.profile.first_name,
+    							   "second_name": request.user.profile.second_name,
+    							   "father_name": request.user.profile.father_name,
+    							   "school": request.user.profile.school,
+    							   "location": request.user.profile.location,
+    							   "grade": request.user.profile.grade, 'form' : TeamForm()}))
   return HttpResponse(render(request,'contest/userprofile.html',
 							  {"email" : request.user.email,
 							   "username" : request.user.username,
@@ -63,6 +73,11 @@ def update_profile(request):
 	else:
 		user_form=UserForm(instance=request.user)
 		profile_form=ProfileForm(instance=request.user.profile)
+    if (request.user_agent.is_mobile):
+        return render(request, 'contest/mobile/update_profiles.html', {
+    		'user_form': user_form,
+    		'profile_form': profile_form
+    	})
 	return render(request, 'contest/update_profiles.html', {
 		'user_form': user_form,
 		'profile_form': profile_form

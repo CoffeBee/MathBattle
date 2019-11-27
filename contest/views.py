@@ -96,6 +96,8 @@ def solutions(request):
             pass
         if rang > sol.need_rang and sol.username != request.user and (sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION or sol.verdict == Virdict.APPLICATION or sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION):
             need.append(sol)
+    if (request.user_agent.is_mobile):
+        return render(request, 'contest/mobile/solutions.html', context={'submits': need, 'user' : request.user})
     return render(request, 'contest/solutions.html', context={'submits': need, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login/')

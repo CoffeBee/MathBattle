@@ -128,7 +128,6 @@
                         <table class="table data-list-view">
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th>НАЗВАНИЕ</th>
                                     <th>РАЗДЕЛ</th>
                                 </tr>
@@ -136,9 +135,7 @@
                             <tbody>
                                 {% for theme in themes%}
                                 <tr onclick="location.href='{{theme.name}}';">
-                                    <td>
 
-                                    </td>
                                     <td class="product-name">{{theme.name}}</td>
                                     <td class="product-category">{{theme.general_theme.all.0.name}}</td>
                                 </tr>

@@ -36,11 +36,15 @@ def themes(request):
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
     tasks = [[check(task, request.user), task] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
+    if (request.user_agent.is_mobile):
+        return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
     return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login')
 def contests(request):
     contests = Contest.objects.filter(finishDate__date__gte=datetime.timezone.now())
+    if (request.user_agent.is_mobile):
+        return render(request, 'contest/mobile/contests.html', context={'contests' : contests, 'user' : request.user})
     return render(request, 'contest/contests.html', context={'contests' : contests, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login')
@@ -70,6 +74,8 @@ def contest(request, contest_name):
                     Mayscore += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
                     mfl = True
         tasks = [[check_team(task, team), task] for task in TaskContestCase.objects.filter(contest__name=contest_name).all()]
+        if (request.user_agent.is_mobile):
+            return render(request, 'contest/mobile/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore, 'name' : tasks[0][1].contest.name})
         return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore, 'name' : tasks[0][1].contest.name})
     return render(request, 'contest/solutionError.html')
 

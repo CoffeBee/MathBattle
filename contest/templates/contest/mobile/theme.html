@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Темы - MathBattle</title>
+    {% load static%}
+    <link rel="apple-touch-icon" href="{% static 'contest/app-assets/images/ico/apple-icon-120.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'main.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/vendors/css/vendors.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/vendors/css/tables/datatable/datatables.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/vendors/css/file-uploaders/dropzone.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/themes/semi-dark-layout.css" %}">
+    <!-- END: Vendor CSS-->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/bootstrap.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/bootstrap-extended.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/colors.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/components.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/themes/dark-layout.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/themes/semi-dark-layout.css" %}">
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/core/menu/menu-types/vertical-menu.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/core/colors/palette-gradient.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/plugins/file-uploaders/dropzone.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/pages/data-list-view.css" %}">
+    <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
+    <!-- END: Custom CSS-->
+</head>
+<!-- END: Head-->
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
+    <!-- BEGIN: Main Menu-->
+    <div class="left side-menu"><button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left"><i class="ion-close"></i></button><!-- LOGO -->
+        <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav flex-row">
+                    <li class="nav-item mr-auto"><a class="navbar-brand">
+                            <img src="{% static "contest/app-assets/images/logo/logo.png" %}" style="width : 45x; height : 30px;">
+                            <h2 class="brand-text mb-0" style="padding-left : 2px; margin-top : 10px; font-size : 1.7rem;">athBattle</h2>
+                        </a></li>
+                </ul>
+            </div>
+            <div class="shadow-bottom"></div>
+            <div class="main-menu-content">
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item"><a href="/themes/theme"><i class="feather icon-package"></i><span class="menu-title" style="font-size :">Темы</span></a>
+                    </li>
+                    <li class=" nav-item"><a href="/themes/contest"><i class="feather icon-award"></i><span class="menu-title">Контесты</span></a>
+                    </li>
+                    <li class=" nav-item"><a href="/themes/solutions"><i class="feather icon-file-text"></i><span class="menu-title">Решения</span></a>
+                    </li>
+                    </li>
+                </ul>
+            </div>
+        </div><!-- end sidebarinner -->
+    </div>
+    <!-- END: Main Menu-->
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <!-- BEGIN: Header-->
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+            <div class="navbar-wrapper">
+                <div class="navbar-container content">
+                    <div class="navbar-collapse" id="navbar-mobile">
+                        <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                            <ul class="nav navbar-nav">
+                                <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
+                            </ul>
+                        </div>
+                        <ul class="nav navbar-nav float-right">
+                            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
+                            <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon feather icon-search"></i></a>
+                                <div class="search-input">
+                                    <div class="search-input-icon"><i class="feather icon-search primary"></i></div>
+                                    <input class="input" type="text" placeholder="Explore Vuesax..." tabindex="-1" data-search="template-list" />
+                                    <div class="search-input-close"><i class="feather icon-x"></i></div>
+                                    <ul class="search-list"></ul>
+                                </div>
+                            </li>
+                            <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                    <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="/auth/logout"><i class="feather icon-power"></i> Выйти</a>
+                                    <a class="dropdown-item" href="/userprofile"><i class="feather icon-user"></i> Профиль</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- END: Header-->
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-12 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Тема {{theme.0.1.theme.name}}</h2>
+                            <div class="breadcrumb-wrapper col-12">
+                                <ol class="breadcrumb">
+
+                                    <li class="breadcrumb-item"><a href="/themes/theme">Темы</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">{{theme.0.1.theme.name}}</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <!-- Data list view starts -->
+                <section id="data-list-view" class="data-list-view-header">
+                    <!-- DataTable starts -->
+                    <div class="table-responsive">
+                        <table class="table data-list-view">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>НАЗВАНИЕ</th>
+                                    <th>СЛОЖНОСТЬ</th>
+                                    <th>КОЛ-ВО РЕШИВШИХ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in theme%}
+                                <tr onclick="location.href='/tasks/{{task.1.task.title}}';">
+                                    <td>
+                                        {% if task.0 == 1%}
+                                            <div class="vs-checkbox-con vs-checkbox-success">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+
+                                            </div>
+                                        {%endif%}
+                                        {% if task.0 == 2%}
+                                            <div class="vs-checkbox-con vs-checkbox-danger">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+
+                                            </div>
+                                        {%endif%}
+                                         {% if task.0 == 0%}
+                                            <div class="vs-checkbox-con vs-checkbox-danger">
+                                                <input type="checkbox"  value="true" onclick="return true;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+
+                                            </div>
+                                        {%endif%}
+                                    </td>
+                                    <td class="product-name">{{task.1.task.title}}</td>
+                                    <td class="product-price">{{task.1.hardness}}</td>
+                                    <td class="product-price">0 человек решило</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- DataTable ends -->
+                    <!-- add new sidebar starts -->
+                    <div class="add-new-data-sidebar">
+                        <div class="overlay-bg"></div>
+                        <div class="add-new-data">
+                            <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
+                                <div>
+                                    <h4>ADD NEW DATA</h4>
+                                </div>
+                                <div class="hide-data-sidebar">
+                                    <i class="feather icon-x"></i>
+                                </div>
+                            </div>
+                            <div class="data-items pb-3">
+                                <div class="data-fields px-2 mt-3">
+                                    <div class="row">
+                                        <div class="col-sm-12 data-field-col">
+                                            <label for="data-name">Name</label>
+                                            <input type="text" class="form-control" id="data-name">
+                                        </div>
+                                        <div class="col-sm-12 data-field-col">
+                                            <label for="data-category"> Category </label>
+                                            <select class="form-control" id="data-category">
+                                                <option>Audio</option>
+                                                <option>Computers</option>
+                                                <option>Fitness</option>
+                                                <option>Appliance</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 data-field-col">
+                                            <label for="data-status">Order Status</label>
+                                            <select class="form-control" id="data-status">
+                                                <option>Pending</option>
+                                                <option>Canceled</option>
+                                                <option>Delivered</option>
+                                                <option>On Hold</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 data-field-col">
+                                            <label for="data-price">Price</label>
+                                            <input type="number" class="form-control" id="data-price">
+                                        </div>
+                                        <div class="col-sm-12 data-field-col data-list-upload">
+                                            <form action="#" class="dropzone dropzone-area" id="dataListUpload">
+                                                <div class="dz-message">Upload Image</div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                <div class="add-data-btn">
+                                    <button class="btn btn-primary">Add Data</button>
+                                </div>
+                                <div class="cancel-data-btn">
+                                    <button class="btn btn-outline-danger">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- add new sidebar ends -->
+                </section>
+                <!-- Data list view end -->
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25"><a class="text-bold-800 grey darken-2" href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">MathBattle,</a>Все права защищены</span><span class="float-md-right d-none d-md-block">Сделано в Силаэдре<i class="feather icon-heart pink"></i></span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+    <!-- BEGIN: Vendor JS-->
+    <script src="{% static "contest/app-assets/vendors/js/vendors.min.js" %}"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static "contest/app-assets/vendors/js/extensions/dropzone.min.js" %}"></script>
+    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.min.js" %}"></script>
+    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js" %}"></script>
+    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js" %}"></script>
+    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js" %}"></script>
+
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="{% static "contest/app-assets/js/core/app-menu.js" %}"></script>
+    <script src="{% static "contest/app-assets/js/core/app.js" %}"></script>
+    <script src="{% static "contest/app-assets/js/scripts/components.js" %}"></script>
+    <!-- END: Theme JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="{% static "contest/app-assets/js/scripts/ui/data-list-view.js" %}"></script>
+    <!-- END: Page JS-->
+</body>
+<!-- END: Body-->
+
+</html>

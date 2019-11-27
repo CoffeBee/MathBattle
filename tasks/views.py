@@ -35,4 +35,6 @@ def task(request, task_title):
             else:
              newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.WRONG_ANSWER, task=task, need_rang=rang)
             newsol.save()
+     if (request.user_agent.is_mobile):
+         return render(request, 'contest/mobile/task.html', context={'task' : task, 'form' : TaskForm(), 'submits' : submits})
      return render(request, 'contest/task.html', context={'task' : task, 'form' : TaskForm(), 'submits' : submits})

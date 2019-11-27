@@ -115,8 +115,11 @@ def solution(request, submit_id):
                     submit.need_rang += 1
                     submit.save()
                 return redirect('/themes/solutions')
-
+            if (request.user_agent.is_mobile):
+                return render(request, 'contest/mobile/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user})
             return render(request, 'contest/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user})
+        if (request.user_agent.is_mobile):
+            return render(request, 'contest/mobile/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
         return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
     if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION and submit.verdict != Virdict.APPLICATION):
     	return render(request, 'contest/ContestError.html')
@@ -135,5 +138,6 @@ def solution(request, submit_id):
                 submit.comments.add(new_message)
             submit.save()
             return redirect('/themes/solutions')
-
+    if (request.user_agent.is_mobile):
+        return render(request, 'contest/mobile/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})
     return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})

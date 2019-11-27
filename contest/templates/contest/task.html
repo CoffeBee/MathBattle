@@ -40,151 +40,7 @@
     tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
   });
 </script>
-<script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 
-<script>
-var Preview = {
-  delay: 10,        // delay after keystroke before updating
-  preview: null,     // filled in by Init below
-  buffer: null,      // filled in by Init below
-  timeout: null,     // store setTimout id
-  mjRunning: false,  // true when MathJax is processing
-  mjPending: false,  // true when a typeset has been queued
-  oldText: null,     // used to check if an update is needed
-  //
-  //  Get the preview and buffer DIV's
-  //
-  Init: function () {
-    this.preview = document.getElementById("MathPreview");
-    this.buffer = document.getElementById("MathBuffer");
-  },
-  //
-  //  Switch the buffer and preview, and display the right one.
-  //  (We use visibility:hidden rather than display:none since
-  //  the results of running MathJax are more accurate that way.)
-  //
-  SwapBuffers: function () {
-    var buffer = this.preview, preview = this.buffer;
-    this.buffer = buffer; this.preview = preview;
-    buffer.style.visibility = "hidden"; buffer.style.position = "absolute";
-    preview.style.position = ""; preview.style.visibility = "";
-  },
-  //
-  //  This gets called when a key is pressed in the textarea.
-  //  We check if there is already a pending update and clear it if so.
-  //  Then set up an update to occur after a small delay (so if more keys
-  //    are pressed, the update won't occur until after there has been
-  //    a pause in the typing).
-  //  The callback function is set up below, after the Preview object is set up.
-  //
-  Update: function () {
-    if (this.timeout) {clearTimeout(this.timeout)}
-    this.timeout = setTimeout(this.callback,this.delay);
-  },
-  //
-  //  Creates the preview and runs MathJax on it.
-  //  If MathJax is already trying to render the code, return
-  //  If the text hasn't changed, return
-  //  Otherwise, indicate that MathJax is running, and start the
-  //    typesetting.  After it is done, call PreviewDone.
-  //
-  CreatePreview: function () {
-    Preview.timeout = null;
-    if (this.mjPending) return;
-    var text = document.getElementById("MathInput").value;
-    if (text === "")
-    {
-      text = document.getElementById("MathInput").placeholder;
-    }
-    if (text === this.oldtext) return;
-    if (this.mjRunning) {
-      this.mjPending = true;
-      MathJax.Hub.Queue(["CreatePreview",this]);
-    } else {
-      this.buffer.innerHTML = this.oldtext = text;
-      this.mjRunning = true;
-      MathJax.Hub.Queue(
-  ["Typeset",MathJax.Hub,this.buffer],
-  ["PreviewDone",this]
-      );
-    }
-  },
-  //
-  //  Indicate that MathJax is no longer running,
-  //  and swap the buffers to show the results.
-  //
-  PreviewDone: function () {
-    this.mjRunning = this.mjPending = false;
-    this.SwapBuffers();
-  }
-};
-//
-//  Cache a callback to the CreatePreview action
-//
-Preview.callback = MathJax.Callback(["CreatePreview",Preview]);
-Preview.callback.autoReset = true;  // make sure it can run more than once
-Preview.Update();
-</script>
-<style>
-body, html{
-  height:100%;
-  padding: 0px;
-  margin: 0px;
-}
-table#a
-{
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
-  overflow: hidden;
-}
-textarea#a
-{
- border: none;
- margin: 0px;
- padding-left: 20px;
- padding-right: 20px;
- padding-top: 20px;
-
-  width: 100%;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;
-}
-tr#a,td#a
-{
-  vertical-align: top;
-  overflow: auto;
-  width: 50%;
-  padding: 0px;
-  margin: 0px;
-}
-td#Input
-{
-}
-td#Output{
-  position: relative;
-}
-#MathBuffer
-{
-
-  margin-top: 20px;
-  padding-left: 20px;
-  padding-left: 20px;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-#MathPreview
-{
-  margin-top: 20px;
-  padding-left: 20px;
-  padding-left: 20px;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-</style>
 </head>
 <!-- END: Head-->
 <!-- BEGIN: Body-->
@@ -305,7 +161,7 @@ td#Output{
                                 <p class="mb-2">Пишите свои мысли как можно структурированнее и понятнее. Если Ваше решение не будет понято, Вам придеться долго подавать на аппеляцию. Советуем Вам сначало написать решение тезисно. У вас есть 1000 символов на решение</p>
                                 <div class="row">
                                     <div class="col-12">
-                                      <script src="summernote-ext-equation.js"></script>
+                                      <script src="https://raw.githubusercontent.com/thisroot/summernote-equation-plugin/master/summernote-ext-equation.js"></script>
 
                                         {{form.description}}
                                     </div>
@@ -439,8 +295,6 @@ td#Output{
     <script src="{% static "contest/app-assets/js/scripts/ui/data-list-view.js" %}"></script>
     <!-- END: Page JS-->
 
-
-Preview.Init();
 </script>
 </body>
 <!-- END: Body-->

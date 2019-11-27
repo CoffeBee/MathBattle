@@ -112,8 +112,7 @@
                             <h2 class="content-header-title float-left mb-0">Команда {{team.name}}</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Главная</a>
-                                    </li>
+
                                     <li class="breadcrumb-item"> Команды
                                     </li>
                                     <li class="breadcrumb-item"> {{team.name}}
@@ -144,11 +143,37 @@
                                 {% for user in team.users.all%}
                                 <tr>
                                     <td></td>
-                                    <td class="product-name">{{user.username}}</td>
-                                    <td class="product-category">{{user.profile.first_name}}</td>
-                                    <td class="product-category">{{user.profile.second_name}}</td>
-                                    <td class="product-category">{{user.profile.school}}</td>
-                                    <td class="product-category">{{user.profile.grade}} класс</td>
+                                    <td class="product-name">
+                                      {% if not user.username %}
+                                      -
+                                      {%endif%}
+                                      {{user.username}}
+                                  </td>
+                                    <td class="product-category">
+                                      {% if not user.profile.first_name %}
+                                    -
+                                    {%endif%}
+                                    {{user.profile.first_name}}
+                                  </td>
+                                    <td class="product-category">
+                                      {% if not user.profile.second_name %}
+                                    -
+                                    {%endif%}
+                                    {{user.profile.second_name}}
+                                  </td>
+                                    <td class="product-category">
+                                      {% if not user.profile.school %}
+                                    -
+                                    {%endif%}
+                                    {{user.profile.school}}
+                                  </td>
+                                    <td class="product-category">
+
+                                        {% if not user.profile.grade %}
+                                      -
+                                      {%endif%}
+                                      {{user.profile.grade}} класс
+                                    </td>
 
                                 </tr>
                                 {%endfor%}

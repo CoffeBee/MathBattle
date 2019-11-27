@@ -112,8 +112,6 @@
                             <h2 class="content-header-title float-left mb-0">Темы</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Главная</a>
-                                    </li>
                                     <li class="breadcrumb-item active">Темы
                                     </li>
                                 </ol>
@@ -142,7 +140,7 @@
                                 {% for theme in themes%}
                                 <tr onclick="location.href='{{theme.name}}';">
                                     <td>
-                                       
+
                                     </td>
                                     <td class="product-name">{{theme.name}}</td>
                                     <td class="product-category">{{theme.general_theme.all.0.name}}</td>
@@ -249,7 +247,7 @@
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js" %}"></script>
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js" %}"></script>
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js" %}"></script>
-    
+
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Theme JS-->
     <script src="{% static "contest/app-assets/js/core/app-menu.js" %}"></script>

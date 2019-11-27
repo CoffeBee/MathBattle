@@ -100,7 +100,8 @@ class ContestUser(models.Model):
 class GlobalTheme(models.Model):
     name = models.CharField(max_length=200)
     rangs = models.ManyToManyField(User, through='Rang')
-
+    def __str__(self.name):
+        return str(self.name)
 
 class Theme(models.Model):
 
@@ -118,6 +119,8 @@ class GlobalThemeName(models.Model):
     hardness = models.IntegerField()
     global_them = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+
+
 
 class TaskCase(models.Model):
 

@@ -45,11 +45,18 @@ def profile_views(request):
 
 @login_required(login_url='../auth/login/')
 def team(request, team_name):
-	team = Team.objects.get(link=team_name)
-	if request.method == 'POST':
-		if not request.user in team.users.all():
-			team.users.add(request.user)
-	return render(request, 'contest/team.html', {'team' : team,
+    team = Team.objects.get(link=team_name)
+    if request.method == 'POST':
+        if not request.user in team.users.all():
+            team.users.add(request.user)
+    if (request.user_agent.is_mobile):
+        return render(request, 'contest/mobile/team.html', {'team' : team,
+                                                    'user' : request.user,
+                                                    "first_name": request.user.profile.first_name,
+                     							    "second_name": request.user.profile.second_name,
+                                                    "school": request.user.profile.school,
+                                                    "grade": request.user.profile.grade,})
+    return render(request, 'contest/team.html', {'team' : team,
                                                 'user' : request.user,
                                                 "first_name": request.user.profile.first_name,
                  							    "second_name": request.user.profile.second_name,

@@ -7,11 +7,13 @@ from .models import Task, Solution, Rang, GlobalThemeName, TaskContestCase
 from checker.models import Checker
 from checker.virdicts import Virdict
 from .forms import TaskForm
+from django.db.models import Q
+
 
 @login_required(login_url='../../../auth/login/')
 def task(request, task_title):
      task = Task.objects.get(title=task_title)
-     submits = Solution.objects.filter(task=task, username=request.user)
+     submits = Solution.objects.filter(task=task, username=request.user).filter(~Q(verdict = Virdict.PREVIEW))
      if  request.method == 'POST':
         form = TaskForm(request.POST)
         if (form.is_valid()):

@@ -87,8 +87,8 @@ DATABASES = {
        'NAME' : 'mathbattle',
        'USER' : 'podvorniy',
        'PASSWORD' : 'Podvorniy1303©',
-       'HOST' : 'rc1a-56coeyzqwpbz96go.mdb.yandexcloud.net',
-       'PORT' : '6432'
+       'HOST' : 'localhost',
+       'PORT' : '5432'
 
     }
 }
@@ -245,4 +245,3 @@ SUMMERNOTE_CONFIG = {
     # For lazy loading (inplace widget only)
     'lazy': False,
 }
-

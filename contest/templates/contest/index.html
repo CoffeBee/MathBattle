@@ -70,17 +70,17 @@
         <!-- BEGIN: Header-->
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
-        <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+        <nav class="header-navbar navbar-expand-md navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
             <div class="navbar-wrapper">
                 <div class="navbar-container content">
                     <div class="navbar-collapse" id="navbar-mobile">
                         <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
                             <ul class="nav navbar-nav">
-                                <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
+                                <li class="nav-item mobile-menu d-lg-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
                             </ul>
                         </div>
                         <ul class="nav navbar-nav float-right">
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
+                            <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
                             <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon feather icon-search"></i></a>
                                 <div class="search-input">
                                     <div class="search-input-icon"><i class="feather icon-search primary"></i></div>
@@ -128,28 +128,28 @@
                         <table class="table data-list-view">
                             <thead>
                                 <tr>
-                                    <th class="hidden-sm-down"></th>
+                                    <th></th>
                                     <th>НАЗВАНИЕ</th>
                                     <th>РАЗДЕЛ</th>
-                                    <th class="hidden-sm-down">ПРОГРЕСС</th>
-                                    <th class="hidden-sm-down">СЛОЖНОСТЬ</th>
-                                    <th class="hidden-sm-down" >КОЛ-ВО ЗАДАЧ</th>
+                                    <th>ПРОГРЕСС</th>
+                                    <th>СЛОЖНОСТЬ</th>
+                                    <th >КОЛ-ВО ЗАДАЧ</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for theme in themes%}
                                 <tr onclick="location.href='{{theme.name}}';">
-                                    <td class="hidden-sm-down">
+                                    <td>
 
                                     </td>
                                     <td class="product-name">{{theme.name}}</td>
                                     <td class="product-category">{{theme.general_theme.all.0.name}}</td>
-                                    <td class="hidden-sm-down">
+                                    <td>
                                         <div class="progress progress-bar-success">
                                             <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width:97%"></div>
                                         </div>
                                     </td>
-                                    <td class="hidden-sm-down">
+                                    <td>
                                         <div class="chip chip-{{theme.hardness}}">
                                             <div class="chip-body">
                                                 <div class="chip-text">{{theme.hardness}}</div>
@@ -224,6 +224,7 @@
                     </div>
                     <!-- add new sidebar ends -->
                 </section>
+
                 <!-- Data list view end -->
             </div>
         </div>
@@ -256,6 +257,7 @@
     <!-- END: Theme JS-->
     <!-- BEGIN: Page JS-->
     <script src="{% static "contest/app-assets/js/scripts/ui/data-list-view.js" %}"></script>
+
     <!-- END: Page JS-->
 </body>
 <!-- END: Body-->

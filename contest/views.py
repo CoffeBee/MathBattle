@@ -37,7 +37,7 @@ def themes(request):
 def theme(request, theme_name):
     tasks = [[check(task, request.user), task] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
     if (request.user_agent.is_mobile):
-        return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
+        return render(request, 'contest/mobile/theme.html', context={'theme' : tasks, 'user' : request.user})
     return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login')

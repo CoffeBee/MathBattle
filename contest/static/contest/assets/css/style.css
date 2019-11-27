@@ -563,5 +563,7 @@ body.fixed-left .side-menu.left {
         transform: translateY(-2000px)
     }
 }
-
-
+.navigation > li.open > a, .navigation > li.sidebar-group-active > a
+{
+  background-color: transparent;
+}

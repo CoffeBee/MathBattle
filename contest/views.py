@@ -29,6 +29,8 @@ def check_team(task, team):
 @login_required(login_url='../../auth/login/')
 def themes(request):
     themes = Theme.objects.all()
+    if (request.user_agent.is_mobile):
+        return render(request, 'contest/mobile/index.html', context={'themes': themes, 'user' : request.user})
     return render(request, 'contest/index.html', context={'themes': themes, 'user' : request.user})
 
 @login_required(login_url='../../../auth/login/')

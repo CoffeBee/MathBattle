@@ -29,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/core/colors/palette-gradient.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/plugins/file-uploaders/dropzone.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "contest/app-assets/css/pages/data-list-view.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
     <!-- END: Page CSS-->
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
@@ -69,17 +70,17 @@
         <!-- BEGIN: Header-->
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
-        <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+        <nav class="header-navbar navbar-expand-md navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
             <div class="navbar-wrapper">
                 <div class="navbar-container content">
                     <div class="navbar-collapse" id="navbar-mobile">
                         <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
                             <ul class="nav navbar-nav">
-                                <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
+                                <li class="nav-item mobile-menu d-lg-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
                             </ul>
                         </div>
                         <ul class="nav navbar-nav float-right">
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
+                            <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
                             <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon feather icon-search"></i></a>
                                 <div class="search-input">
                                     <div class="search-input-icon"><i class="feather icon-search primary"></i></div>
@@ -88,6 +89,7 @@
                                     <ul class="search-list"></ul>
                                 </div>
                             </li>
+
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                     <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
                                 </a>
@@ -107,10 +109,11 @@
                 <div class="content-header-left col-md-12 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Профиль</h2>
+                            <h2 class="content-header-title float-left mb-0">Темы</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
-
+                                    <li class="breadcrumb-item active">Темы
+                                    </li>
                                 </ol>
                             </div>
                         </div>
@@ -119,63 +122,96 @@
             </div>
             <div class="content-body">
                 <!-- Data list view starts -->
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <h4 class="card-title">Личные данные</h4>
-                            <p>   </p>
-                            <p class="card-text"><b>Никнейм </b>  {{ user.username }}</p>
-                            <p class="card-text"><b>Имя </b>  {{ user.profile.first_name }}</p>
-                            <p class="card-text"><b>Отчество </b>  {{ user.profile.father_name }}</p>
-                            <p class="card-text"><b>Фамилия </b>  {{ user.profile.second_name }}</p>
-                            <p class="card-text"><b>Почта </b>  {{ user.email }}</p>
-                            <p class="card-text"><b>Город проживания </b>  {{ user.profile.location }}</p>
-                            <p class="card-text"><b>Школа </b>  {{ user.profile.school }}</p>
-                            <p class="card-text"><b>Класс </b>  {{ user.profile.grade }}</p>
-                            <input type="button" class="btn btn-primary waves-effect waves-light"onclick="location.href='../userprofile/update_profiles';" value="Редактировать"/>
-                        </div>
+                <section id="data-list-view" class="data-list-view-header">
+                    <!-- DataTable starts -->
+                    <div class="table-responsive">
+                        <table class="table data-list-view">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>НАЗВАНИЕ</th>
+                                    <th>РАЗДЕЛ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for theme in themes%}
+                                <tr onclick="location.href='{{theme.name}}';">
+                                    <td>
+
+                                    </td>
+                                    <td class="product-name">{{theme.name}}</td>
+                                    <td class="product-category">{{theme.general_theme.all.0.name}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <!-- Data list view end -->
-            </div>
-            <div class="content-body">
-                <!-- Data list view starts -->
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <h4 class="card-title">Создать команду</h4>
-                            <form action="?" method="post">
-                                {% csrf_token %}
-                                <div class="row">
-                                    <div class="col-xl-6 col-md-8 col-12 mb-2">
-                                        <fieldset class="form-group">
-                                            <label for="ans">Название вашей комадны</label>
-                                            {{form.name}}
-                                        </fieldset>
+                    <!-- DataTable ends -->
+                    <!-- add new sidebar starts -->
+                    <div class="add-new-data-sidebar">
+                        <div class="overlay-bg"></div>
+                        <div class="add-new-data">
+                            <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
+                                <div>
+                                    <h4>ADD NEW DATA</h4>
+                                </div>
+                                <div class="hide-data-sidebar">
+                                    <i class="feather icon-x"></i>
+                                </div>
+                            </div>
+                            <div class="data-items pb-3">
+                                <div class="data-fields px-2 mt-3">
+                                    <div class="row">
+                                        <div class="col-sm-12 data-field-col">
+                                            <label for="data-name">Name</label>
+                                            <input type="text" class="form-control" id="data-name">
+                                        </div>
+                                        <div class="col-sm-12 data-field-col">
+                                            <label for="data-category"> Category </label>
+                                            <select class="form-control" id="data-category">
+                                                <option>Audio</option>
+                                                <option>Computers</option>
+                                                <option>Fitness</option>
+                                                <option>Appliance</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 data-field-col">
+                                            <label for="data-status">Order Status</label>
+                                            <select class="form-control" id="data-status">
+                                                <option>Pending</option>
+                                                <option>Canceled</option>
+                                                <option>Delivered</option>
+                                                <option>On Hold</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 data-field-col">
+                                            <label for="data-price">Price</label>
+                                            <input type="number" class="form-control" id="data-price">
+                                        </div>
+                                        <div class="col-sm-12 data-field-col data-list-upload">
+                                            <form action="#" class="dropzone dropzone-area" id="dataListUpload">
+                                                <div class="dz-message">Upload Image</div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light">Сгенерировать ссылку</button>
-                            </form>
+                            </div>
+                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                <div class="add-data-btn">
+                                    <button class="btn btn-primary">Add Data</button>
+                                </div>
+                                <div class="cancel-data-btn">
+                                    <button class="btn btn-outline-danger">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- add new sidebar ends -->
+                </section>
 
-                        </div>
-                    </div>
-                </div>
                 <!-- Data list view end -->
             </div>
-            <div class="content-body">
-                <!-- Data list view starts -->
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <h4 class="card-title">Ваши команды команду</h4>
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- Data list view end -->
-            </div>
-    </div>
-    </div>
+        </div>
     </div>
     <!-- END: Content-->
     <div class="sidenav-overlay"></div>
@@ -196,7 +232,7 @@
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js" %}"></script>
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js" %}"></script>
     <script src="{% static "contest/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js" %}"></script>
-    <script src="{% static "contest/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js" %}"></script>
+
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Theme JS-->
     <script src="{% static "contest/app-assets/js/core/app-menu.js" %}"></script>
@@ -205,6 +241,7 @@
     <!-- END: Theme JS-->
     <!-- BEGIN: Page JS-->
     <script src="{% static "contest/app-assets/js/scripts/ui/data-list-view.js" %}"></script>
+
     <!-- END: Page JS-->
 </body>
 <!-- END: Body-->

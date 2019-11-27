@@ -54,7 +54,7 @@ def contest(request, contest_name):
     if now > contest.startDate and now < contest.finishDate:
         if len(ContestUser.objects.filter(contest=contest, user=request.user).all()) == 0:
             return render(request, 'contest/ContestRegister.html', context={'form' : ContestRegister(user=request.user)})
-        team = ContestUser.objects.get(contest=contest, user=request.user).team
+        team = ContestUser.objects.filter(contest=contest, user=request.user).all()[0].team
         score = 0
         Mayscore = 0
         for task in contest.tasks.all():
@@ -68,7 +68,7 @@ def contest(request, contest_name):
                     Mayscore += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
                     mfl = True
         tasks = [[check_team(task, team), task] for task in TaskContestCase.objects.filter(contest__name=contest_name).all()]
-        return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore})
+        return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore, 'name' : tasks[0][1].contest.name})
     return render(request, 'contest/solutionError.html')
 
 

@@ -17,6 +17,10 @@ def check(task, user):
     if Solution.objects.filter(username=user, task=task.task).exists():
         return 2
     return 0
+def solved(task):
+    return len(Solution.objects.filter(task=task.task, verdict = Virdict.ACCEPTED))
+def submited(task):
+    return len(Solution.objects.filter(task=task.task))
 def check_team(task, team):
     fl = 0
     for user in team.users.all():
@@ -35,7 +39,7 @@ def themes(request):
 
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
-    tasks = [[check(task, request.user), task] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
+    tasks = [[check(task, request.user), task, solved(task), submited(task)] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/theme.html', context={'theme' : tasks, 'user' : request.user})
     return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
@@ -73,7 +77,7 @@ def contest(request, contest_name):
                 if not mfl and Solution.objects.filter(username = user).filter(Q(verdict = Virdict.ACCEPTED_FOR_EVUALETION_IN_CONTEST) | Q(verdict = Virdict.ACCEPTED) | Q(verdict = Virdict.ACCEPTED_FOR_EVUALETION)).filter(task = task).exists():
                     Mayscore += TaskContestCase.objects.get(task=task, contest__name=contest_name).points
                     mfl = True
-        tasks = [[check_team(task, team), task] for task in TaskContestCase.objects.filter(contest__name=contest_name).all()]
+        tasks = [[check_team(task, team), task, solved(task), submited(task)] for task in TaskContestCase.objects.filter(contest__name=contest_name).all()]
         if (request.user_agent.is_mobile):
             return render(request, 'contest/mobile/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore, 'name' : tasks[0][1].contest.name})
         return render(request, 'contest/contest.html', context={'tasks' : tasks, 'user' : request.user, 'score' : score, 'Mayscore' : Mayscore, 'name' : tasks[0][1].contest.name})

@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Темы - MathBattle</title>
+    <title>Вход - MathBattle</title>
     {% load static%}
     <link rel="apple-touch-icon" href="{% static 'contest/app-assets/images/ico/apple-icon-120.png' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'main.css' %}">
@@ -88,7 +88,7 @@ body {
                                                         <label for="user-password">Пароль</label>
                                                     </fieldset>
                                                     <a href="/auth/signup" class="btn btn-outline-primary float-left btn-inline">Зарегистрироваться</a>
-                                                    <button type="submit" class="btn btn-primary float-right btn-inline">Войти</button>
+                                                    <button type="submit" href="/auth/login" class="btn btn-primary float-right btn-inline">Войти</button>
                                                 </form>
                                             </div>
                                         </div>

@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Темы - MathBattle</title>
+    <title>Регистрация на контест - MathBattle</title>
    {% load static%}
     <link rel="apple-touch-icon" href="{% static 'contest/app-assets/images/ico/apple-icon-120.png' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'main.css' %}">
@@ -60,7 +60,7 @@ body {
             <div class="card auth-card bg-transparent shadow-none rounded-0 mb-0 w-100">
                 <div class="card-content">
                     <div class="card-body text-center">
-                        <h1 class="font-large-2 mt-1 mb-0">Вы еще не зарегистрированны на конетест. Выберите команду за которую вы будите играть</h1>
+                        <h1 class="font-large-2 mt-1 mb-0">Вы еще не зарегистрированы на контест. Выберите команду, за которую Вы будете играть</h1>
                         <form action="?" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{form.team}}

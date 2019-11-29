@@ -127,7 +127,7 @@ def solution(request, submit_id):
         return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
     if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION and submit.verdict != Virdict.APPLICATION):
     	return render(request, 'contest/ContestError.html')
-    theme = sol.task.theme_set.all()[0]
+    theme = submit.task.theme_set.all()[0]
     global_theme = theme.general_theme.all()[0]
     rang = 0
     try:

@@ -127,6 +127,15 @@ def solution(request, submit_id):
         return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
     if (submit.verdict != Virdict.ACCEPTED_FOR_EVUALETION and submit.verdict != Virdict.APPLICATION):
     	return render(request, 'contest/ContestError.html')
+    theme = sol.task.theme_set.all()[0]
+    global_theme = theme.general_theme.all()[0]
+    rang = 0
+    try:
+        rang = Rang.objects.get(user=request.user, theme=global_theme).point
+    except:
+        pass
+    if rang <= sol.need_rang:
+        return render(request, 'contest/ContestError.html')
     if (request.method == 'POST'):
         form = CheckForm(request.POST)
         if form.is_valid():

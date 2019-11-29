@@ -134,7 +134,7 @@ def solution(request, submit_id):
         rang = Rang.objects.get(user=request.user, theme=global_theme).point
     except:
         pass
-    if rang <= sol.need_rang:
+    if rang <= submit.need_rang:
         return render(request, 'contest/ContestError.html')
     if (request.method == 'POST'):
         form = CheckForm(request.POST)

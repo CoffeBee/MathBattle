@@ -24,7 +24,6 @@ SECRET_KEY = 'saoy*kd&8w*t$^qgwemy+ioz9x)2t4p0m+^z-*eg1vgd40jysf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
 
@@ -56,6 +55,7 @@ MIDDLEWARE = [
    'django.contrib.messages.middleware.MessageMiddleware',
    'django.middleware.clickjacking.XFrameOptionsMiddleware',
    'django_user_agents.middleware.UserAgentMiddleware',
+   'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'mathbattle.urls'
@@ -88,7 +88,7 @@ DATABASES = {
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
        'NAME' : 'mathbattle',
        'USER' : 'podvorniy',
-       'PASSWORD' : 'Podvorniy1303©',
+       'PASSWORD' : '12345678',
        'HOST' : 'localhost',
        'PORT' : '5432'
 

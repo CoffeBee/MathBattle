@@ -12,7 +12,7 @@ from django.db.models import Q
 
 @login_required(login_url='../../../auth/login/')
 def task(request, task_title):
-     task = Task.objects.get(title=task_title)
+     task = Task.objects.filter(title=task_title)[0]
      submits = Solution.objects.filter(task=task, username=request.user).filter(~Q(verdict = Virdict.PREVIEW))
      if  request.method == 'POST':
         form = TaskForm(request.POST)

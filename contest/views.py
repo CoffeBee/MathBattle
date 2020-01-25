@@ -120,8 +120,8 @@ def solution(request, submit_id):
                     submit.save()
                 return redirect('/themes/solutions')
             if (request.user_agent.is_mobile):
-                return render(request, 'contest/mobile/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user})
-            return render(request, 'contest/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user})
+                return render(request, 'contest/mobile/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user, 'form' : CheckForm()})
+            return render(request, 'contest/ownSolutionJudgeReject.html', context={'submit': submit, 'user' : request.user, 'form' : CheckForm()})
         if (request.user_agent.is_mobile):
             return render(request, 'contest/mobile/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
         return render(request, 'contest/ownSolutionJudge.html', context={'submit': submit, 'user' : request.user})
@@ -147,7 +147,6 @@ def solution(request, submit_id):
                 submit.comments.add(new_message)
             else:
                 submit.verdict = Virdict.REJECTED
-                submit.comments.append(form.cleaned_data['comment'])
                 submit.comments.add(new_message)
             submit.save()
             return redirect('/themes/solutions')

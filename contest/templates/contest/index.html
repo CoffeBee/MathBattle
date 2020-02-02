@@ -82,12 +82,11 @@
                         <ul class="nav navbar-nav float-right">
                             <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
                             <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon feather icon-search"></i></a>
-                                <div class="search-input">
-                                    <div class="search-input-icon"><i class="feather icon-search primary"></i></div>
-                                    <input class="input" type="text" placeholder="Explore Vuesax..." tabindex="-1" data-search="template-list" />
-                                    <div class="search-input-close"><i class="feather icon-x"></i></div>
-                                    <ul class="search-list"></ul>
-                                </div>
+                              <div class="search-input">
+                                <form method="get">
+                                  <input type="text" name="q" id="id_q" class="input" placeholder="Поиск">
+                                </form>
+                              </div>
                             </li>
 
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
@@ -124,6 +123,7 @@
                 <!-- Data list view starts -->
                 <section id="data-list-view" class="data-list-view-header">
                     <!-- DataTable starts -->
+
                     <div class="table-responsive">
                         <table class="table data-list-view">
                             <thead>
@@ -202,6 +202,9 @@
     <script src="{% static "contest/app-assets/js/scripts/ui/data-list-view.js" %}"></script>
 
     <!-- END: Page JS-->
+    <script type="text/javascript">
+      document.getElementById("id_q").value = "{{query}}"
+    </script>
 </body>
 <!-- END: Body-->
 

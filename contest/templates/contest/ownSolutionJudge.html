@@ -117,7 +117,7 @@
                             <h2 class="content-header-title float-left mb-0">{{task.title}}</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/themes/solutions">Решения</a>
+                                    <li class="breadcrumb-item"><a href="/themes/solutions" onclick="my()">Решения</a>
                                     </li>
                                     <li class="breadcrumb-item active">Ваше решение для задачи {{submit.task.title}}</li>
                                 </ol>
@@ -131,7 +131,7 @@
                 <div class="card">
                         <div class="card-content">
                             <div class="card-body">
-                                <h4 class="card-title">Решение</h4>
+                                <h4 class="card-title" onclick="my()">Решение</h4>
                                 <p class="card-text">{{submit.description|safe}}</p>
                                 <p class="card-text mt-1"><small class="text-muted">Ваше решение</small></p>
                             </div>
@@ -172,6 +172,21 @@
     </footer>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
+    <script>
+      function my()
+      {
+        var y = document.getElementsByTagName("IMG");
+        var i;
+        for (i = 2; i < y.length; i++) {
+          alert(y[i].scr)
+          if (y[i].id != "logo")
+          {
+              y[i].style = "width : 100%;"
+          }
+        }
+      }
+      my();
+    </script>
     <script src="{% static "contest/app-assets/vendors/js/vendors.min.js" %}"></script>
     <!-- BEGIN Vendor JS-->
     <!-- BEGIN: Page Vendor JS-->

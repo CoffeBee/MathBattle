@@ -51,7 +51,7 @@
             <div class="navbar-header">
                 <ul class="nav navbar-nav flex-row">
                     <li class="nav-item mr-auto"><a class="navbar-brand">
-                            <img src="{% static "contest/app-assets/images/logo/logo.png" %}" style="width : 45x; height : 30px;">
+                            <img src="{% static "contest/app-assets/images/logo/logo.png" %}" style="width : 45x; height : 30px;" id="logo">
                             <h2 class="brand-text mb-0" style="padding-left : 2px; margin-top : 10px; font-size : 1.7rem;">athBattle</h2>
                         </a></li>
                 </ul>
@@ -96,7 +96,7 @@
                                 </div>
                             </li>
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                    <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
+                                    <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" id="logo" /></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="/auth/logout"><i class="feather icon-power"></i> Выйти</a>
@@ -189,6 +189,7 @@
     </footer>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
+    
     <script src="{% static "contest/app-assets/vendors/js/vendors.min.js" %}"></script>
     <!-- BEGIN Vendor JS-->
     <!-- BEGIN: Page Vendor JS-->

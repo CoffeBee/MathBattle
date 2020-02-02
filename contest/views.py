@@ -8,9 +8,14 @@ from django.db.models.functions import datetime
 from django.utils import timezone
 from .forms import ContestRegister
 from django.contrib.auth.decorators import login_required
-from tasks.models import Theme, TaskCase, Solution, Contest, Rang, TaskContestCase, Message
+from tasks.models import Theme, TaskCase, Solution, Contest, Rang, TaskContestCase, Message, GlobalThemeName
 from checker.virdicts import Virdict
 from .forms import CheckForm
+import logging
+import time
+from django.db.models import Q
+# Get an instance of a logger
+logger = logging.getLogger('ok')
 def check(task, user):
     if Solution.objects.filter(username=user, task=task.task, verdict = Virdict.ACCEPTED).exists():
         return 1
@@ -30,19 +35,34 @@ def check_team(task, team):
             fl = 2
     return fl
 
+def get_theme_queryset(query=None):
+    queryset = []
+    queries = query.split(" ")
+    for q in queries:
+        themes = Theme.objects.filter(
+            Q(name__icontains=q)
+        ).distinct()
+    for theme in themes:
+        queryset.append(theme)
+    return list(set(queryset))
+
 @login_required(login_url='../../auth/login/')
 def themes(request):
     themes = Theme.objects.all()
+    if request.GET:
+        query = request.GET['q']
+        themes = get_theme_queryset(query)
     if (request.user_agent.is_mobile):
-        return render(request, 'contest/mobile/index.html', context={'themes': themes, 'user' : request.user})
-    return render(request, 'contest/index.html', context={'themes': themes, 'user' : request.user})
+        return render(request, 'contest/mobile/index.html', context={'themes': themes, 'user': request.user})
+    return render(request, 'contest/index.html', context={'themes': themes, 'user': request.user})
 
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
     tasks = [[check(task, request.user), task, solved(task), submited(task)] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
+    context = {"theme": tasks, "user": request.user}
     if (request.user_agent.is_mobile):
-        return render(request, 'contest/mobile/theme.html', context={'theme' : tasks, 'user' : request.user})
-    return render(request, 'contest/theme.html', context={'theme' : tasks, 'user' : request.user})
+        return render(request, 'contest/mobile/theme.html', context)
+    return render(request, 'contest/theme.html', context)
 
 @login_required(login_url='../../../auth/login')
 def contests(request):
@@ -93,11 +113,7 @@ def solutions(request):
             continue
         theme = sol.task.theme_set.all()[0]
         global_theme = theme.general_theme.all()[0]
-        rang = 0
-        try:
-            rang = Rang.objects.get(user=request.user, theme=global_theme).point
-        except:
-            pass
+        rang = 10000
         if rang > sol.need_rang and sol.username != request.user and (sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION or sol.verdict == Virdict.APPLICATION or sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION):
             need.append(sol)
     if (request.user_agent.is_mobile):
@@ -134,14 +150,16 @@ def solution(request, submit_id):
         rang = Rang.objects.get(user=request.user, theme=global_theme).point
     except:
         pass
-    if rang <= submit.need_rang:
-        return render(request, 'contest/ContestError.html')
+
     if (request.method == 'POST'):
         form = CheckForm(request.POST)
         if form.is_valid():
             new_message = Message(text=form.cleaned_data['comment'])
             new_message.save()
             if 'OK' in request.POST:
+                logs = open("okknig", 'a')
+                logs.write("{} сдал задачу из темы {} под названием {}. Принимал {}. Время {}".format(submit.username.username, theme.name, submit.task.title, request.user.username, time.time()))
+                logs.close()
                 submit.task.solvers.add(request.user)
                 submit.verdict = Virdict.ACCEPTED
                 submit.comments.add(new_message)

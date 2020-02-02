@@ -130,7 +130,11 @@
                             <p class="card-text"><b>Почта </b>  {{ user.email }}</p>
                             <p class="card-text"><b>Город проживания </b>  {{ user.profile.location }}</p>
                             <p class="card-text"><b>Школа </b>  {{ user.profile.school }}</p>
-                            <p class="card-text"><b>Класс </b>  {{ user.profile.grade }}</p>
+                            {% if user.profile.grade == None %}
+                              <p class="card-text"><b>Класс </b></p>
+                            {% else %}
+                              <p class="card-text"><b>Класс </b>  {{ user.profile.grade }}</p>
+                            {% endif %}
                             <input type="button" class="btn btn-primary waves-effect waves-light"onclick="location.href='../userprofile/update_profiles';" value="Редактировать"/>
                         </div>
                     </div>

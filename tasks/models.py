@@ -27,45 +27,45 @@ class Hardness(Enum):
 class Task(models.Model):
 
     class Meta:
-        verbose_name = "Task"
-        verbose_name_plural = "Tasks"
+        verbose_name = "Задача"
+        verbose_name_plural = "Задачи"
 
-    text = models.CharField(max_length=2000)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    right_answer = models.CharField(max_length=200)
-    checker = models.ForeignKey(Checker, on_delete=models.CASCADE, default=DEFAULT_CHECKER_ID)
-    title = models.CharField(default='Task', max_length=200)
-    solvers = models.ManyToManyField(User, related_name='solver')
+    text = models.CharField(max_length=2000, verbose_name='Текст')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    right_answer = models.CharField(max_length=200, verbose_name='Правильный ответ')
+    checker = models.ForeignKey(Checker, on_delete=models.CASCADE, default=DEFAULT_CHECKER_ID, verbose_name='Проверяющая программа')
+    title = models.CharField(default='Task', max_length=200, verbose_name='Название')
+    solvers = models.ManyToManyField(User, related_name='solver', verbose_name='Список решивших')
 
     def __str__(self):
         return self.title
 
 class Message(models.Model):
     class Meta:
-        verbose_name = "Message"
-        verbose_name_plural = "Messages"
+        verbose_name = "Сообщение"
+        verbose_name_plural = "Сообщения"
     text = SummernoteTextField()
 
 class Solution(models.Model):
 
     class Meta:
-        verbose_name = "Solution"
-        verbose_name_plural = "Solutions"
+        verbose_name = "Решение"
+        verbose_name_plural = "Решения"
 
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, default=DEFAULT_TASK_ID)
-    answer = models.CharField(max_length=2000)
-    description = SummernoteTextField()
-    verdict = EnumField(Virdict, max_length=500,default=Virdict.WRONG_ANSWER)
-    submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True)
-    need_rang = models.IntegerField()
-    comments = models.ManyToManyField(Message, blank=True)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, default=DEFAULT_TASK_ID, verbose_name='Задача')
+    answer = models.CharField(max_length=2000, verbose_name='Ответ')
+    description = SummernoteTextField(verbose_name='Решение')
+    verdict = EnumField(Virdict, max_length=500,default=Virdict.WRONG_ANSWER, verbose_name='Вердикт')
+    submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True, verbose_name='Время')
+    need_rang = models.IntegerField(verbose_name='Ранг проверки')
+    comments = models.ManyToManyField(Message, blank=True, verbose_name='Комментарии жури')
 
 class Contest(models.Model):
 
     class Meta:
-        verbose_name = "Contest"
-        verbose_name_plural = "Contests"
+        verbose_name = "Контест"
+        verbose_name_plural = "Контесты"
 
     def __str__(self):
         return self.name
@@ -73,13 +73,13 @@ class Contest(models.Model):
     def task_default():
         return [1]
 
-    name = models.CharField(max_length=200)
-    tasks = models.ManyToManyField(Task, through='TaskContestCase')
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    team_size = models.IntegerField(default=4)
-    startDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
-    finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True)
-    contestants = models.ManyToManyField(User, through='ContestUser', related_name='contestants')
+    name = models.CharField(max_length=200, verbose_name='Название')
+    tasks = models.ManyToManyField(Task, through='TaskContestCase', verbose_name='Задачи')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    team_size = models.IntegerField(default=4, verbose_name='Ограничение на количество человек в команде')
+    startDate = models.DateTimeField(default=datetime.timezone.now(), blank=True, verbose_name='Время начала контеста')
+    finishDate = models.DateTimeField(default=datetime.timezone.now(), blank=True, verbose_name='Время окончания контеста')
+    contestants = models.ManyToManyField(User, through='ContestUser', related_name='contestants', verbose_name='Участники')
 
 
 class ContestUser(models.Model):
@@ -98,27 +98,32 @@ class ContestUser(models.Model):
 
 
 class GlobalTheme(models.Model):
-    name = models.CharField(max_length=200)
-    rangs = models.ManyToManyField(User, through='Rang')
+
+    class Meta:
+        verbose_name = "Раздел"
+        verbose_name_plural = "Раздел"
+
+    name = models.CharField(max_length=200, verbose_name='Название')
+    rangs = models.ManyToManyField(User, through='Rang', verbose_name='Ранг')
     def __str__(self):
         return str(self.name)
 
 class Theme(models.Model):
 
     class Meta:
-        verbose_name = "Theme"
-        verbose_name_plural = "Themes"
+        verbose_name = "Тема"
+        verbose_name_plural = "Темы"
 
-    name = models.CharField(max_length=200)
-    tasks = models.ManyToManyField(Task, through='TaskCase')
-    general_theme = models.ManyToManyField(GlobalTheme, through='GlobalThemeName')
+    name = models.CharField(max_length=200, verbose_name='Название')
+    tasks = models.ManyToManyField(Task, through='TaskCase', verbose_name='Задачи')
+    general_theme = models.ManyToManyField(GlobalTheme, through='GlobalThemeName', verbose_name='Раздел')
     def __str__(self):
     	return str(self.name)
 
 class GlobalThemeName(models.Model):
-    hardness = models.IntegerField()
-    global_them = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+    hardness = models.IntegerField(verbose_name='Сложность')
+    global_them = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE, verbose_name='Раздел')
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, verbose_name='Тема')
 
 
 
@@ -128,9 +133,9 @@ class TaskCase(models.Model):
         verbose_name = "TaskCase"
         verbose_name_plural = "TasksCase"
 
-    hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+    hardness = EnumField(Hardness, max_length=500, default=Hardness.MIDDLE, verbose_name='Сложность')
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, verbose_name='Задача')
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, verbose_name='Тема')
 
 
 class TaskContestCase(models.Model):
@@ -139,19 +144,19 @@ class TaskContestCase(models.Model):
         verbose_name = "TaskContestCase"
         verbose_name_plural = "TaskContestCases"
 
-    points = models.IntegerField()
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
+    points = models.IntegerField(verbose_name='Стоимость')
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, verbose_name='Задача')
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, verbose_name='Контест')
 
 class Rang(models.Model):
 
     class Meta:
-        verbose_name = "Rang"
-        verbose_name_plural = "Rangs"
+        verbose_name = "Ранг"
+        verbose_name_plural = "Ранги"
 
-    point = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    theme = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE)
+    point = models.IntegerField(verbose_name='Очки крутости')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    theme = models.ForeignKey(GlobalTheme, on_delete=models.CASCADE, verbose_name='Раздел')
 
 class Points(models.Model):
     score = models.IntegerField()

@@ -5,8 +5,8 @@ import os
 class Checker(models.Model):
 
     class Meta:
-        verbose_name = "Checker"
-        verbose_name_plural = "Checkers"
+        verbose_name = "Проверяющая программа"
+        verbose_name_plural = "Проверяющие программы"
 
     def __str__(self):
         return os.path.basename(self.code.name)
@@ -15,4 +15,4 @@ class Checker(models.Model):
     	codestr = self.code.read()
     	return eval(codestr)
 
-    code = models.FileField(upload_to='uploads/checkers')
+    code = models.FileField(upload_to='uploads/checkers', verbose_name="Файл")

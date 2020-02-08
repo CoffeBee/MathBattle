@@ -138,25 +138,41 @@
                             </thead>
                             <tbody>
                                 {% for theme in themes%}
-                                <tr onclick="location.href='{{theme.name}}';">
+                                <tr onclick="location.href='{{theme.1.name}}';">
                                     <td>
 
                                     </td>
-                                    <td class="product-name">{{theme.name}}</td>
-                                    <td class="product-category">{{theme.general_theme.all.0.name}}</td>
+                                    <td class="product-name">{{theme.1.name}}</td>
+                                    <td class="product-category">{{theme.1.general_theme.all.0.name}}</td>
                                     <td>
                                         <div class="progress progress-bar-success">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width:97%"></div>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width: {{theme.2}}%"></div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="chip chip-{{theme.hardness}}">
-                                            <div class="chip-body">
-                                                <div class="chip-text">{{theme.hardness}}</div>
-                                            </div>
-                                        </div>
+                                        {%if theme.0 == 1%}
+                                          <div class="chip chip-success">
+                                              <div class="chip-body">
+                                                  <div class="chip-text">Простая</div>
+                                              </div>
+                                          </div>
+                                        {%endif%}
+                                        {%if theme.0 == 2%}
+                                          <div class="chip chip-warning">
+                                              <div class="chip-body">
+                                                  <div class="chip-text">Средняя</div>
+                                              </div>
+                                          </div>
+                                        {%endif%}
+                                        {%if theme.0 == 3%}
+                                          <div class="chip chip-danger">
+                                              <div class="chip-body">
+                                                  <div class="chip-text">Сложная</div>
+                                              </div>
+                                          </div>
+                                        {%endif%}
                                     </td>
-                                    <td class="product-price hidden-sm-down">{{theme.tasks.count}} Задач</td>
+                                    <td class="product-price hidden-sm-down">{{theme.1.tasks.count}} Задач</td>
                                 </tr>
                                 {%endfor%}
                             </tbody>

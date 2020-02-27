@@ -45,16 +45,27 @@ def get_theme_queryset(query=None):
     for theme in themes:
         queryset.append(theme)
     return list(set(queryset))
+def hard(t):
+    return GlobalThemeName.objects.get(global_them=t.general_theme.all()[0], theme=t).hardness
+def progress(t, request):
+    cnt_all = 0
+    cnt = 0
 
+    for i in t.tasks.all():
+        cnt_all += 1
+        if (Solution.objects.filter(verdict=Virdict.ACCEPTED).filter(username=request.user).filter(task=i).count() > 0):
+            cnt += 1
+    return int(cnt * 100 / cnt_all)
 @login_required(login_url='../../auth/login/')
 def themes(request):
     themes = Theme.objects.all()
+    themes_clean = [(hard(theme), theme, progress(theme, request)) for theme in themes]
     if request.GET:
         query = request.GET['q']
         themes = get_theme_queryset(query)
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/index.html', context={'themes': themes, 'user': request.user})
-    return render(request, 'contest/index.html', context={'themes': themes, 'user': request.user})
+    return render(request, 'contest/index.html', context={'themes': themes_clean, 'user': request.user})
 
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
@@ -171,3 +182,4 @@ def solution(request, submit_id):
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})
     return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})
+

@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Проверка решения - MathBattle</title>
+    <title>Профиль - MathBattle</title>
     {% load static%}
     <link rel="apple-touch-icon" href="{% static 'contest/app-assets/images/ico/apple-icon-120.png' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'main.css' %}">
@@ -33,13 +33,6 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
     <!-- END: Custom CSS-->
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    showProcessingMessages: false,
-    tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
-  });
-</script>
-<script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </head>
 <!-- END: Head-->
 <!-- BEGIN: Body-->
@@ -67,28 +60,10 @@
                                     <a class="dropdown-item" href="/themes/theme"><i class="feather icon-package"></i> Темы</a>
                                     <a class="dropdown-item" href="/themes/contest"><i class="feather icon-award"></i> Контесты</a>
                                     <a class="dropdown-item" href="/themes/solutions"><i class="feather icon-file-text"></i> Решения</a>
-                                </div>
+                                  </div>
                               </li>                            </ul>
                         </div>
-                        <ul class="nav navbar-nav float-right">
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
-                            <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon feather icon-search"></i></a>
-                                <div class="search-input">
-                                    <div class="search-input-icon"><i class="feather icon-search primary"></i></div>
-                                    <input class="input" type="text" placeholder="Explore Vuesax..." tabindex="-1" data-search="template-list" />
-                                    <div class="search-input-close"><i class="feather icon-x"></i></div>
-                                    <ul class="search-list"></ul>
-                                </div>
-                            </li>
-                            <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                    <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{user.username}}</span><span class="user-status">Online</span></div><span><img class="round" src="{% static "contest/app-assets/images/portrait/small/avatar-s-11.png" %}" alt="avatar" height="40" width="40" /></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="/auth/logout"><i class="feather icon-power"></i> Выйти</a>
-                                    <a class="dropdown-item" href="/userprofile"><i class="feather icon-user"></i> Профиль</a>
-                                </div>
-                            </li>
-                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -99,60 +74,41 @@
                 <div class="content-header-left col-md-12 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">{{submit.task.title}}</h2>
+                            <h2 class="content-header-title float-left mb-0">О нас</h2>
+                            <div class="breadcrumb-wrapper col-12">
+                                <ol class="breadcrumb">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="content-body">
-                <!-- Data list view starts -->
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <h4 class="card-title">Решение</h4>
-                            <p class="card-text">{{submit.description|safe}}</p>
-                            <p class="card-text mt-1"><small class="text-muted">Прочитайте свое решение и устраните все неточности</small></p>
-                        </div>
-                    </div>
-                </div>
-                {% for sol in submit.comments.all%}
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <h4 class="card-title"></h4>
-                                <p class="card-text">{{sol.text|safe}}</p>
-                                <p class="card-text mt-1"><small class="text-muted">Комментарий к решению</small></p>
+                                </ol>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-                <!-- Data list view end -->
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Ваш вердикт</h4>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <form action="?" method="post">
-                                {% csrf_token %}
-                                <p class="mb-2">Пишите ваши претензии к решению как можно точнее, если Вы плохо напишите или не напишите коментарий к решению - это будет минус в Вашу карму</p>
-                                <div class="row">
-                                    <div class="col-12">
-                                        {{form.comment}}
-                                    </div>
-                                </div>
-                                <button type="submit" name="OK" class="btn btn-success waves-effect waves-light">Правильно</button>
-                                <button type="submit" name="Rejected" class="btn btn-danger waves-effect waves-light">Неправильно</button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="content-body">
                 <!-- Data list view starts -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                          <h2 class="card-title">Цель</h2>
+                          <p class="card-text">
+                            Сайт MathBattle разработан в рамках школы Силаэдр для учеников 5-8 классов, увлекающихся олимпиадной математикой.
+                            На сайте есть 2 раздела: контесты и личная нарешка.
+
+                          </p>
+                          <h2 class="card-title">Контесты</h2>
+                          <p class="card-text">
+                            Это командные игры. Нужно собрать команду на нашем сайте и зарегистрироваться командой на контест. Более подробнее Вы можете, посмотреть в разделе Контесты и Профиль.
+                          </p>
+                          <h2 class="card-title">Нарешка</h2>
+                          <p class="card-text">
+                            В разделе Темы собраны задачи для 5-8 классов. Вы можете выбрать понравившуюся тему и сдавать задачи в систему. Мы принимаем не только текст, но и фотографии, Тех-формулы(для этого нужно прописать в начале и в конце "$").
+                          </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Data list view end -->
             </div>
-        </div>
+
     </div>
     </div>
     </div>

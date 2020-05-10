@@ -15,6 +15,12 @@ import logging
 import time
 from django.db.models import Q
 # Get an instance of a logger
+
+def main(request):
+    if (request.user_agent.is_mobile):
+        return render(request, "contest/mobile/about.html")
+    return render(request, 'contest/about.html')
+
 logger = logging.getLogger('ok')
 def check(task, user):
     if Solution.objects.filter(username=user, task=task.task, verdict = Virdict.ACCEPTED).exists():
@@ -182,4 +188,3 @@ def solution(request, submit_id):
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})
     return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})
-

@@ -60,7 +60,11 @@ body {
             <div class="card auth-card bg-transparent shadow-none rounded-0 mb-0 w-100">
                 <div class="card-content">
                     <div class="card-body text-center">
-                        <h1 class="font-large-2 mt-1 mb-0">Вы еще не зарегистрированы на контест. Выберите команду, за которую Вы будете играть</h1>
+                        <h1 class="font-large-2 mt-1 mb-0">Регистрация на контест</h1>
+                        <p class="p-1">
+                          Выберите команду, за которую Вы будете играть. <br>
+                          Для создания команды перейдите в <a href="/userprofile">профиль пользователя</a>
+                        </p>
                         <form action="?" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{form.team}}

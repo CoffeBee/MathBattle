@@ -8,5 +8,5 @@ urlpatterns = [
     path('theme/<str:theme_name>/', theme),
     path('solutions/', solutions),
     path('solutions/<int:submit_id>', solution),
-
+    path('about/', main)
 ]

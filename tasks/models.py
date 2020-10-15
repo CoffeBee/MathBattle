@@ -181,9 +181,9 @@ class ContestAdmin(admin.ModelAdmin):
 class TaskAdmin(admin.ModelAdmin):
     exclude = ('solvers', "author",)
     def save_model(self, request, obj, form, change):
+        obj.author = request.user
         obj.save()
         obj.solvers.add(request.user)
-        obj.author = request.user
         obj.save()
     inlines = (TaskCase_inline, TaskContestCase_inline)
 

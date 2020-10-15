@@ -28,7 +28,6 @@ def check(task, user):
     if Solution.objects.filter(username=user, task=task.task).exists():
         return 2
     return 0
-
 def solved(task):
     return len(Solution.objects.filter(task=task.task, verdict = Virdict.ACCEPTED))
 def submited(task):
@@ -76,40 +75,10 @@ def themes(request):
         return render(request, 'contest/mobile/index.html', context={'themes': themes, 'user': request.user})
     return render(request, 'contest/index.html', context={'themes': themes_clean, 'user': request.user})
 
-def tabletheme(request, themename):
-    theme = Theme.objects.filter(name=themename)
-    tasks = theme.tasks_set.all()
-    solutions = Solutions.objects.filter(themesol=theme)
-    need = {}
-    for sol in solutions:
-        if sol.verdict == Virdict.PPREVIEW:
-            continue
-        user = sol.username
-        if user not in need.keys():
-            tasksres = {}
-            for task in tasks:
-                taskres[task] = ' '
-            need[user] = taskres
-        verdict = sol.verdict
-        if verdict == Virdict.WRONG_ANSWER:
-            need[user][sol.task] = '-'
-        elif verdict == Virdict.ACCEPTED_FOR_EVUALETION:
-            need[user][sol.task] = '?'
-        elif verdict == Virdict.IN_EVUALETION:
-            need[user][sol.task] = '?'
-        elif verdict == Virdict.REJECTED:
-            need[user][sol.task] = '-'
-        elif verdict == Virdict.ACCEPTED:
-            need[user][sol.task] = '+'
-        elif verdict == Virdict.REQUST_TO_APPLICATION:
-            need[user][sol.task] = '?'
-    return need
-
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
     tasks = [[check(task, request.user), task, solved(task), submited(task)] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
     context = {"theme": tasks, "user": request.user}
-    print(tabletheme(request, theme_name))
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/theme.html', context)
     return render(request, 'contest/theme.html', context)
@@ -169,7 +138,6 @@ def solutions(request):
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/solutions.html', context={'submits': need, 'user' : request.user})
     return render(request, 'contest/solutions.html', context={'submits': need, 'user' : request.user})
-
 
 @login_required(login_url='../../../auth/login/')
 def solution(request, submit_id):

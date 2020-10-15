@@ -60,7 +60,6 @@ class Solution(models.Model):
     submitTime = models.DateTimeField(default=datetime.timezone.now(), blank=True, verbose_name='Время')
     need_rang = models.IntegerField(verbose_name='Ранг проверки')
     comments = models.ManyToManyField(Message, blank=True, verbose_name='Комментарии жури')
-    themesol = models.ForeignKey("Theme", on_delete=models.CASCADE, verbose_name="Решение по теме")
 
 class Contest(models.Model):
 

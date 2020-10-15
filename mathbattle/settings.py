@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'mathbattle.wsgi.application'
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME' : 'mathbattle',
-       'USER' : 'podvorniy',
-       'PASSWORD' : '12345678',
-       'HOST' : 'localhost',
+       'NAME' : 'mathbattleul',
+       'USER' : 'postgres',
+       'PASSWORD' : 'postgres',
+       'HOST' : '176.99.173.63',
        'PORT' : '5432'
 
     }

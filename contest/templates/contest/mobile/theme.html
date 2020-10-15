@@ -126,6 +126,17 @@
 
                                             </div>
                                         {%endif%}
+                                        {% if task.0 == 3%}
+                                            <div class="vs-checkbox-con vs-checkbox-warning">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+
+                                            </div>
+                                        {%endif%}
                                         {% if task.0 == 2%}
                                             <div class="vs-checkbox-con vs-checkbox-danger">
                                                 <input type="checkbox" checked="" value="false" onclick="return false;">
@@ -161,6 +172,37 @@
 
                     <!-- add new sidebar ends -->
                 </section>
+                <h2 class="content-header-title float-left mb-0" style="padding-bottom: 15px">Результаты</h2>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <th scope="col">Ник участника</th>
+                      <td scope="col">Решено</td>
+                      {% for task in theme %}
+                        <td scope="col">{{task.1.task.title}}</td>
+                      {% endfor %}
+                    </tr>
+                    {% for user, value in tabledata.items %}
+                      <tr>
+                        <th>{{user}}</th>
+                        {% for elem in value %}
+
+                          {% if elem == "?" %}
+                            <td style="background-color: #FBE908">{{elem}}</td>
+                          {% elif elem == "+" %}
+                            <td style="background-color: #C2FFAA; font-size: 20px">{{elem}}</td>
+                          {% elif elem == "-" %}
+                            <td style="background-color: #F4744A; font-size: 24px">{{elem}}</td>
+                          {% elif elem == "х" %}
+                            <td style="font-size: 15px">{{elem}}</td>
+                          {% else %}
+                            <td>{{elem}}</td>
+                          {% endif %}
+                        {% endfor %}
+                      </tr>
+                    {% endfor%}
+                  </tbody>
+                </table>
                 <!-- Data list view end -->
             </div>
         </div>

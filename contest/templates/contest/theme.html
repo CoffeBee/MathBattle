@@ -39,6 +39,20 @@
 
 <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
     <!-- BEGIN: Main Menu-->
+    <style>
+      .table-bordered tbody tr {
+        border: 1px solid gray !important;
+      }
+      .table-bordered tbody th {
+        border: 0.5px solid gray !important;
+      }
+      .table-bordered tbody td {
+        text-align: center;
+        vertical-align: middle;
+        border: 0.5px solid gray !important;
+      }
+
+    </style>
     <div class="left side-menu"><button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left"><i class="ion-close"></i></button><!-- LOGO -->
         <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
             <div class="navbar-header">
@@ -152,6 +166,17 @@
 
                                             </div>
                                         {%endif%}
+                                        {% if task.0 == 3%}
+                                            <div class="vs-checkbox-con vs-checkbox-warning">
+                                                <input type="checkbox" checked="" value="false" onclick="return false;">
+                                                    <span class="vs-checkbox">
+                                                        <span class="vs-checkbox--check">
+                                                            <i class="vs-icon feather icon-check"></i>
+                                                        </span>
+                                                    </span>
+
+                                            </div>
+                                        {%endif%}
                                         {% if task.0 == 2%}
                                             <div class="vs-checkbox-con vs-checkbox-danger">
                                                 <input type="checkbox" checked="" value="false" onclick="return false;">
@@ -190,7 +215,37 @@
 
                     <!-- add new sidebar ends -->
                 </section>
-                <!-- Data list view end -->
+                <h2 class="content-header-title float-left mb-0" style="padding-bottom: 15px">Результаты</h2>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <th scope="col">Ник участника</th>
+                      <td scope="col">Решено</td>
+                      {% for task in theme %}
+                        <td scope="col">{{task.1.task.title}}</td>
+                      {% endfor %}
+                    </tr>
+                    {% for user, value in tabledata.items %}
+                      <tr>
+                        <th>{{user}}</th>
+                        {% for elem in value %}
+
+                          {% if elem == "?" %}
+                            <td style="background-color: #FBE908">{{elem}}</td>
+                          {% elif elem == "+" %}
+                            <td style="background-color: #C2FFAA; font-size: 20px">{{elem}}</td>
+                          {% elif elem == "-" %}
+                            <td style="background-color: #F4744A; font-size: 24px">{{elem}}</td>
+                          {% elif elem == "х" %}
+                            <td style="font-size: 15px">{{elem}}</td>
+                          {% else %}
+                            <td>{{elem}}</td>
+                          {% endif %}
+                        {% endfor %}
+                      </tr>
+                    {% endfor%}
+                  </tbody>
+                </table>
             </div>
         </div>
     </div>

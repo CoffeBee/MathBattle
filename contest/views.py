@@ -14,6 +14,7 @@ from .forms import CheckForm
 import logging
 import time
 from django.db.models import Q
+
 # Get an instance of a logger
 
 def main(request):
@@ -25,6 +26,10 @@ logger = logging.getLogger('ok')
 def check(task, user):
     if Solution.objects.filter(username=user, task=task.task, verdict = Virdict.ACCEPTED).exists():
         return 1
+    if Solution.objects.filter(username=user, task=task.task, verdict = Virdict.ACCEPTED_FOR_EVUALETION).exists():
+        return 3
+    if Solution.objects.filter(username=user, task=task.task, verdict = Virdict.APPLICATION).exists():
+        return 3
     if Solution.objects.filter(username=user, task=task.task).exists():
         return 2
     return 0
@@ -77,39 +82,45 @@ def themes(request):
     return render(request, 'contest/index.html', context={'themes': themes_clean, 'user': request.user})
 
 def tabletheme(request, themename):
-    theme = Theme.objects.filter(name=themename)
-    tasks = theme.tasks_set.all()
-    solutions = Solutions.objects.filter(themesol=theme)
+    theme = Theme.objects.filter(name=themename).first()
+    tasks = theme.tasks.all()
+    solutions = Solution.objects.filter(themesol=theme)
     need = {}
+    i = 1
+    taskI = {}
+    for task in tasks:
+        taskI[task] = i
+        i += 1
     for sol in solutions:
-        if sol.verdict == Virdict.PPREVIEW:
+        if sol.verdict == Virdict.PREVIEW:
             continue
         user = sol.username
         if user not in need.keys():
-            tasksres = {}
+            tasksres = []
+            tasksres.append(0)
             for task in tasks:
-                taskres[task] = ' '
-            need[user] = taskres
+                tasksres.append('х')
+            need[user] = tasksres
         verdict = sol.verdict
-        if verdict == Virdict.WRONG_ANSWER:
-            need[user][sol.task] = '-'
-        elif verdict == Virdict.ACCEPTED_FOR_EVUALETION:
-            need[user][sol.task] = '?'
-        elif verdict == Virdict.IN_EVUALETION:
-            need[user][sol.task] = '?'
-        elif verdict == Virdict.REJECTED:
-            need[user][sol.task] = '-'
-        elif verdict == Virdict.ACCEPTED:
-            need[user][sol.task] = '+'
-        elif verdict == Virdict.REQUST_TO_APPLICATION:
-            need[user][sol.task] = '?'
+        if verdict == Virdict.WRONG_ANSWER and need[user][taskI[sol.task]] == 'х':
+            need[user][taskI[sol.task]] = '-'
+        if verdict == Virdict.ACCEPTED_FOR_EVUALETION and (need[user][taskI[sol.task]] == 'х' or need[user][taskI[sol.task]] == '-'):
+            need[user][taskI[sol.task]] = '?'
+        if verdict == Virdict.IN_EVUALETION and (need[user][taskI[sol.task]] == 'х' or need[user][taskI[sol.task]] == '-'):
+            need[user][taskI[sol.task]] = '?'
+        if verdict == Virdict.REJECTED and need[user][taskI[sol.task]] == 'х':
+            need[user][taskI[sol.task]] = '-'
+        if verdict == Virdict.ACCEPTED:
+            need[user][0] += 1
+            need[user][taskI[sol.task]] = '+'
+        if verdict == Virdict.APPLICATION and (need[user][taskI[sol.task]] == ' ' or need[user][taskI[sol.task]] == '-'):
+            need[user][taskI[sol.task]] = '?'
     return need
 
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
     tasks = [[check(task, request.user), task, solved(task), submited(task)] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
-    context = {"theme": tasks, "user": request.user}
-    print(tabletheme(request, theme_name))
+    context = {"theme": tasks, "user": request.user, "tabledata": tabletheme(request, theme_name)}
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/theme.html', context)
     return render(request, 'contest/theme.html', context)

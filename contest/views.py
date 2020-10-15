@@ -61,6 +61,8 @@ def progress(t, request):
         cnt_all += 1
         if (Solution.objects.filter(verdict=Virdict.ACCEPTED).filter(username=request.user).filter(task=i).count() > 0):
             cnt += 1
+    if cnt_all == 0:
+        return 100
     return int(cnt * 100 / cnt_all)
 @login_required(login_url='../../auth/login/')
 def themes(request):

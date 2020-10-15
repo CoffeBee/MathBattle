@@ -16,10 +16,14 @@ def task(request, task_title):
      submits = Solution.objects.filter(task=task, username=request.user).filter(~Q(verdict = Virdict.PREVIEW))
      if  request.method == 'POST':
         form = TaskForm(request.POST)
-        if (form.is_valid()):
-
+        if (True):
+            form.is_valid()
             ans = form.cleaned_data['answer']
-            description = form.cleaned_data['description']
+            description = ''
+            if 'description' in form.cleaned_data.keys():
+                description = form.cleaned_data['description']
+
+
             checker = task.checker
             rang = 0
             try:

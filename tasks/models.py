@@ -37,6 +37,7 @@ class Task(models.Model):
     checker = models.ForeignKey(Checker, on_delete=models.CASCADE, default=DEFAULT_CHECKER_ID, verbose_name='Проверяющая программа')
     title = models.CharField(default='Task', max_length=200, verbose_name='Название')
     solvers = models.ManyToManyField(User, related_name='solver', verbose_name='Список решивших')
+    answer_only = models.BooleanField(default=False, verbose_name="Проверять только ответы")
 
     def __str__(self):
         return self.title

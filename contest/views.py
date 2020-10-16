@@ -120,7 +120,8 @@ def tabletheme(request, themename):
 @login_required(login_url='../../../auth/login/')
 def theme(request, theme_name):
     tasks = [[check(task, request.user), task, solved(task), submited(task)] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
-    context = {"theme": tasks, "user": request.user, "tabledata": tabletheme(request, theme_name)}
+    thema = Theme.objects.filter(name=theme_name).first()
+    context = {"theme": tasks, "user": request.user, "tabledata": tabletheme(request, theme_name), 'active': thema.deadline > timezone.now()}
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/theme.html', context)
     return render(request, 'contest/theme.html', context)

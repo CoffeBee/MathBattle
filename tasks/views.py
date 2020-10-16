@@ -7,6 +7,7 @@ from .models import Task, Solution, Rang, GlobalThemeName, TaskContestCase
 from checker.models import Checker
 from checker.virdicts import Virdict
 from .forms import TaskForm
+from django.utils import timezone
 from django.db.models import Q
 
 
@@ -34,11 +35,13 @@ def task(request, task_title):
                 newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.PREVIEW, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
                 newsol.save()
                 return redirect('../../themes/solutions/{}'.format(newsol.id))
-            if checker.checkAns(ans, task.right_answer):
+            if task.theme_set.all()[0].deadline < timezone.now():
+                pass
+            elif checker.checkAns(ans, task.right_answer):
              newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED_FOR_EVUALETION, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
             else:
              newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.WRONG_ANSWER, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
             newsol.save()
      if (request.user_agent.is_mobile):
-         return render(request, 'contest/mobile/task.html', context={'task' : task, 'form' : TaskForm(), 'submits' : submits})
-     return render(request, 'contest/task.html', context={'task' : task, 'form' : TaskForm(), 'submits' : submits})
+         return render(request, 'contest/mobile/task.html', context={'task' : task, 'form' : TaskForm(), 'submits' : submits, 'active': task.theme_set.all()[0].deadline > timezone.now()})
+     return render(request, 'contest/task.html', context={'task' : task, 'form' : TaskForm(), 'submits' : submits, 'active' : task.theme_set.all()[0].deadline > timezone.now()})

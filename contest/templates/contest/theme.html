@@ -40,6 +40,11 @@
 <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
     <!-- BEGIN: Main Menu-->
     <style>
+        .table-bordered {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
       .table-bordered tbody tr {
         border: 1px solid gray !important;
       }
@@ -128,7 +133,11 @@
 
                                     <li class="breadcrumb-item"><a href="/themes/theme">Темы</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{theme.0.1.theme.name}}</li>
+                                    {% if active %}
+                                        <li class="breadcrumb-item active">{{theme.0.1.theme.name}}</li>
+                                    {% else %}
+                                        <li class="breadcrumb-item active">{{theme.0.1.theme.name}} <span class="text-danger">(Дедлайн сдачи задач прошел)</span></li>
+                                    {% endif %}
                                 </ol>
                             </div>
                         </div>

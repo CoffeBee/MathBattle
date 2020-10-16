@@ -120,7 +120,12 @@
                                     </li>
                                     <li class="breadcrumb-item">Задачи
                                     </li>
-                                    <li class="breadcrumb-item active">{{task.title}}</li>
+                                    </li>
+                                    {% if active %}
+                                        <li class="breadcrumb-item active">{{task.title}}</li>
+                                    {% else %}
+                                        <li class="breadcrumb-item active">{{task.title}} <span class="text-danger">(Дедлайн сдачи задачи прошел)</span></li>
+                                    {% endif %}
                                 </ol>
                             </div>
                         </div>
@@ -165,7 +170,11 @@
                                     </div>
 
                                     </div>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light" name="submit">Отправить</button>
+                                {% if active %}
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="submit">Отправить</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="submit" disabled="">Отправить</button>
+                                {% endif %}
                                 <button type="submit" class="btn btn-primary waves-effect waves-light" name="preview">Предпросмотр</button>
                             </form>
                         </div>

@@ -145,8 +145,11 @@
                                     </div>
 
                                     </div>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light" name="submit">Отправить</button>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light" name="preview">Предпросмотр</button>
+                                {% if active %}
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="submit">Отправить</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="submit" disabled="">Отправить</button>
+                                {% endif %}
                             </form>
                         </div>
                     </div>

@@ -101,8 +101,11 @@
                 <div class="content-header-left col-md-12 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">{{task.title}}</h2>
-
+                            {% if active %}
+                                <h2 class="content-header-title float-left mb-0">{{task.title}}</h2>
+                            {% else %}
+                                <h2 class="content-header-title float-left mb-0">{{task.title}} <span class="text-danger">(Дедлайн сдачи задачи прошел)</span></h2>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

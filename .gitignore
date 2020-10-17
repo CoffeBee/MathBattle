@@ -2,3 +2,4 @@ uploads/*
 */migrations/0*
 */migrations/_*_/*
 mathbattle/*
+templates/admin/tasks/task/change_form.html

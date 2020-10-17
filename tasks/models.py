@@ -30,13 +30,15 @@ class Task(models.Model):
         verbose_name = "Задача"
         verbose_name_plural = "Задачи"
 
-    text = models.CharField(max_length=2000, verbose_name='Текст')
+    text = models.TextField(max_length=2000, verbose_name='Текст')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
     right_answer = models.CharField(max_length=200, verbose_name='Правильный ответ')
     checker = models.ForeignKey(Checker, on_delete=models.CASCADE, default=DEFAULT_CHECKER_ID, verbose_name='Проверяющая программа')
     title = models.CharField(default='Task', max_length=200, verbose_name='Название')
     solvers = models.ManyToManyField(User, related_name='solver', verbose_name='Список решивших')
     answer_only = models.BooleanField(default=False, verbose_name="Проверять только ответы")
+    text_photo = models.ImageField(blank=True, null=True)
+
 
     def __str__(self):
         return self.title
@@ -181,7 +183,7 @@ class ContestAdmin(admin.ModelAdmin):
     inlines = (TaskContestCase_inline,)
 
 class TaskAdmin(admin.ModelAdmin):
-    exclude = ('solvers', "author",)
+    fields = ('title', ('text', 'text_photo'), 'right_answer', 'checker', 'answer_only')
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         obj.save()

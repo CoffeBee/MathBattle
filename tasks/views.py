@@ -38,7 +38,10 @@ def task(request, task_title):
             if task.theme_set.all()[0].deadline < timezone.now():
                 pass
             elif checker.checkAns(ans, task.right_answer):
-             newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED_FOR_EVUALETION, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
+             if task.answer_only:
+                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
+             else:
+                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED_FOR_EVUALETION, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
             else:
              newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.WRONG_ANSWER, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
             newsol.save()

@@ -161,12 +161,15 @@
                                         </fieldset>
                                     </div>
                                 </div>
-                                <p class="mb-2">Пишите свои мысли понятно. Если Ваше решение не будет понятно, Вам придеться долго подавать на аппеляцию. Советуем Вам сначало написать решение тезисно. У вас есть 1000 символов на решение</p>
+                                {% if not task.answer_only %}
+                                    <p class="mb-2">Пишите свои мысли понятно. Если Ваше решение не будет понятно, Вам придеться долго подавать на аппеляцию. Советуем Вам сначало написать решение тезисно. У вас есть 1000 символов на решение</p>
+                                {% endif %}
                                 <div class="row">
                                     <div class="col-12">
                                       <script src="https://raw.githubusercontent.com/thisroot/summernote-equation-plugin/master/summernote-ext-equation.js"></script>
-
-                                        {{form.description}}
+                                        {% if not task.answer_only %}
+                                            {{form.description}}
+                                        {% endif %}
                                     </div>
 
                                     </div>

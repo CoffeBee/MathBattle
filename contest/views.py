@@ -176,7 +176,7 @@ def solutions(request):
         theme = sol.task.theme_set.all()[0]
         global_theme = theme.general_theme.all()[0]
         rang = 10000
-        if rang > sol.need_rang and sol.username != request.user and (sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION or sol.verdict == Virdict.APPLICATION or sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION):
+        if rang > sol.need_rang and request.user.is_superuser and sol.username != request.user and (sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION or sol.verdict == Virdict.APPLICATION or sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION):
             need.append(sol)
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/solutions.html', context={'submits': need, 'user' : request.user})

@@ -30,7 +30,7 @@ $(document).ready(function () {
     },
     order: [[1, 'asc']],
     bInfo: false,
-    "pageLength": 4,
+    "pageLength": 8,
     buttons: [
       {
         text: "<i class='feather icon-plus'></i> Add New",

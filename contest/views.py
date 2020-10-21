@@ -231,6 +231,7 @@ def solution(request, submit_id):
                 submit.comments.add(new_message)
             submit.save()
             return redirect('/themes/solutions')
+    print(submit.task.title)
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})
-    return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})
+    return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user, 'task' : submit.task.title})

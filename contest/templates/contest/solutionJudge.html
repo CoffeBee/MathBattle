@@ -45,6 +45,19 @@
 <!-- BEGIN: Body-->
 
 <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
+    <div style="position: fixed; background-color: rgba(100, 100, 100, 0.5); z-index: 100; display: none" id="img_view">
+        <div style="display: flex; flex-direction: column; width: 100vw; height: 100vh; align-items: center; justify-content: center;" id="inner_img">
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <p style="font-size: 18px; margin: 0;">Решение задачи пользователя {{user.username}} задачи {{task}}</p>
+                <div style="margin-left: 15px; display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; border-radius: 5px;" onmouseover="drawback(this);" onmouseout="undrawback(this);" onclick="rotateimg(this)">
+                    <i class="feather icon-rotate-ccw" style="font-size: 20px;"></i>
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 15px;">
+                <img style="max-height: 85vh; max-width: 85vw; object-fit: contain;" id="full_size" />
+            </div>
+        </div>
+    </div>
     <!-- BEGIN: Main Menu-->
     <div class="left side-menu"><button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left"><i class="ion-close"></i></button><!-- LOGO -->
         <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
@@ -53,6 +66,7 @@
                     <li class="nav-item mr-auto"><a class="navbar-brand">
                             <img src="{% static "contest/app-assets/images/logo/logo.png" %}" style="width : 45x; height : 30px;" id="logo">
                             <h2 class="brand-text mb-0" style="padding-left : 2px; margin-top : 10px; font-size : 1.7rem;">athBattle</h2>
+
                         </a></li>
                 </ul>
             </div>
@@ -111,7 +125,7 @@
                 <div class="content-header-left col-md-12 col-12 mb-2">
                     <div class="row breadcrumbs-top"
                         <div class="col-12">
-				<h2 class="content-header-title float-left mb-0">{{task.title}} {{submit.username}}</h2>
+				<h2 class="content-header-title float-left mb-0">{{task}} {{submit.username}}</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
 
@@ -204,8 +218,46 @@
     <!-- END: Theme JS-->
     <!-- BEGIN: Page JS-->
     <script src="{% static "contest/app-assets/js/scripts/ui/data-list-view.js" %}"></script>
+    <script type="text/javascript">
+        var imgs = document.querySelectorAll("img[src^='/media'")  
+        function drawback(elem) {
+            elem.style.backgroundColor = "rgba(100, 100, 100, 0.2)"
+        }
+        function undrawback(elem) {
+            elem.style.backgroundColor = "rgba(100, 100, 100, 0)"
+        }
+        function rotateimg(elem) {
+            if (elem.getAttribute("angle") === null) {
+                elem.setAttribute("angle", 90);
+            }
+            else {
+                elem.setAttribute("angle", parseInt(elem.getAttribute("angle")) + 90);
+            }
+            var ang = elem.getAttribute("angle");
+            document.querySelector("#full_size").style.transform = `rotate(${ang}deg)`
+        }
+        var image_view = document.querySelector("#img_view") 
+        var inner_img = document.querySelector("#inner_img") 
+        image_view.addEventListener('click', (e) => {
+            if (e.target !== inner_img)
+                return;
+            image_view.style.display = "none";
+        });
+          
+        imgs.forEach((img) => {
+          img.addEventListener('click', () => {
+            image_view.style.display = "block";
+            full_size.src = img.src;
+          });
+          img.style.maxWidth = "60vw";
+          img.style.maxHeight = "40vh";
+          img.style.objectFit = "cover";
+          img.style.cursor = "zoom-in";
+        });
+    </script>
     <!-- END: Page JS-->
 </body>
+
 <!-- END: Body-->
 
 </html>

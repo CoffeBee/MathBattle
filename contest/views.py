@@ -170,14 +170,8 @@ def contest(request, contest_name):
 def solutions(request):
     solutions = Solution.objects.all()
     need = []
-    for sol in  solutions:
-        if len(sol.task.theme_set.all()) == 0:
-            continue
-        theme = sol.task.theme_set.all()[0]
-        global_theme = theme.general_theme.all()[0]
-        rang = 10000
-        if rang > sol.need_rang and request.user.is_superuser and sol.username != request.user and (sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION or sol.verdict == Virdict.APPLICATION or sol.verdict == Virdict.ACCEPTED_FOR_EVUALETION):
-            need.append(sol)
+    if request.user.is_superuser:
+        need = solutions
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/solutions.html', context={'submits': need, 'user' : request.user})
     return render(request, 'contest/solutions.html', context={'submits': need, 'user' : request.user})
@@ -231,7 +225,7 @@ def solution(request, submit_id):
                 submit.comments.add(new_message)
             submit.save()
             return redirect('/themes/solutions')
-    print(submit.task.title)
+    
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})
     return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user, 'task' : submit.task.title})

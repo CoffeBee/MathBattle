@@ -122,8 +122,8 @@ class Theme(models.Model):
     name = models.CharField(max_length=200, verbose_name='Название')
     tasks = models.ManyToManyField(Task, through='TaskCase', verbose_name='Задачи')
     general_theme = models.ManyToManyField(GlobalTheme, through='GlobalThemeName', verbose_name='Раздел')
-    deadline = models.DateTimeField(default=datetime.timezone.now(), blank=True, verbose_name='Время сдачи задач в теме')
     start_time = models.DateTimeField(default=datetime.timezone.now(), blank=True, verbose_name='Время начала сдачи Задачи')
+    deadline = models.DateTimeField(default=datetime.timezone.now(), blank=True, verbose_name='Время сдачи задач в теме')
 
     def __str__(self):
     	return str(self.name)

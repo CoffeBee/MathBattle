@@ -72,7 +72,10 @@ def progress(t, request):
     return int(cnt * 100 / cnt_all)
 @login_required(login_url='../../auth/login/')
 def themes(request):
-    themes = Theme.objects.filter(start_time__lt=datetime.timezone.now())
+    if request.user.is_superuser:
+        themes = Theme.objects.all()
+    else:
+        themes = Theme.objects.filter(start_time__lt=datetime.timezone.now())
     themes_clean = [(hard(theme), theme, progress(theme, request)) for theme in themes]
     if request.GET:
         query = request.GET['q']

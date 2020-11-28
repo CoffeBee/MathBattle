@@ -37,7 +37,7 @@ def check(task, user):
 def solved(task):
     return len(Solution.objects.filter(task=task.task, verdict = Virdict.ACCEPTED))
 def submited(task):
-    return len(Solution.objects.filter(task=task.task))
+    return len(Solution.objects.filter(task=task.task)) - len(Solution.objects.filter(task=task.task, verdict = Virdict.PREVIEW))
 def check_team(task, team):
     fl = 0
     for user in team.users.all():

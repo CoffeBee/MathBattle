@@ -24,7 +24,6 @@ class Hardness(Enum):
     SINIOR_UPPER = 'SINIOR-UPPER'
 
 
-
 class Task(models.Model):
 
     class Meta:
@@ -40,6 +39,8 @@ class Task(models.Model):
     answer_only = models.BooleanField(default=False, verbose_name="Проверять только ответы")
     text_photo = models.ImageField(blank=True, null=True)
 
+    def natural_key(self):
+        return (self.title, )
 
     def __str__(self):
         return self.title

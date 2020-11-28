@@ -33,6 +33,8 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{% static "contest/assets/css/style.css" %}">
     <!-- END: Custom CSS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <!-- END: Head-->
 <!-- BEGIN: Body-->
@@ -152,6 +154,7 @@
             </div>
         </div>
     </div>
+
     <!-- END: Content-->
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
@@ -161,6 +164,35 @@
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
         </p>
     </footer>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var pageNumber = {{pageNumber | safe}};
+
+            $('#dataTable').on( 'error.dt', function ( e, settings, techNote, message ) {
+            console.log( 'An error has been reported by DataTables: ', message );
+            } ) ;
+            for (var i = 1; i <= pageNumber; i++) {
+                $.ajax({
+                     type: "GET",
+                     url: window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + `/themes/solutionspage/${i}`,
+                     data: {'csrfmiddlewaretoken': '{{csrf_token}}'},
+                     dataType: "json",
+                     success: function(json) {
+                        for (sol of $.parseJSON(json)) {
+                            var date = new Date(sol.fields.submitTime)
+                            var options = {year: 'numeric', month: 'long', day: 'numeric'};
+                            console.log(sol.fields);
+                            dataListView.row.add(['', sol.fields.task[0], `${date.toLocaleDateString('ru-RU', options)} ${date.toLocaleTimeString("ru-RU")}`, sol.fields.username, sol.fields.answer]).draw(true)     
+                        }
+                      },
+                      error: function(rs, e) {
+                            alert(rs.responseText);
+                      }
+                });
+            }
+        })
+
+    </script>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <script src="{% static "contest/app-assets/vendors/js/vendors.min.js" %}"></script>

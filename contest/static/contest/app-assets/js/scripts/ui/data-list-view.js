@@ -7,11 +7,11 @@
     Author: PIXINVENT
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
-
+var dataListView;
 $(document).ready(function () {
   "use strict";
   // init list view datatable
-  var dataListView = $('.data-list-view').DataTable({
+  dataListView = $('.data-list-view').DataTable({
     responsive: false,
     columnDefs: [{
       orderable: true,
@@ -87,6 +87,7 @@ $(document).ready(function () {
 
   })
 
+  $.fn.dataTable.ext.errMode = 'none';
   // To append actions dropdown before add new button
 
 

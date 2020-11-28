@@ -134,7 +134,7 @@
                                     <li class="breadcrumb-item"><a href="/themes/theme">Темы</a>
                                     </li>
                                     {% if active %}
-                                        <li class="breadcrumb-item active">{{theme.0.1.theme.name}}</li>
+                                        <li class="breadcrumb-item active">{{theme.0.1.theme.name}} <span class="text">(Дедлайн сдачи задач: {{deadline}})</span></li>
                                     {% else %}
                                         <li class="breadcrumb-item active">{{theme.0.1.theme.name}} <span class="text-danger">(Дедлайн сдачи задач прошел)</span></li>
                                     {% endif %}

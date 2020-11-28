@@ -169,7 +169,6 @@
             var pageNumber = {{pageNumber | safe}};
 
             $('#dataTable').on( 'error.dt', function ( e, settings, techNote, message ) {
-            console.log( 'An error has been reported by DataTables: ', message );
             } ) ;
             for (var i = 1; i <= pageNumber; i++) {
                 $.ajax({
@@ -181,7 +180,6 @@
                         for (sol of $.parseJSON(json)) {
                             var date = new Date(sol.fields.submitTime)
                             var options = {year: 'numeric', month: 'long', day: 'numeric'};
-                            console.log(sol.fields);
                             dataListView.row.add(['', sol.fields.task[0], `${date.toLocaleDateString('ru-RU', options)} ${date.toLocaleTimeString("ru-RU")}`, sol.fields.username, sol.fields.answer]).draw(true)     
                         }
                       },

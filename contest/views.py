@@ -124,7 +124,7 @@ def tabletheme(request, themename):
 def theme(request, theme_name):
     tasks = [[check(task, request.user), task, solved(task), submited(task)] for task in TaskCase.objects.filter(theme__name=theme_name).all()]
     thema = Theme.objects.filter(name=theme_name).first()
-    context = {"theme": tasks, "user": request.user, "tabledata": tabletheme(request, theme_name), 'active': thema.deadline > timezone.now()}
+    context = {"theme": tasks, "user": request.user, "tabledata": tabletheme(request, theme_name), 'active': thema.deadline > timezone.now(), 'deadline': thema.deadline}
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/theme.html', context)
     return render(request, 'contest/theme.html', context)
@@ -228,7 +228,7 @@ def solution(request, submit_id):
                 submit.comments.add(new_message)
             submit.save()
             return redirect('/themes/solutions')
-    
+
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user})
     return render(request, 'contest/solutionJudge.html', context={'submit': submit, 'form' : CheckForm(), 'user' : request.user, 'task' : submit.task.title})

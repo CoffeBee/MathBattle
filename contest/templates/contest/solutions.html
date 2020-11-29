@@ -184,7 +184,7 @@
                      success: function(json) {
                         for (sol of $.parseJSON(json)) {
                             var date = new Date(sol.fields.submitTime)
-                            dataListView.row.add(['', sol.fields.task[0], `${date.getFullYear()}/${date.getMonth()}/${date.getDays()}`, sol.fields.username, sol.fields.answer, sol.pk]).draw(true)     
+                            dataListView.row.add(['', sol.fields.task[0], `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`, sol.fields.username, sol.fields.answer, sol.pk]).draw(true)     
                         }
                       },
                       error: function(rs, e) {

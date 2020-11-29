@@ -16,9 +16,7 @@ import logging
 import time
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-
-# Get an instance of a logger
+from django.conf import settings
 
 from django.core.serializers.json import DjangoJSONEncoder
 
@@ -178,7 +176,7 @@ def contest(request, contest_name):
 @login_required(login_url='../../auth/login/')
 def solutions(request):
     solutions = Solution.objects.filter(~(Q(verdict = Virdict.PREVIEW) | Q(verdict = Virdict.ACCEPTED)))
-    paginator = Paginator(solutions, 24)
+    paginator = Paginator(solutions, settings.SOL_PAGE_SIZE)
     need = []
     if request.user.is_superuser:
         need = paginator.page(1)
@@ -188,10 +186,10 @@ def solutions(request):
 
 def solutionspage(request, page):
     solutions = Solution.objects.filter(~(Q(verdict = Virdict.PREVIEW) | Q(verdict = Virdict.ACCEPTED)))
-    paginator = Paginator(solutions, 24)
+    paginator = Paginator(solutions, settings.SOL_PAGE_SIZE)
     if request.user.is_superuser:
         solutions = Solution.objects.all()
-        return JsonResponse(serializers.serialize('json', Paginator(solutions, 24).page(page), fields=('id', 'task', 'task__title', 'submitTime', 'username', 'answer'), use_natural_foreign_keys=True, use_natural_primary_keys=True), safe=False)
+        return JsonResponse(serializers.serialize('json', Paginator(solutions, settings.SOL_PAGE_SIZE).page(page), fields=('id', 'task', 'task__title', 'submitTime', 'username', 'answer'), use_natural_foreign_keys=True, use_natural_primary_keys=True), safe=False)
     else:
         return JsonResponse({ "Auth" : False }, safe=False)
 @login_required(login_url='../../../auth/login/')

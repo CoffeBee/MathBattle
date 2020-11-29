@@ -66,7 +66,8 @@ def hard(t):
 def progress(t, request):
     cnt_all = 0
     cnt = 0
-
+    if request.user.is_anonymous:
+        return 0
     for i in t.tasks.all():
         cnt_all += 1
         if (Solution.objects.filter(verdict=Virdict.ACCEPTED).filter(username=request.user).filter(task=i).count() > 0):

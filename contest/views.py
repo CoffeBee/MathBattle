@@ -1,21 +1,25 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from tasks.models import ContestUser
 from userprofile.models import Team
 import random
+from django.core import serializers
 from django.db.models import Q
 from django.db.models.functions import datetime
 from django.utils import timezone
 from .forms import ContestRegister
 from django.contrib.auth.decorators import login_required
-from tasks.models import Theme, TaskCase, Solution, Contest, Rang, TaskContestCase, Message, GlobalThemeName
+from tasks.models import Theme, TaskCase, Solution, Contest, Rang, TaskContestCase, Message, GlobalThemeName, Task
 from checker.virdicts import Virdict
 from .forms import CheckForm
 import logging
 import time
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.conf import settings
 
-# Get an instance of a logger
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 def main(request):
     if (request.user_agent.is_mobile):
@@ -171,15 +175,23 @@ def contest(request, contest_name):
 
 @login_required(login_url='../../auth/login/')
 def solutions(request):
-    solutions = Solution.objects.all()
+    solutions = Solution.objects.filter(~(Q(verdict = Virdict.PREVIEW) | Q(verdict = Virdict.ACCEPTED)))
+    paginator = Paginator(solutions, settings.SOL_PAGE_SIZE)
     need = []
     if request.user.is_superuser:
-        need = solutions
+        need = paginator.page(1)
     if (request.user_agent.is_mobile):
         return render(request, 'contest/mobile/solutions.html', context={'submits': need, 'user' : request.user})
-    return render(request, 'contest/solutions.html', context={'submits': need, 'user' : request.user})
+    return render(request, 'contest/solutions.html', context={'submits': need, 'user' : request.user, 'pageNumber' : paginator.num_pages})
 
-
+def solutionspage(request, page):
+    solutions = Solution.objects.filter(~(Q(verdict = Virdict.PREVIEW) | Q(verdict = Virdict.ACCEPTED)))
+    paginator = Paginator(solutions, settings.SOL_PAGE_SIZE)
+    if request.user.is_superuser:
+        solutions = Solution.objects.all()
+        return JsonResponse(serializers.serialize('json', Paginator(solutions, settings.SOL_PAGE_SIZE).page(page), fields=('id', 'task', 'task__title', 'submitTime', 'username', 'answer'), use_natural_foreign_keys=True, use_natural_primary_keys=True), safe=False)
+    else:
+        return JsonResponse({ "Auth" : False }, safe=False)
 @login_required(login_url='../../../auth/login/')
 def solution(request, submit_id):
     submit = Solution.objects.get(id=submit_id)

@@ -7,6 +7,7 @@ urlpatterns = [
     path('contest/<str:contest_name>', contest),
     path('theme/<str:theme_name>/', theme),
     path('solutions/', solutions),
+    path('solutionspage/<int:page>', solutionspage),
     path('solutions/<int:submit_id>', solution),
     path('about/', main)
 ]

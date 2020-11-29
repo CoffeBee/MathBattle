@@ -122,7 +122,7 @@
                 <section id="data-list-view" class="data-list-view-header">
                     <!-- DataTable starts -->
                     <div class="table-responsive">
-                        <table class="table data-list-view">
+                        <table class="table data-list-view" id="dataTable">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -170,6 +170,11 @@
 
             $('#dataTable').on( 'error.dt', function ( e, settings, techNote, message ) {
             } ) ;
+
+            $('#dataTable tbody').on('click', 'tr', function () {
+                window.open(`${dataListView.row( this ).data()[5]}`);
+            } );
+
             for (var i = 1; i <= pageNumber; i++) {
                 $.ajax({
                      type: "GET",
@@ -180,7 +185,7 @@
                         for (sol of $.parseJSON(json)) {
                             var date = new Date(sol.fields.submitTime)
                             var options = {year: 'numeric', month: 'long', day: 'numeric'};
-                            dataListView.row.add(['', sol.fields.task[0], `${date.toLocaleDateString('ru-RU', options)} ${date.toLocaleTimeString("ru-RU")}`, sol.fields.username, sol.fields.answer]).draw(true)     
+                            dataListView.row.add(['', sol.fields.task[0], `${date.toLocaleDateString('ru-RU', options)} ${date.toLocaleTimeString("ru-RU")}`, sol.fields.username, sol.fields.answer, sol.pk]).draw(true)     
                         }
                       },
                       error: function(rs, e) {

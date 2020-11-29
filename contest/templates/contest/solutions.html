@@ -137,7 +137,7 @@
                                 <tr onclick="location.href={{solution.id}}">
                                     <td></td>
                                     <td class="product-name">{{solution.task.title}}</td>
-                                    <td class="product-price">{{solution.submitTime}}</td>
+                                    <td class="product-price">{{solution.submitTime|date:'Y/m/d H:i'  }}</td>
                                     <td class="product-price">{{solution.username}}</td>
                                     <td class="product-price">{{solution.answer}}</td>
                                 </tr>
@@ -184,7 +184,7 @@
                      success: function(json) {
                         for (sol of $.parseJSON(json)) {
                             var date = new Date(sol.fields.submitTime)
-                            dataListView.row.add(['', sol.fields.task[0], `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`, sol.fields.username, sol.fields.answer, sol.pk]).draw(true)     
+                            dataListView.row.add(['', sol.fields.task[0], `${date.getFullYear()}/${date.getMonth()}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`, sol.fields.username, sol.fields.answer, sol.pk]).draw(true)     
                         }
                       },
                       error: function(rs, e) {

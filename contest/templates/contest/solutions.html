@@ -175,7 +175,7 @@
                 window.open(`${dataListView.row( this ).data()[5]}`);
             } );
 
-            for (var i = 1; i <= pageNumber; i++) {
+            for (var i = 2; i <= pageNumber; i++) {
                 $.ajax({
                      type: "GET",
                      url: window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + `/themes/solutionspage/${i}`,

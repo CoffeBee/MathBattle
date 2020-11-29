@@ -257,3 +257,6 @@ CACHES = {
 # cache alias will be used. Set to `None` to disable caching.
 USER_AGENTS_CACHE = 'default'
 DATA_UPLOAD_MAX_MEMORY_SIZE = 13107200
+
+# Custom settings
+SOL_PAGE_SIZE = 24

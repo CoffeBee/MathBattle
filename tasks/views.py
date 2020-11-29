@@ -9,6 +9,8 @@ from checker.virdicts import Virdict
 from .forms import TaskForm
 from django.utils import timezone
 from django.db.models import Q
+from django.db.models.functions import datetime
+
 
 
 @login_required(login_url='../../../auth/login/')
@@ -32,18 +34,18 @@ def task(request, task_title):
             except:
                  pass
             if "preview" in request.POST:
-                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.PREVIEW, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
+                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.PREVIEW, task=task, need_rang=rang, themesol=task.theme_set.all()[0], submitTime=datetime.timezone.now())
                 newsol.save()
                 return redirect('../../themes/solutions/{}'.format(newsol.id))
             if task.theme_set.all()[0].deadline < timezone.now():
                 pass
             elif checker.checkAns(ans, task.right_answer):
              if task.answer_only:
-                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
+                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED, task=task, need_rang=rang, themesol=task.theme_set.all()[0],  submitTime=datetime.timezone.now())
              else:
-                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED_FOR_EVUALETION, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
+                newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.ACCEPTED_FOR_EVUALETION, task=task, need_rang=rang, themesol=task.theme_set.all()[0],  submitTime=datetime.timezone.now())
             else:
-             newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.WRONG_ANSWER, task=task, need_rang=rang, themesol=task.theme_set.all()[0])
+             newsol = Solution(username=request.user, answer=ans, description=description, verdict=Virdict.WRONG_ANSWER, task=task, need_rang=rang, themesol=task.theme_set.all()[0],  submitTime=datetime.timezone.now())
             newsol.save()
      if (request.user_agent.is_mobile):
          return render(request, 'contest/mobile/task.html', context={'task' : task, 'form' : TaskForm(), 'submits' : submits, 'active': task.theme_set.all()[0].deadline > timezone.now()})

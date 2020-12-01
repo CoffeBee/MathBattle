@@ -81,6 +81,8 @@ def themes(request):
         themes = Theme.objects.all()
     else:
         themes = Theme.objects.filter(start_time__lt=datetime.timezone.now())
+    if request.user.groups.exists():
+        themes = themes.filter(general_theme__group=request.user.groups.all()[0])
     themes_clean = [(hard(theme), theme, progress(theme, request)) for theme in themes]
     if request.GET:
         query = request.GET['q']

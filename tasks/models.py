@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.postgres.fields import ArrayField
 from django.contrib import admin
 from checker.virdicts import Virdict
@@ -111,6 +111,12 @@ class GlobalTheme(models.Model):
 
     name = models.CharField(max_length=200, verbose_name='Название')
     rangs = models.ManyToManyField(User, through='Rang', verbose_name='Ранг')
+    group = models.ForeignKey(Group, verbose_name="Группа", on_delete=models.PROTECT, null=True)
+
+    def save(self, *args, **kwargs):
+        self.group = Group.objects.get(name=self.name)
+        super(GlobalTheme, self).save(*args, **kwargs)
+
     def __str__(self):
         return str(self.name)
 
@@ -128,6 +134,9 @@ class Theme(models.Model):
 
     def __str__(self):
     	return str(self.name)
+
+
+
 
 class GlobalThemeName(models.Model):
     hardness = models.IntegerField(verbose_name='Сложность')

@@ -115,7 +115,7 @@ class GlobalTheme(models.Model):
 
     def save(self, *args, **kwargs):
         self.group = Group.objects.get(name=self.name)
-        super(Bill, self).save(*args, **kwargs)
+        super(GlobalTheme, self).save(*args, **kwargs)
 
     def __str__(self):
         return str(self.name)

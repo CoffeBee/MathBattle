@@ -107,7 +107,7 @@ def tabletheme(request, themename):
         user = sol.username
         if user not in need.keys():
             tasksres = []
-            tasksres.append(0)
+            tasksres.append(set())
             for task in tasks:
                 tasksres.append('х')
             need[user] = tasksres
@@ -121,10 +121,13 @@ def tabletheme(request, themename):
         if verdict == Virdict.REJECTED and need[user][taskI[sol.task]] == 'х':
             need[user][taskI[sol.task]] = '-'
         if verdict == Virdict.ACCEPTED:
-            need[user][0] += 1
+            need[user][0].add(sol.task.pk)
             need[user][taskI[sol.task]] = '+'
         if verdict == Virdict.APPLICATION and (need[user][taskI[sol.task]] == ' ' or need[user][taskI[sol.task]] == '-'):
             need[user][taskI[sol.task]] = '?'
+
+    for _, val in need.items():
+        val[0] = len(val[0])
     return need
 
 @login_required(login_url='../../../auth/login/')

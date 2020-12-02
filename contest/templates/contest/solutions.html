@@ -134,7 +134,7 @@
                             </thead>
                             <tbody>
                                 {% for solution in submits %}
-                                <tr onclick="location.href={{solution.id}}">
+                                <tr onclick="window.open({{solution.id}});">
                                     <td></td>
                                     <td class="product-name">{{solution.task.title}}</td>
                                     <td class="product-price">{{solution.submitTime|date:'Y/m/d H:i'  }}</td>
@@ -172,7 +172,10 @@
             } ) ;
 
             $('#dataTable tbody').on('click', 'tr', function () {
-                window.open(`${dataListView.row( this ).data()[5]}`);
+                if (dataListView.row( this ).data()[5]) {
+                    window.open(`${dataListView.row( this ).data()[5]}`);
+                }
+                
             } );
 
             for (var i = 2; i <= pageNumber; i++) {

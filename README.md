@@ -11,7 +11,7 @@ python3 -m pip install django==2.2.7 psycopg2 whitenoise python-memcached Pillow
 python3 -m pip install -e git://github.com/qcoumes/django-enumfields@6aa094ad1b6057b740fbf855ef50cf135e460ed9#egg=django_enumfields
 ```
 
-Now you should open mathbattle/setting.py and edit database information:
+Now you should open mathbattle/settings.py and edit database information:
 ```python
 ...
 DATABASES = {
